@@ -185,3 +185,7 @@ CREATE TABLE Visualizacion(
     FOREIGN KEY(V_idAnuncio) REFERENCES Anuncio(idAnuncio),
     FOREIGN KEY(V_nombre_anunciante) REFERENCES Anunciante(nombre_anunciante)
 );
+
+INSERT INTO TipoUsuario(nombre_tipo) VALUES("Administrador");
+INSERT INTO TipoUsuario(nombre_tipo) VALUES("Lector");
+INSERT INTO TipoUsuario(nombre_tipo) VALUES("Editor");

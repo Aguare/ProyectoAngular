@@ -1,0 +1,49 @@
+<div class="vh-100">
+  <app-menu-general></app-menu-general>
+  <div class="container p-5" style="width: 300px; height: 400px">
+    <form
+      class="form-validate"
+      [formGroup]="validarForm"
+      (ngSubmit)="iniciarSesion()"
+    >
+      <div class="text-center">
+        <img
+          class="rounded-circle"
+          src="https://i.pinimg.com/originals/24/80/81/248081cef017d0d3256f38815048291f.jpg"
+          width="102"
+          height="97"
+        />
+        <h1 class="h3 mb-3 fw-normal">Iniciar Sesión</h1>
+      </div>
+      <div class="form-group">
+        <label for="exampleInputEmail1">Usuario</label>
+        <input
+          type="email"
+          class="form-control"
+          formControlName="nombreUsuario"
+          placeholder="Ingrese su usuario"
+        />
+      </div>
+      <div class="form-group">
+        <label for="exampleInputPassword1">Contraseña</label>
+        <input
+          type="password"
+          class="form-control"
+          formControlName="password"
+          placeholder="Ingrese su Contraseña"
+        />
+      </div>
+      <div class="p-2">
+        <button class="w-100 btn btn-lg btn-primary" type="submit">
+          Ingresar
+        </button>
+      </div>
+    </form>
+  </div>
+  <div *ngIf="errorCredenciales" class="container-sm text-center">
+    <div class="alert alert-danger" role="alert">
+      Usuario o Contraseña incorrecta
+    </div>
+  </div>
+  <app-footer></app-footer>
+</div>

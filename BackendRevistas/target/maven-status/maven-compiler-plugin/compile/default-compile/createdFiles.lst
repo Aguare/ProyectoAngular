@@ -5,3 +5,4 @@ SQL\Encriptar.class
 Entidades\Usuario.class
 SQL\Conexion.class
 Entidades\Error.class
+SQL\Main.class

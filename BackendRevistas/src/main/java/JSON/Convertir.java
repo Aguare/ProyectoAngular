@@ -16,19 +16,37 @@ public class Convertir {
         gson = new Gson();
     }
 
-    public Object obtenerObjeto(String jsonString, Type type) {
-        return this.gson.fromJson(jsonString, type);
+    /**
+     * Convierte un JSON a objeto
+     *
+     * @param datos el string con los datos del objeto
+     * @param tipoObjeto el tipo de objeto que se convertirá
+     * @return retorna un Object
+     */
+    public Object obtenerObjeto(String datos, Type tipoObjeto) {
+        return this.gson.fromJson(datos, tipoObjeto);
     }
 
-    public String obtenerJSON(Object src, Type typeOfSrc) {
-        return this.gson.toJson(src, typeOfSrc);
+    /**
+     * Obtiene el JSON a partir de un objeto
+     *
+     * @param objeto objeto a convertir
+     * @param tipoObjeto el tipo del objeto
+     * @return Retorna un string con los datos
+     */
+    public String obtenerJSON(Object objeto, Type tipoObjeto) {
+        return this.gson.toJson(objeto, tipoObjeto);
     }
 
+    /**
+     * Convierte un BufferReader en el String estructura JSON
+     * @param lector Buffer
+     * @return retorna un String con estructura JSON
+     */
     public String entradaJSON(BufferedReader lector) {
-        String line = "";
+        String body = "";
         try {
-            String body = "";
-            line = lector.readLine();
+            String line = lector.readLine();
             while (line != null) {
                 body = body + line;
                 line = lector.readLine();
@@ -37,6 +55,6 @@ public class Convertir {
             System.out.println(body);
         } catch (Exception e) {
         }
-        return line;
+        return body;
     }
 }

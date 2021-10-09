@@ -1,5 +1,6 @@
 package ServletsUsuario;
 
+import Controlador.ControlUsuario;
 import Entidades.Usuario;
 import JSON.Convertir;
 import java.io.BufferedReader;
@@ -51,9 +52,17 @@ public class InicioSesion extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        BufferedReader lector = request.getReader();
+        request.setCharacterEncoding("UTF-8");
         Convertir c = new Convertir();
-        c.entradaJSON(lector);
-        response.getWriter().append(c.obtenerJSON(new Usuario(1, "NO EXISTE"), Usuario.class));
+        ControlUsuario control = new ControlUsuario();
+        try {
+            BufferedReader lector = request.getReader();
+            String textoUsuario = c.entradaJSON(lector);
+            Usuario usuario = (Usuario) c.obtenerObjeto(textoUsuario, Usuario.class);
+            response.getWriter().append(c.obtenerJSON(control.verificarUsuario(usuario.getNombreUsuario(), usuario.getPassword()), Usuario.class));
+        } catch (Exception e) {
+            response.getWriter().append(c.obtenerJSON(new Usuario(0, "ERROR_404", ""), Usuario.class));
+        }
+        
     }
 }

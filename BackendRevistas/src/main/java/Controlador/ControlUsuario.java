@@ -21,7 +21,7 @@ public class ControlUsuario {
      * @return
      */
     public Usuario verificarUsuario(String usuario, String password) {
-        String query = "SELECT password FROM Usuario WHERE nombre_usuario = ?;";
+        String query = "SELECT * FROM Usuario WHERE nombre_usuario = ?;";
         try {
             PreparedStatement prepared = Conexion.Conexion().prepareStatement(query);
             prepared.setString(1, usuario);
@@ -37,10 +37,12 @@ public class ControlUsuario {
             }
             pass = desencriptar.desencriptarPass(pass, "ipc");
             if (pass.equals(password)) {
-                return new Usuario(tipoUsuario, "helado");
+                return new Usuario(tipoUsuario, nombreUsuario, "");
+            } else {
+                return new Usuario(0, "ERROR_404", "");
             }
         } catch (SQLException e) {
         }
-        return null;
+        return new Usuario(0, "ERROR_404", "");
     }
 }

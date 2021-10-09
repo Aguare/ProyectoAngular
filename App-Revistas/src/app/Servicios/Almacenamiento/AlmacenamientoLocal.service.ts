@@ -27,5 +27,4 @@ export class AlmacenamientoLocalService {
   quitar(llave: string) {
     this.almacenamientoLocal.removeItem(llave);
   }
-
 }

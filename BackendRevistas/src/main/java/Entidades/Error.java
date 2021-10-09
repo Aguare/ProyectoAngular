@@ -5,6 +5,7 @@ package Entidades;
  * @author marco
  */
 public class Error {
+
     private String tipoError;
     private String mensaje;
 

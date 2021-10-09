@@ -9,13 +9,12 @@ import { Backend } from 'src/app/Objetos/Backend';
 })
 export class LoginService {
 
-  constructor(private _http: HttpClient) { }
+  constructor(private conexion: HttpClient) { }
 
-  validarUsuario(nombreUsuario: string, _password: string): Observable<Usuario> {
-    return this._http.post<Usuario>(
+  validarUsuario(nombreUsuario: string, password: string): Observable<Usuario> {
+    return this.conexion.post<Usuario>(
       `${Backend.Path}InicioSesion`,
-      new Usuario(nombreUsuario, _password)
+      new Usuario("0", nombreUsuario, password)
     );
   }
-
 }

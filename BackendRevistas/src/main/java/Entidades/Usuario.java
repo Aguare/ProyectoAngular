@@ -8,8 +8,9 @@ public class Usuario {
 
     private String tipoUsuario;
     private String nombreUsuario;
-    
-    public Usuario(int tipoUsuario, String nombreUsuario) {
+    private String password;
+
+    public Usuario(int tipoUsuario, String nombreUsuario, String password) {
         this.nombreUsuario = nombreUsuario;
         verificarTipo(tipoUsuario);
     }
@@ -26,7 +27,7 @@ public class Usuario {
                 this.tipoUsuario = "Editor";
                 break;
             default:
-                this.tipoUsuario = "NO EXISTE";
+                this.tipoUsuario = "ERROR_404";
                 break;
         }
     }
@@ -45,5 +46,13 @@ public class Usuario {
 
     public void setNombreUsuario(String nombreUsuario) {
         this.nombreUsuario = nombreUsuario;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

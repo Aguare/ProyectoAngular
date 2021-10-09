@@ -189,3 +189,6 @@ CREATE TABLE Visualizacion(
 INSERT INTO TipoUsuario(nombre_tipo) VALUES("Administrador");
 INSERT INTO TipoUsuario(nombre_tipo) VALUES("Lector");
 INSERT INTO TipoUsuario(nombre_tipo) VALUES("Editor");
+INSERT INTO Usuario(nombre_usuario, password, U_idTipoUsuario) VALUES("admin","5r6gXIfIDxY=",1);
+INSERT INTO Usuario(nombre_usuario, password, U_idTipoUsuario) VALUES("lector","zUWLKm5KpjA=",2);
+INSERT INTO Usuario(nombre_usuario, password, U_idTipoUsuario) VALUES("editor","CHlj2IPQAes=",3);

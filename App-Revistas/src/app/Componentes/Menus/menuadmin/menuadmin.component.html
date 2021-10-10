@@ -8,6 +8,7 @@
       class="rounded-pill"
     />
   </a>
+  <a class="navbar-brand">Admin</a>
   <div class="collapse navbar-collapse" id="navbarsExample04">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
@@ -17,15 +18,16 @@
         <a class="nav-link" href="#">Perfil</a>
       </li>
       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#"
-          >Revistas</a
-        >
+        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="InicioAdmin">
+          Opciones
+        </a>
         <ul class="dropdown-menu">
-          <li><a class="dropdown-item" href="#">Suscripciones</a></li>
-          <li><a class="dropdown-item" href="#">Link 2</a></li>
-          <li><a class="dropdown-item" href="#">Link 3</a></li>
+          <li><a class="dropdown-item" href="InicioAdmin/VerAnunciantes">Ver Anunciantes</a></li>
+          <li><a class="dropdown-item" href="InicioAdmin/RegistrarAnunciante">Registrar Anunciante</a></li>
         </ul>
       </li>
     </ul>
   </div>
+  <app-cerrar-sesion></app-cerrar-sesion>
 </nav>
+<router-outlet></router-outlet>

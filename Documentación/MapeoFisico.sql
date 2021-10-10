@@ -23,7 +23,7 @@ CREATE TABLE Usuario(
 );
 
 CREATE TABLE Perfil(
-    idPerfil INT NOT NULL,
+    idPerfil INT NOT NULL AUTO_INCREMENT,
     foto TEXT,
     descripcion VARCHAR(100),
     P_nombre_usuario VARCHAR(50),
@@ -192,3 +192,31 @@ INSERT INTO TipoUsuario(nombre_tipo) VALUES("Editor");
 INSERT INTO Usuario(nombre_usuario, password, U_idTipoUsuario) VALUES("admin","5r6gXIfIDxY=",1);
 INSERT INTO Usuario(nombre_usuario, password, U_idTipoUsuario) VALUES("lector","zUWLKm5KpjA=",2);
 INSERT INTO Usuario(nombre_usuario, password, U_idTipoUsuario) VALUES("editor","CHlj2IPQAes=",3);
+
+INSERT INTO Etiqueta(nombre_etiqueta) VALUES("Ropa");
+INSERT INTO Etiqueta(nombre_etiqueta) VALUES("Comida");
+INSERT INTO Etiqueta(nombre_etiqueta) VALUES("Carros");
+INSERT INTO Etiqueta(nombre_etiqueta) VALUES("Animales");
+INSERT INTO Etiqueta(nombre_etiqueta) VALUES("Perro");
+INSERT INTO Etiqueta(nombre_etiqueta) VALUES("Cocina");
+INSERT INTO Etiqueta(nombre_etiqueta) VALUES("Carpinteria");
+INSERT INTO Etiqueta(nombre_etiqueta) VALUES("Tecnología");
+INSERT INTO Etiqueta(nombre_etiqueta) VALUES("Computadoras");
+INSERT INTO Etiqueta(nombre_etiqueta) VALUES("Monitor");
+INSERT INTO Etiqueta(nombre_etiqueta) VALUES("Mouse");
+INSERT INTO Etiqueta(nombre_etiqueta) VALUES("Silla");
+INSERT INTO Etiqueta(nombre_etiqueta) VALUES("Mesa");
+INSERT INTO Etiqueta(nombre_etiqueta) VALUES("Audifonos");
+INSERT INTO Etiqueta(nombre_etiqueta) VALUES("Case");
+INSERT INTO Etiqueta(nombre_etiqueta) VALUES("ventilador");
+INSERT INTO Etiqueta(nombre_etiqueta) VALUES("Gorra");
+INSERT INTO Etiqueta(nombre_etiqueta) VALUES("Real Madrid");
+INSERT INTO Etiqueta(nombre_etiqueta) VALUES("Barcelona");
+INSERT INTO Etiqueta(nombre_etiqueta) VALUES("PSG");
+INSERT INTO Etiqueta(nombre_etiqueta) VALUES("Messi");
+INSERT INTO Etiqueta(nombre_etiqueta) VALUES("Cristiano Ronaldo");
+INSERT INTO Etiqueta(nombre_etiqueta) VALUES("Programación");
+INSERT INTO Etiqueta(nombre_etiqueta) VALUES("USAC");
+INSERT INTO Etiqueta(nombre_etiqueta) VALUES("CUNOC");
+INSERT INTO Etiqueta(nombre_etiqueta) VALUES("Ingeniería");
+INSERT INTO Etiqueta(nombre_etiqueta) VALUES("Base de Datos");

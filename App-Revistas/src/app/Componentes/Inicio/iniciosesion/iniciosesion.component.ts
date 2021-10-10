@@ -1,10 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Usuario } from '../../Objetos/Usuario';
-import { AlmacenamientoLocalService } from '../../Servicios/Almacenamiento/AlmacenamientoLocal.service';
-import { RedireccionarService } from '../../Servicios/Redireccionar.service';
-import { LoginService } from '../../Servicios/Sesion/Login.service';
+import { Usuario } from '../../../Objetos/Usuario';
+import { AlmacenamientoLocalService } from '../../../Servicios/Almacenamiento/AlmacenamientoLocal.service';
+import { RedireccionarService } from '../../../Servicios/Redireccionar.service';
+import { LoginService } from '../../../Servicios/Sesion/Login.service';
 
 @Component({
   selector: 'app-iniciosesion',
@@ -42,6 +42,7 @@ export class IniciosesionComponent implements OnInit {
           this.redireccionar.redireccionarUsuario();
         } else {
           this.errorCredenciales = true;
+          this.validarForm.reset();
         }
       });
     }

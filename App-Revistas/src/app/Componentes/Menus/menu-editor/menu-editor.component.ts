@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AlmacenamientoLocalService } from 'src/app/Servicios/Almacenamiento/AlmacenamientoLocal.service';
 
 @Component({
   selector: 'app-menu-editor',
@@ -10,9 +11,5 @@ export class MenuEditorComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-  }
-
-  cerrarSesion(){
-    alert("cerrar sesión");
   }
 }

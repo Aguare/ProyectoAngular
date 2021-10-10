@@ -30,6 +30,8 @@ public class InicioSesion extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
         BufferedReader lector = request.getReader();
         String body = "";
         String line = lector.readLine();
@@ -63,6 +65,5 @@ public class InicioSesion extends HttpServlet {
         } catch (Exception e) {
             response.getWriter().append(c.obtenerJSON(new Usuario(0, "ERROR_404", ""), Usuario.class));
         }
-        
     }
 }

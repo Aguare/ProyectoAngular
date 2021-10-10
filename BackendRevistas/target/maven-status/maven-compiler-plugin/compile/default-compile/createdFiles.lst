@@ -1,8 +1,13 @@
-ServletsUsuario\InicioSesion.class
 Controlador\ControlUsuario.class
+ServletsUsuario\ObtenerEtiquetas.class
 JSON\Convertir.class
 SQL\Encriptar.class
 Entidades\Usuario.class
-SQL\Conexion.class
-Entidades\Error.class
+Entidades\Info.class
+Entidades\Etiqueta.class
+Entidades\Perfil.class
+Entidades\Cliente.class
 SQL\Main.class
+ServletsUsuario\InicioSesion.class
+ServletsUsuario\RegistrarUsuario.class
+SQL\Conexion.class

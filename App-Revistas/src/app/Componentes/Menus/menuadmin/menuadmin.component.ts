@@ -11,5 +11,4 @@ export class MenuadminComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
 }

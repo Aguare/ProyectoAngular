@@ -1,0 +1,38 @@
+<div class="container" style="height: 500px">
+  <div class="text-center my-4">
+    <h2>Selecciona tus Preferencias</h2>
+    <p>Haz click para agregar tus intereses</p>
+  </div>
+  <div class="text-center">
+    <h5>Categorias y etiquetas existentes</h5>
+  </div>
+  <div class="container">
+    <table class="table-responsive text-center">
+      <tbody>
+        <app-etiqueta
+          *ngFor="let etiqueta of etiquetasExistentes; let i = index"
+          [etiquetaIn]="etiqueta"
+          [tipoBoton]="true"
+          (agregar)="agregarEtiqueta($event)"
+        >
+        </app-etiqueta>
+      </tbody>
+    </table>
+  </div>
+  <div class="text-center my-4">
+    <h5>Tus intereses</h5>
+  </div>
+  <div class="container">
+    <table class="table-responsive text-center my-4">
+      <tbody>
+        <app-etiqueta
+          *ngFor="let etiqueta of etiquetasSeleccionadas; let i = index"
+          [etiquetaIn]="etiqueta"
+          [tipoBoton]="false"
+          (quitar)="quitarEtiqueta($event)"
+        >
+        </app-etiqueta>
+      </tbody>
+    </table>
+  </div>
+</div>

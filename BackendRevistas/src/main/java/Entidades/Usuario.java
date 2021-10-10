@@ -32,6 +32,19 @@ public class Usuario {
         }
     }
 
+    public int obtenerTipoUsuarioNumero() {
+        switch (tipoUsuario) {
+            case "Administrador":
+                return 1;
+            case "Lector":
+                return 2;
+            case "Editor":
+                return 3;
+            default:
+                return 0;
+        }
+    }
+
     public String getTipoUsuario() {
         return tipoUsuario;
     }

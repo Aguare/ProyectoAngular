@@ -4,14 +4,24 @@ package Entidades;
  *
  * @author marco
  */
-public class Error {
+public class Info {
 
+    private boolean operacion;
     private String tipoError;
     private String mensaje;
 
-    public Error(String tipoError, String mensaje) {
+    public Info(boolean operacion, String tipoError, String mensaje) {
+        this.operacion = operacion;
         this.tipoError = tipoError;
         this.mensaje = mensaje;
+    }
+
+    public boolean isOperacion() {
+        return operacion;
+    }
+
+    public void setOperacion(boolean operacion) {
+        this.operacion = operacion;
     }
 
     public String getTipoError() {
@@ -29,4 +39,5 @@ public class Error {
     public void setMensaje(String mensaje) {
         this.mensaje = mensaje;
     }
+
 }

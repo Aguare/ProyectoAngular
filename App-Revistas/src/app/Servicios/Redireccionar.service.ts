@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { Info } from '../Objetos/Info';
 import { Usuario } from '../Objetos/Usuario';
 import { AlmacenamientoLocalService } from './Almacenamiento/AlmacenamientoLocal.service';
 
@@ -13,6 +14,10 @@ export class RedireccionarService {
 
   enviarPagina(direccion: string) {
     this.redireccionar.navigate([direccion]);
+  }
+
+  enviarPaginaMensaje(direccion: string, mensaje: Info){
+    this.redireccionar.navigate([direccion, mensaje]);
   }
 
   redireccionarUsuario() {

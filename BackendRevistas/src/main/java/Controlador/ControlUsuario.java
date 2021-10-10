@@ -81,7 +81,6 @@ public class ControlUsuario {
         } else {
             return new Info(false, "ERROR", errorGeneral);
         }
-
     }
 
     public boolean registrarUsuario(Usuario usuario) {

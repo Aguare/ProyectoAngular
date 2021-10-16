@@ -8,7 +8,7 @@
       class="rounded-pill"
     />
   </a>
-  <a class="navbar-brand">Editor</a>
+  <a class="navbar-brand"> {{ usuario.nombreUsuario }} </a>
   <div class="collapse navbar-collapse" id="navbarsExample04">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
@@ -22,12 +22,23 @@
           Revistas
         </a>
         <ul class="dropdown-menu">
+          <li><a class="dropdown-item" href="#">Publicaciones</a></li>
+          <li><a class="dropdown-item" href="InicioEditor/NuevaPublicacion">Nueva Publicación</a></li>
+        </ul>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#">
+          Reportes
+        </a>
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item" href="#">Ganancias</a></li>
+          <li><a class="dropdown-item" href="#">Comentarios</a></li>
           <li><a class="dropdown-item" href="#">Suscripciones</a></li>
-          <li><a class="dropdown-item" href="#">Link 2</a></li>
-          <li><a class="dropdown-item" href="#">Link 3</a></li>
+          <li><a class="dropdown-item" href="#">Con más Me Gusta</a></li>
         </ul>
       </li>
     </ul>
   </div>
   <app-cerrar-sesion></app-cerrar-sesion>
 </nav>
+<router-outlet></router-outlet>

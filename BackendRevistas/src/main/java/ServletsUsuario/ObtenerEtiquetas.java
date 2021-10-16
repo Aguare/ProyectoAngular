@@ -30,6 +30,11 @@ public class ObtenerEtiquetas extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String etiqueta = (String) request.getAttribute("Etiqueta");
+        if (etiqueta != null) {
+            Etiqueta nueva = new Etiqueta(etiqueta);
+            
+        }
     }
 
     /**

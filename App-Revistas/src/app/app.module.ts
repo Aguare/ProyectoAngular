@@ -26,6 +26,8 @@ import { SinConexionComponent } from './Componentes/Errores/sin-conexion/sin-con
 import { BuscarComponent } from './Componentes/Revistas/buscar/buscar.component';
 import { VerRevistasComponent } from './Componentes/Revistas/ver-revistas/ver-revistas.component';
 import { TarjetaRevistaComponent } from './Componentes/Revistas/tarjeta-revista/tarjeta-revista.component';
+import { PublicarRevistaComponent } from './Componentes/Revistas/publicar-revista/publicar-revista.component';
+import { CrearEtiquetaComponent } from './Componentes/SeleccionEtiquetas/CrearEtiqueta/CrearEtiqueta.component';
 
 const rutas: Routes = [
   {
@@ -34,7 +36,12 @@ const rutas: Routes = [
       { path: 'VerRevistas', component: BuscarComponent }
     ]
   },
-  { path: 'InicioEditor', component: MenuEditorComponent },
+  {
+    path: 'InicioEditor', component: MenuEditorComponent,
+    children: [
+      { path: 'NuevaPublicacion', component: PublicarRevistaComponent },
+    ]
+  },
   {
     path: 'InicioAdmin', component: MenuadminComponent,
     children: [
@@ -74,6 +81,8 @@ const rutas: Routes = [
     BuscarComponent,
     VerRevistasComponent,
     TarjetaRevistaComponent,
+    PublicarRevistaComponent,
+    CrearEtiquetaComponent
   ],
   imports: [
     BrowserModule,

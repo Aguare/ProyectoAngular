@@ -30,3 +30,8 @@
     </table>
   </div>
 </div>
+<app-CrearEtiqueta
+  (incluir)="agregarNuevaEtiqueta($event)"
+  *ngIf="crearEtiqueta"
+>
+</app-CrearEtiqueta>

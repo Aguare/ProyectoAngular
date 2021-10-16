@@ -1,9 +1,10 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Etiqueta } from 'src/app/Objetos/Etiqueta';
 import { Info } from 'src/app/Objetos/Info';
 import { ObtenerEtiquetasService } from 'src/app/Servicios/ObtenerObjetos/ObtenerEtiquetas.service';
 import { RedireccionarService } from 'src/app/Servicios/Redireccionar.service';
 import { RegistrarService } from 'src/app/Servicios/Registros/Registrar.service';
+
 
 @Component({
   selector: 'app-CrearEtiqueta',
@@ -16,6 +17,7 @@ export class CrearEtiquetaComponent implements OnInit {
   nuevaEtiqueta: string = "";
   error: boolean = false;
   mensaje: Info = new Info(false, "Sin espacios en blanco", "");
+  @Output() incluir = new EventEmitter<string>();
 
   constructor(
     public obtenerEtiquetas: ObtenerEtiquetasService,
@@ -41,12 +43,15 @@ export class CrearEtiquetaComponent implements OnInit {
     if (this.nuevaEtiqueta != "") {
       this.error = false;
       if (this.etiquetas != null) {
-        this.verificarExistencia();
+        this.error = this.verificarExistencia();
         if (!this.error) {
           this.registrar.registrarEtiqueta(this.nuevaEtiqueta).subscribe((respuesta: Info) => {
             this.mensaje = respuesta;
             this.error = true;
+            this.incluirEtiqueta();
           });
+        } else {
+          this.nuevaEtiqueta = "";
         }
       } else {
         this.mensaje = new Info(false, "Sin Conexión", "No tiene red");
@@ -57,15 +62,19 @@ export class CrearEtiquetaComponent implements OnInit {
     }
   }
 
-  verificarExistencia() {
+  verificarExistencia(): boolean {
     for (let i = 0; i < this.etiquetas.length; i++) {
       const etiqueta = this.etiquetas[i];
-      if (etiqueta.nombre.toUpperCase == this.nuevaEtiqueta.toUpperCase) {
-        this.error = true;
+      if (etiqueta.nombre.toUpperCase() == this.nuevaEtiqueta.toUpperCase()) {
         this.mensaje = new Info(false, "Ya existe", "Seleccione la etiqueta");
-        break;
+        return true;
       }
     }
-    this.error = false;
+    return false;
+  }
+
+  incluirEtiqueta() {
+    this.incluir.emit(this.nuevaEtiqueta);
+    this.nuevaEtiqueta = "";
   }
 }

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Etiqueta } from 'src/app/Objetos/Etiqueta';
 import { ObtenerEtiquetasService } from 'src/app/Servicios/ObtenerObjetos/ObtenerEtiquetas.service';
 
@@ -9,6 +9,7 @@ import { ObtenerEtiquetasService } from 'src/app/Servicios/ObtenerObjetos/Obtene
 })
 export class SeleccionEtiquetasComponent implements OnInit {
 
+  @Input() crearEtiqueta: boolean = false;
   etiquetasExistentes: Etiqueta[];
   etiquetasSeleccionadas: Etiqueta[];
   @Output() enviarEtiquetas = new EventEmitter<Etiqueta[]>();
@@ -17,7 +18,7 @@ export class SeleccionEtiquetasComponent implements OnInit {
     obtenerEtiquetas.obtenerEtiquetas().subscribe((nuevasEtiquetas: Etiqueta[]) => {
       if (nuevasEtiquetas != null) {
         this.etiquetasExistentes = nuevasEtiquetas;
-      }else{
+      } else {
         alert("No hay conexión con el servidor");
       }
     });
@@ -37,7 +38,10 @@ export class SeleccionEtiquetasComponent implements OnInit {
         break;
       }
     }
+  }
 
+  agregarNuevaEtiqueta(etiqueta: string) {
+    this.etiquetasSeleccionadas.push(new Etiqueta(etiqueta));
   }
 
   quitarEtiqueta(etiqueta: string) {
@@ -51,8 +55,7 @@ export class SeleccionEtiquetasComponent implements OnInit {
     }
   }
 
-  etiquetasSU(etiquetas: Etiqueta[]){
+  etiquetasSU(etiquetas: Etiqueta[]) {
     this.enviarEtiquetas.emit(this.etiquetasSeleccionadas);
   }
-
 }

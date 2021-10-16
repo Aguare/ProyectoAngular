@@ -1,7 +1,9 @@
 package ServletsUsuario;
 
+import Controlador.ControlEditor;
 import Controlador.ControlUsuario;
 import Entidades.Etiqueta;
+import Entidades.Info;
 import JSON.Convertir;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -30,11 +32,13 @@ public class ObtenerEtiquetas extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String etiqueta = (String) request.getAttribute("Etiqueta");
-        if (etiqueta != null) {
-            Etiqueta nueva = new Etiqueta(etiqueta);
-            
-        }
+        String etiqueta = (String) request.getParameter("Etiqueta");
+        System.out.println(etiqueta);
+        ControlEditor control = new ControlEditor();
+        Convertir c = new Convertir();
+        Etiqueta nueva = new Etiqueta(etiqueta);
+        Info info = control.registrarEtiqueta(nueva);
+        response.getWriter().append(c.obtenerJSON(info, Info.class));
     }
 
     /**

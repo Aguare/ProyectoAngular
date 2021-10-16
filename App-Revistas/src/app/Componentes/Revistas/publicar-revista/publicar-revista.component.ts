@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PublicarRevistaComponent implements OnInit {
 
+  crearEtiqueta: boolean = true;
   constructor() { }
 
   ngOnInit(): void {

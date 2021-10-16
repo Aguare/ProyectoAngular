@@ -62,6 +62,8 @@ CREATE TABLE Perfil_Etiquetas(
 CREATE TABLE Revista(
     idRevista INT NOT NULL AUTO_INCREMENT,
     revista TEXT NOT NULL,
+    titulo VARCHAR(50) NOT NULL,
+    descripcion VARCHAR(150) NOT NULL,
     no_version INT,
     precio_costo DOUBLE,
     precio_suscripcion DOUBLE NOT NULL,

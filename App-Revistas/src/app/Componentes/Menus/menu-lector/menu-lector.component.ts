@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AlmacenamientoLocalService } from 'src/app/Servicios/Almacenamiento/AlmacenamientoLocal.service';
+import { Usuario} from 'src/app/Objetos/Usuario';
 
 @Component({
   selector: 'app-menu-lector',
@@ -7,7 +9,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MenuLectorComponent implements OnInit {
 
-  constructor() { }
+  usuario: Usuario = new Usuario("2", "Lector", "");
+  
+  constructor(
+    private almacenamiento: AlmacenamientoLocalService
+  ) {
+    let nuevo = JSON.parse(`${this.almacenamiento.obtener("Usuario")}`);
+    if (nuevo != null) {
+      this.usuario = nuevo;
+    }
+   }
 
   ngOnInit(): void {
   }

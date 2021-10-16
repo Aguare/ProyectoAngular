@@ -70,7 +70,9 @@ export class RegistroUsuarioComponent implements OnInit {
         let cliente = new Cliente(new Usuario(this.tipoUsuario, this.nombreUsuario, this.password), new Perfil(this.descripcion, this.etiquetasSeleccionadas));
         this.enviarRegistro.registrarUsuario(cliente).subscribe((respuesta: Info) =>{
           this.redireccionar.enviarPagina("Mensaje");
-        });
+        },
+        error => this.redireccionar.enviarPagina("ErrorConexion")
+        );
       } else {
         this.mensajeError = "Debe seleccionar al menos 3 categorias o etiquetas";
         this.mensajeFormulario = true;

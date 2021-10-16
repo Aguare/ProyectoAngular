@@ -4,5 +4,7 @@
 			"path": "App-Revistas"
 		}
 	],
-	"settings": {}
+	"settings": {
+		"terminal.explorerKind": "external"
+	}
 }

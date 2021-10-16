@@ -3,7 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { MenuGeneralComponent } from './Componentes/Menus/menu-general/menu-general.component';
 import { FooterComponent } from './Componentes/footer/footer.component';
 import { MenuLectorComponent } from './Componentes/Menus/menu-lector/menu-lector.component';
 import { MenuEditorComponent } from './Componentes/Menus/menu-editor/menu-editor.component';
@@ -22,10 +21,19 @@ import { EtiquetaComponent } from './Componentes/SeleccionEtiquetas/etiqueta/eti
 import { MostrarInformacionComponent } from './Componentes/Errores/mostrar-informacion/mostrar-informacion.component';
 import { RegistrarAnuncianteComponent } from './Componentes/CompAdmin/registrar-anunciante/registrar-anunciante.component';
 import { VerAnunciantesComponent } from './Componentes/CompAdmin/ver-anunciantes/ver-anunciantes.component';
+import { MenuGeneralComponent } from './Componentes/Menus/menu-general/menu-general.component';
+import { SinConexionComponent } from './Componentes/Errores/sin-conexion/sin-conexion.component';
+import { BuscarComponent } from './Componentes/Revistas/buscar/buscar.component';
+import { VerRevistasComponent } from './Componentes/Revistas/ver-revistas/ver-revistas.component';
+import { TarjetaRevistaComponent } from './Componentes/Revistas/tarjeta-revista/tarjeta-revista.component';
 
 const rutas: Routes = [
-  { path: 'InicioSesion', component: IniciosesionComponent },
-  { path: 'InicioLector', component: MenuLectorComponent },
+  {
+    path: 'InicioLector', component: MenuLectorComponent,
+    children: [
+      { path: 'VerRevistas', component: BuscarComponent }
+    ]
+  },
   { path: 'InicioEditor', component: MenuEditorComponent },
   {
     path: 'InicioAdmin', component: MenuadminComponent,
@@ -34,15 +42,20 @@ const rutas: Routes = [
       { path: 'VerAnunciantes', component: VerAnunciantesComponent }
     ]
   },
-  { path: 'Inicio', component: MenuGeneralComponent },
-  { path: 'RegistroUsuario', component: RegistroUsuarioComponent },
-  { path: 'Mensaje', component: MostrarInformacionComponent }
+  {
+    path: 'Inicio', component: MenuGeneralComponent,
+    children: [
+      { path: 'InicioSesion', component: IniciosesionComponent },
+      { path: 'RegistroUsuario', component: RegistroUsuarioComponent }
+    ]
+  },
+  { path: 'Mensaje', component: MostrarInformacionComponent },
+  { path: 'ErrorConexion', component: SinConexionComponent }
 ]
 
 @NgModule({
   declarations: [
     AppComponent,
-    MenuGeneralComponent,
     FooterComponent,
     MenuLectorComponent,
     MenuEditorComponent,
@@ -55,7 +68,12 @@ const rutas: Routes = [
     EtiquetaComponent,
     MostrarInformacionComponent,
     RegistrarAnuncianteComponent,
-    VerAnunciantesComponent
+    VerAnunciantesComponent,
+    MenuGeneralComponent,
+    SinConexionComponent,
+    BuscarComponent,
+    VerRevistasComponent,
+    TarjetaRevistaComponent,
   ],
   imports: [
     BrowserModule,

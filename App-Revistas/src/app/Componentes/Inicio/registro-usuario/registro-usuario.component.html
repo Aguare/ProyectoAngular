@@ -1,121 +1,134 @@
-<app-menu-general></app-menu-general>
-<div class="text-center p-2">
-  <h1>Ingrese sus Datos</h1>
-</div>
-<form class="was-validated" [formGroup]="validarForm" (ngSubmit)="registrar()">
-  <div class="container-lg my-1 border">
-    <div *ngIf="mensajeFormulario" class="alert alert-danger my-2 text-center" role="alert">
-      {{mensajeError}}
-    </div>
-    <div class="row">
-      <div class="col container-sm p-4">
-        <div class="row">
-          <div class="form-group">
-            <label for="uname">Nombre de Usuario</label>
-            <input
-              type="text"
-              class="form-control"
-              placeholder="Ingrese su Nombre de Usuario"
-              minlength="4"
-              maxlength="50"
-              formControlName="nombreUsuario"
-              required
-            />
-            <div class="valid-feedback">
-              Este nombre de Usuario está disponible
-            </div>
-            <div class="invalid-feedback">
-              Por favor ingrese un nombre válido
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col">
+<div class="my-5">
+  <form
+    class="was-validated"
+    [formGroup]="validarForm"
+    (ngSubmit)="registrar()"
+  >
+    <div class="container-lg my-1 border shadow-lg">
+      <div class="text-center my-2">
+        <h1>Ingrese sus Datos</h1>
+      </div>
+      <div
+        *ngIf="mensajeFormulario"
+        class="alert alert-danger my-2 text-center"
+        role="alert"
+      >
+        {{ mensajeError }}
+      </div>
+      <div class="row">
+        <div class="col container-sm p-4">
+          <div class="row">
             <div class="form-group">
-              <label for="pwd">Contraseña</label>
+              <label for="uname">Nombre de Usuario</label>
               <input
-                type="password"
+                type="text"
                 class="form-control"
-                placeholder="Ingrese una contraseña"
-                minlength="5"
-                maxlength="70"
-                formControlName="password"
+                placeholder="Ingrese su Nombre de Usuario"
+                minlength="4"
+                maxlength="50"
+                formControlName="nombreUsuario"
                 required
               />
-              <div class="valid-feedback">Contraseña Aceptada</div>
+              <div class="valid-feedback">
+                Este nombre de Usuario está disponible
+              </div>
               <div class="invalid-feedback">
-                Por favor ingrese una contraseña segura
+                Por favor ingrese un nombre válido
               </div>
             </div>
           </div>
-          <div class="col">
-            <div class="form-group">
-              <label for="pwd">Confirmar Contraseña</label>
-              <input
-                type="password"
+          <div class="row">
+            <div class="col">
+              <div class="form-group">
+                <label for="pwd">Contraseña</label>
+                <input
+                  type="password"
+                  class="form-control"
+                  placeholder="Ingrese una contraseña"
+                  minlength="5"
+                  maxlength="70"
+                  formControlName="password"
+                  required
+                />
+                <div class="valid-feedback">Contraseña Aceptada</div>
+                <div class="invalid-feedback">
+                  Por favor ingrese una contraseña segura
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label for="pwd">Confirmar Contraseña</label>
+                <input
+                  type="password"
+                  class="form-control"
+                  placeholder="Confirme su contraseña"
+                  id="idPassword"
+                  minlength="5"
+                  maxlength="70"
+                  (keyup)="comprobarPasswords($event)"
+                  formControlName="passwordConfirm"
+                  required
+                />
+                <div class="valid-feedback">Contraseña Aceptada</div>
+                <div class="invalid-feedback">
+                  Por favor ingrese una contraseña segura
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="container text-center">
+              <div *ngIf="passwordEquals; else passInvalid">
+                <div class="alert alert-success p-0" role="alert">
+                  Las contraseñas coinciden
+                </div>
+              </div>
+              <ng-template #passInvalid>
+                <div class="alert alert-danger p-0" role="alert">
+                  Las contraseñas deben coincidir
+                </div>
+              </ng-template>
+            </div>
+          </div>
+          <div class="row">
+            <div class="container">
+              <label for="sel1">Seleccione su tipo de usuario</label>
+              <select class="form-control" formControlName="tipoUsuario">
+                <option value="2">Lector</option>
+                <option value="3">Editor</option>
+                <option value="1">Administrador</option>
+              </select>
+            </div>
+          </div>
+          <div class="row">
+            <div class="container my-2">
+              <label for="comment">Descripción</label>
+              <textarea
                 class="form-control"
-                placeholder="Confirme su contraseña"
-                id="idPassword"
-                minlength="5"
-                maxlength="70"
-                (keyup)="comprobarPasswords($event)"
-                formControlName="passwordConfirm"
-                required
-              />
-              <div class="valid-feedback">Contraseña Aceptada</div>
-              <div class="invalid-feedback">
-                Por favor ingrese una contraseña segura
-              </div>
+                rows="3"
+                formControlName="descripcion"
+              ></textarea>
             </div>
           </div>
         </div>
-        <div class="row">
-          <div class="container text-center">
-            <div *ngIf="passwordEquals; else passInvalid">
-              <div class="alert alert-success p-0" role="alert">
-                Las contraseñas coinciden
-              </div>
-            </div>
-            <ng-template #passInvalid>
-              <div class="alert alert-danger p-0" role="alert">
-                Las contraseñas deben coincidir
-              </div>
-            </ng-template>
+        <div class="col">
+          <div class="text-center my-4">
+            <h2>Selecciona tus Preferencias</h2>
+            <p>Haz click para agregar tus intereses</p>
           </div>
-        </div>
-        <div class="row">
           <div class="container">
-            <label for="sel1">Seleccione su tipo de usuario</label>
-            <select class="form-control" formControlName="tipoUsuario">
-              <option value="2" selected>Lector</option>
-              <option value="3">Editor</option>
-              <option value="1">Administrador</option>
-            </select>
-          </div>
-        </div>
-        <div class="row">
-          <div class="container my-2">
-            <label for="comment">Descripción</label>
-            <textarea
-              class="form-control"
-              rows="3"
-              formControlName="descripcion"
-            ></textarea>
+            <app-seleccion-etiquetas
+              (enviarEtiquetas)="actualizarEtiquetas($event)"
+            ></app-seleccion-etiquetas>
           </div>
         </div>
       </div>
-      <div class="col">
-        <div class="container">
-          <app-seleccion-etiquetas
-            (enviarEtiquetas)="actualizarEtiquetas($event)"
-          ></app-seleccion-etiquetas>
+      <div class="row">
+        <div class="text-center my-3">
+          <button type="submit" class="btn btn-primary">Registrarse</button>
         </div>
       </div>
     </div>
-    <div class="row">
-      <div class="text-center my-3">
-        <button type="submit" class="btn btn-primary">Registrarse</button>
-      </div>
-    </div>
-  </div>
-</form>
+  </form>
+</div>

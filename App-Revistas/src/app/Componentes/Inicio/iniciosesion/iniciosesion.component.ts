@@ -17,7 +17,12 @@ export class IniciosesionComponent implements OnInit {
   validarForm: FormGroup;
   usuario: Usuario;
 
-  constructor(private formBuilder: FormBuilder, public iniciar: LoginService, public almacenLS: AlmacenamientoLocalService, public redireccionar: RedireccionarService) {
+  constructor(
+    private formBuilder: FormBuilder,
+    public iniciar: LoginService,
+    public almacenLS: AlmacenamientoLocalService,
+    public redireccionar: RedireccionarService
+  ) {
     this.usuario = new Usuario("", "", "");
     this.validarForm = new FormGroup({
       nombreUsuario: new FormControl('', [Validators.required]),
@@ -44,8 +49,9 @@ export class IniciosesionComponent implements OnInit {
           this.errorCredenciales = true;
           this.validarForm.reset();
         }
-      });
+      },
+        error => this.redireccionar.enviarPagina("ErrorConexion")
+      );
     }
   }
-
 }

@@ -1,6 +1,5 @@
 import { Component, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, MinValidator, Validators } from '@angular/forms';
-import { connectableObservableDescriptor } from 'rxjs/internal/observable/ConnectableObservable';
 import { Cliente } from 'src/app/Objetos/Cliente';
 import { Etiqueta } from 'src/app/Objetos/Etiqueta';
 import { Info } from 'src/app/Objetos/Info';

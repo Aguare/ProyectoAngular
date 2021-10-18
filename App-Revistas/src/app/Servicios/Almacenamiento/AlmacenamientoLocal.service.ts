@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Usuario } from 'src/app/Objetos/Usuario';
 import { AlmacenamientoPrincipalService } from './AlmacenamientoPrincipal.service';
 
 @Injectable({
@@ -26,5 +27,9 @@ export class AlmacenamientoLocalService {
 
   quitar(llave: string) {
     this.almacenamientoLocal.removeItem(llave);
+  }
+
+  obtenerUsuario(): Usuario{
+    return JSON.parse(`${this.obtener("Usuario")}`);
   }
 }

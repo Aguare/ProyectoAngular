@@ -28,6 +28,7 @@ import { VerRevistasComponent } from './Componentes/Revistas/ver-revistas/ver-re
 import { TarjetaRevistaComponent } from './Componentes/Revistas/tarjeta-revista/tarjeta-revista.component';
 import { PublicarRevistaComponent } from './Componentes/Revistas/publicar-revista/publicar-revista.component';
 import { CrearEtiquetaComponent } from './Componentes/SeleccionEtiquetas/CrearEtiqueta/CrearEtiqueta.component';
+import { PublicacionesComponent } from './Componentes/CompEditor/publicaciones/publicaciones.component';
 
 const rutas: Routes = [
   {
@@ -40,6 +41,7 @@ const rutas: Routes = [
     path: 'InicioEditor', component: MenuEditorComponent,
     children: [
       { path: 'NuevaPublicacion', component: PublicarRevistaComponent },
+      { path: 'Publicaciones', component: PublicacionesComponent }
     ]
   },
   {
@@ -82,7 +84,8 @@ const rutas: Routes = [
     VerRevistasComponent,
     TarjetaRevistaComponent,
     PublicarRevistaComponent,
-    CrearEtiquetaComponent
+    CrearEtiquetaComponent,
+    PublicacionesComponent
   ],
   imports: [
     BrowserModule,

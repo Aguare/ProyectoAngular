@@ -1,3 +1,4 @@
+Controlador\ControlArchivos.class
 Controlador\ControlUsuario.class
 SQL\ErrorSQL.class
 Controlador\ControlAdmin.class
@@ -14,5 +15,9 @@ Entidades\Perfil.class
 Entidades\Cliente.class
 ServletAdmin\RegistrarAnunciante.class
 ServletsUsuario\InicioSesion.class
+ServletEditor\RegistrarRevista.class
+ServletsControl\SubirArchivo.class
 ServletsUsuario\RegistrarUsuario.class
+Entidades\Revista.class
 SQL\Conexion.class
+Controlador\ControlEditor.class

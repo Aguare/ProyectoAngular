@@ -15,7 +15,14 @@ export class SeleccionEtiquetasComponent implements OnInit {
   @Output() enviarEtiquetas = new EventEmitter<Etiqueta[]>();
 
   constructor(public obtenerEtiquetas: ObtenerEtiquetasService) {
-    obtenerEtiquetas.obtenerEtiquetas().subscribe((nuevasEtiquetas: Etiqueta[]) => {
+    this.resetearLista();
+  }
+
+  ngOnInit(): void {
+  }
+
+  resetearLista() {
+    this.obtenerEtiquetas.obtenerEtiquetas().subscribe((nuevasEtiquetas: Etiqueta[]) => {
       if (nuevasEtiquetas != null) {
         this.etiquetasExistentes = nuevasEtiquetas;
       } else {
@@ -23,9 +30,6 @@ export class SeleccionEtiquetasComponent implements OnInit {
       }
     });
     this.etiquetasSeleccionadas = [];
-  }
-
-  ngOnInit(): void {
   }
 
   agregarEtiqueta(etiqueta: string) {

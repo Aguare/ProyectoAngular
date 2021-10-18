@@ -3,6 +3,7 @@ package ServletAdmin;
 import Controlador.ControlAdmin;
 import Entidades.Anunciante;
 import JSON.Convertir;
+import ObtenerObjetos.ObAdmin;
 import java.io.IOException;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
@@ -17,6 +18,10 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "ObtenerAnunciantes", urlPatterns = {"/ObtenerAnunciantes"})
 public class ObtenerAnunciantes extends HttpServlet {
+    
+    private ControlAdmin control = new ControlAdmin();
+    private ObAdmin obtener = new ObAdmin();
+    private Convertir convertir = new Convertir();
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -45,9 +50,7 @@ public class ObtenerAnunciantes extends HttpServlet {
             throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
-        Convertir convertir = new Convertir();
-        ControlAdmin control = new ControlAdmin();
-        ArrayList<Anunciante> anunciantes = control.obtenerAnunciates();
+        ArrayList<Anunciante> anunciantes = obtener.obtenerAnunciates();
         response.getWriter().append(convertir.obtenerJSON(anunciantes, anunciantes.getClass()));
     }
 }

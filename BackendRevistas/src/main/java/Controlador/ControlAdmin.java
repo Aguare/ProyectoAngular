@@ -31,17 +31,4 @@ public class ControlAdmin {
         return new Info(false, "ERROR", errorGeneral);
     }
 
-    public ArrayList<Anunciante> obtenerAnunciates() {
-        ArrayList<Anunciante> anunciantes = new ArrayList<>();
-        String query = "SELECT * FROM Anunciante;";
-        try {
-            PreparedStatement prepared = Conexion.Conexion().prepareStatement(query);
-            ResultSet resultado = prepared.executeQuery();
-            while (resultado.next()) {
-                anunciantes.add(new Anunciante(resultado.getString("nombre_anunciante"), resultado.getInt("telefono")));
-            }
-        } catch (Exception e) {
-        }
-        return anunciantes;
-    }
 }

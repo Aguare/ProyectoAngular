@@ -14,6 +14,8 @@ public class Revista {
     private String descripcion;
     private int no_version;
     private double precio_costo;
+    private boolean aprobado;
+    private boolean suscripciones;
     private double precio_suscripcion;
     private boolean es_pago;
     private boolean tiene_comentarios;
@@ -21,13 +23,16 @@ public class Revista {
     private Usuario usuarioCreador;
     private ArrayList<Etiqueta> etiquetas;
 
-    public Revista(int idRevista, String revista, String titulo, String descripcion, int no_version, double precio_costo, double precio_suscripcion, boolean es_pago, boolean tiene_comentarios, boolean tiene_reacciones, Usuario usuarioCreador, ArrayList<Etiqueta> etiquetas) {
+    public Revista(int idRevista, String revista, String titulo, String descripcion, int no_version, double precio_costo, boolean aprobado,boolean suscripciones,
+             double precio_suscripcion, boolean es_pago, boolean tiene_comentarios, boolean tiene_reacciones, Usuario usuarioCreador, ArrayList<Etiqueta> etiquetas) {
         this.idRevista = idRevista;
         this.revista = revista;
         this.titulo = titulo;
         this.descripcion = descripcion;
         this.no_version = no_version;
         this.precio_costo = precio_costo;
+        this.aprobado = aprobado;
+        this.suscripciones = suscripciones;
         this.precio_suscripcion = precio_suscripcion;
         this.es_pago = es_pago;
         this.tiene_comentarios = tiene_comentarios;
@@ -130,5 +135,21 @@ public class Revista {
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
+    }
+
+    public boolean isAprobado() {
+        return aprobado;
+    }
+
+    public void setAprobado(boolean aprobado) {
+        this.aprobado = aprobado;
+    }
+
+    public boolean isSuscripciones() {
+        return suscripciones;
+    }
+
+    public void setSuscripciones(boolean suscripciones) {
+        this.suscripciones = suscripciones;
     }
 }

@@ -39,14 +39,14 @@ public class RegistrarRevista extends HttpServlet {
             throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
-        try {
+        try { 
             String nombreUsuario = request.getParameter("usuario");
             Usuario usuario = obtenerG.obtenerUsuario(nombreUsuario);
             ArrayList<Revista> revistasEditor = obEdit.obtenerRevistasEditor(usuario);
-            response.getWriter().append(c.obtenerJSON(revistasEditor, Info.class));
+            response.getWriter().append(c.obtenerJSON(revistasEditor, revistasEditor.getClass()));
         } catch (Exception e) {
-            response.getWriter().append(c.obtenerJSON(new Info(false, "Error del Servidor", "El servidor no pudo resolver la petición"), Info.class));
             response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+            response.getWriter().append(c.obtenerJSON(new Info(false, "Error del Servidor", "El servidor no pudo resolver la petición"), Info.class));
         }
     }
 
@@ -65,6 +65,7 @@ public class RegistrarRevista extends HttpServlet {
         response.setCharacterEncoding("UTF-8");
         Part archivo = request.getPart("archivo");
         String revista = request.getParameter("revista");
+        System.out.println(revista);
         Revista nueva = (Revista) c.obtenerObjeto(revista, Revista.class);
         String pathArchivo = controlArch.guardarArchivo(archivo, nueva.getNo_version() + nueva.getTitulo() + "Revista", ControlArchivos.PDF);
         Info info = controlEditor.registrarRevista(nueva, pathArchivo);

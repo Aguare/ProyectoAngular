@@ -9,6 +9,8 @@ export class Revista {
     descripcion: string;
     no_version: number;
     precio_costo: number;
+    aprobado: boolean;
+    suscripciones: boolean;
     precio_suscripcion: number;
     es_pago: boolean;
     tiene_comentarios: boolean;
@@ -23,6 +25,8 @@ export class Revista {
         descrip: string,
         no_versio: number,
         precio_cost: number,
+        apro: boolean,
+        suscrip: boolean,
         precio_suscripcio: number,
         es_pag: boolean,
         tiene_comentario: boolean,
@@ -36,6 +40,8 @@ export class Revista {
         this.descripcion = descrip;
         this.no_version = no_versio;
         this.precio_costo = precio_cost;
+        this.aprobado = apro;
+        this.suscripciones = suscrip;
         this.precio_suscripcion = precio_suscripcio;
         this.es_pago = es_pag;
         this.tiene_comentarios = tiene_comentario;

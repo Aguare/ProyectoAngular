@@ -67,6 +67,7 @@ CREATE TABLE Revista(
     no_version INT,
     precio_costo DOUBLE,
     aprobado TINYINT NOT NULL,
+    suscripciones TINYINT NOT NULL,
     precio_suscripcion DOUBLE NOT NULL,
     es_pago TINYINT NOT NULL,
     tiene_comentarios TINYINT NOT NULL,

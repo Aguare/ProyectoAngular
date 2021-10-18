@@ -1,4 +1,6 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { SafeResourceUrl } from '@angular/platform-browser';
 import { Info } from 'src/app/Objetos/Info';
 import { Revista } from 'src/app/Objetos/Revista';
 import { Usuario } from 'src/app/Objetos/Usuario';
@@ -22,22 +24,22 @@ export class PublicacionesComponent implements OnInit {
 
   constructor(
     private obtener: ObtenerObjetosService,
-    private almacenamiento: AlmacenamientoLocalService
-  ) { 
+    private almacenamiento: AlmacenamientoLocalService,
+    private conexion: HttpClient
+  ) {
     this.usuario = almacenamiento.obtenerUsuario();
-    obtener.obtenerRevistasPorEditor(this.usuario).subscribe((respuesta: Revista[]) =>{
+    obtener.obtenerRevistasPorEditor(this.usuario).subscribe((respuesta: Revista[]) => {
       if (respuesta != null) {
         this.revistas = respuesta;
+        this.mostrar = false;
       }
     },
       (error: Info) => {
         this.mostrar = true;
-        this.mensaje = error;
       }
     );
   }
 
   ngOnInit(): void {
   }
-
 }

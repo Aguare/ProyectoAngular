@@ -1,19 +1,20 @@
 <div class="card my-1 shadow-lg">
   <div class="card-body">
-    <h4 class="card-title">Título de la Revista</h4>
+    <h4 class="card-title">{{ revista.titulo }}</h4>
     <p class="card-text">
-      Esto contendrá una descripción de la revista, para que el usuario pueda
-      saber de que se trata de manera breve
+      {{ revista.descripcion }}
     </p>
-    
-    <a class="btn btn-outline-primary btn-sm" (click)="darMeGusta()" id="botonMG">
-      Me Gusta <span class="badge bg-danger"> {{cantidadMG}} </span>
+
+    <a
+      class="btn btn-outline-primary btn-sm"
+      (click)="darMeGusta()"
+      id="botonMG{{ revista.idRevista }}"
+    >
+      Me Gusta <span class="badge bg-danger"> {{ cantidadMG }} </span>
     </a>
     <a class="btn btn-outline-info btn-sm mx-2">
-      Comentarios <span class="badge bg-secondary">0</span>
+      Comentarios <span class="badge bg-secondary"> {{ cantidadCom }}</span>
     </a>
-    <a class="btn btn-outline-info btn-sm mx-1">
-      Previsualizar
-    </a>
+    <a class="btn btn-outline-info btn-sm mx-1"> Previsualizar </a>
   </div>
 </div>

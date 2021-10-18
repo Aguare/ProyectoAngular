@@ -1,9 +1,12 @@
 package ObtenerObjetos;
 
+import Entidades.Etiqueta;
 import Entidades.Usuario;
 import SQL.Conexion;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  *
@@ -24,5 +27,20 @@ public class ObGeneral {
         } catch (Exception e) {
         }
         return usuario;
+    }
+
+    public ArrayList<Etiqueta> obtenerEtiquetasRevista(int idRevista) {
+        ArrayList<Etiqueta> etiquetas = new ArrayList<>();
+        String query = "SELECT * FROM Revista_Etiquetas WHERE RE_idRevista = ?;";
+        try {
+            PreparedStatement prepared = Conexion.Conexion().prepareStatement(query);
+            prepared.setInt(1, idRevista);
+            ResultSet r = prepared.executeQuery();
+            while (r.next()) {
+                etiquetas.add(new Etiqueta(r.getString("RE_nombre_etiqueta")));
+            }
+        } catch (SQLException e) {
+        }
+        return etiquetas;
     }
 }

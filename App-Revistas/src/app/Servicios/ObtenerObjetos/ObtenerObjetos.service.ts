@@ -26,4 +26,8 @@ export class ObtenerObjetosService {
   obtenerRevistasPorEditor(usuario: Usuario): Observable<Revista[]> {
     return this.conexion.get<Revista[]>(Backend.Path + "RegistrarRevista?usuario=" + usuario.nombreUsuario);
   }
+
+  obtenerRevistasLector(usuario: Usuario): Observable<Revista[]> {
+    return this.conexion.get<Revista[]>(Backend.Path + "RevistasInicio?usuario=" + usuario.nombreUsuario);
+  }
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, MinValidator, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, MinValidator, Validators } from '@angular/forms';
 import { Etiqueta } from 'src/app/Objetos/Etiqueta';
 import { Info } from 'src/app/Objetos/Info';
 import { Revista } from 'src/app/Objetos/Revista';
@@ -32,18 +32,21 @@ export class PublicarRevistaComponent implements OnInit {
   tiene_comentarios: boolean = false;
   tiene_reaccion: boolean = false;
   usuario: Usuario;
+  suscripciones: boolean = true;
 
   constructor(
     private registrar: RegistrarService,
-    private almacenamiento: AlmacenamientoLocalService
+    private almacenamiento: AlmacenamientoLocalService,
+    private builder: FormBuilder
   ) { }
 
   ngOnInit(): void {
-    this.validarForm = new FormGroup({
+    this.validarForm = this.builder.group({
       titulo: new FormControl('', Validators.required),
       version: new FormControl('', Validators.required),
       descripcion: new FormControl('', Validators.required),
       archivo: new FormControl('', Validators.required),
+      suscripciones: new FormControl(),
       tiene_comentarios: new FormControl(),
       tiene_reaccion: new FormControl()
     });
@@ -55,6 +58,7 @@ export class PublicarRevistaComponent implements OnInit {
 
   ingresoPrecioSus(evento: any) {
     this.precioSuscripcion = evento.target.value;
+    alert(this.precioSuscripcion);
   }
 
   cambiarEsGratuita() {
@@ -63,11 +67,15 @@ export class PublicarRevistaComponent implements OnInit {
       this.esGratuita = false;
       input?.removeAttribute("disabled");
       input?.setAttribute("required", "");
+      input?.setAttribute("min", "1");
+      input?.setAttribute("value", "1");
     } else {
       this.esGratuita = true;
       this.precioSuscripcion = 0;
       input?.removeAttribute("required");
+      input?.removeAttribute("min");
       input?.setAttribute("disabled", "");
+      input?.setAttribute("value", "0");
     }
   }
 
@@ -83,11 +91,7 @@ export class PublicarRevistaComponent implements OnInit {
     this.titulo = this.validarForm.value.titulo;
     this.version = this.validarForm.value.version;
     this.descripcion = this.validarForm.value.descripcion;
-    if(this.esGratuita){
-      this.esGratuita = false;
-    }else{
-      this.esGratuita = true;
-    }
+    this.suscripciones = this.validarForm.value.suscripciones;
     this.tiene_comentarios = this.validarForm.value.tiene_comentarios;
     this.tiene_reaccion = this.validarForm.value.tiene_reaccion;
     if (this.validarForm.valid) {
@@ -95,7 +99,7 @@ export class PublicarRevistaComponent implements OnInit {
         if (this.etiquetas.length >= 1) {
           this.usuario = this.almacenamiento.obtenerUsuario();
           let objeto = new Revista(1, "", this.titulo, this.descripcion,
-            this.version, 0, this.precioSuscripcion, this.esGratuita, this.tiene_comentarios,
+            this.version, 0, false, this.suscripciones, this.precioSuscripcion, !this.esGratuita, this.tiene_comentarios,
             this.tiene_reaccion, this.usuario, this.etiquetas);
           this.registrar.registrarRevista(objeto, this.archivo).subscribe((respuesta: Info) => {
             this.mensaje = respuesta;
@@ -113,6 +117,7 @@ export class PublicarRevistaComponent implements OnInit {
         this.mensaje = new Info(false, "Etiquetas", "Debe seleccionar almenos 1 etiqueta");
       }
     } else {
+      this.error = true;
       this.mensaje = new Info(false, "Campos Inválidos", "Por favor rellene todos los campos");
     }
   }

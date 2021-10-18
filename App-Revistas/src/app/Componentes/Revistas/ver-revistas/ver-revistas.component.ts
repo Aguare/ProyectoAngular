@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Revista } from 'src/app/Objetos/Revista';
 
 @Component({
   selector: 'app-ver-revistas',
@@ -7,7 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class VerRevistasComponent implements OnInit {
 
-  constructor() { }
+  @Input() revistas: Revista[];
+  constructor() {
+   }
 
   ngOnInit(): void {
   }

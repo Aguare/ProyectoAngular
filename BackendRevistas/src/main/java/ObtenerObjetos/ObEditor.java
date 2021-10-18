@@ -26,26 +26,13 @@ public class ObEditor {
             ResultSet r = prepared.executeQuery();
             while (r.next()) {
                 revistas.add(new Revista(r.getInt(1), r.getString(2), r.getString(3), r.getString(4),
-                        r.getInt(5), r.getDouble(6), r.getDouble(7), r.getBoolean(8), r.getBoolean(9), r.getBoolean(10),
-                        usuario, obtenerEtiquetasRevista(r.getInt(1))));
+                        r.getInt(5), r.getDouble(6), r.getBoolean(7),r.getBoolean(8), r.getDouble(9), r.getBoolean(10), r.getBoolean(11), r.getBoolean(12),
+                        usuario, obtenerG.obtenerEtiquetasRevista(r.getInt(1))));
             }
         } catch (SQLException e) {
         }
         return revistas;
     }
 
-    public ArrayList<Etiqueta> obtenerEtiquetasRevista(int idRevista) {
-        ArrayList<Etiqueta> etiquetas = new ArrayList<>();
-        String query = "SELECT * FROM Revista_Etiquetas WHERE RE_idRevista = ?;";
-        try {
-            PreparedStatement prepared = Conexion.Conexion().prepareStatement(query);
-            prepared.setInt(1, idRevista);
-            ResultSet r = prepared.executeQuery();
-            while (r.next()) {
-                etiquetas.add(new Etiqueta(r.getString("RE_nombre_etiqueta")));
-            }
-        } catch (SQLException e) {
-        }
-        return etiquetas;
-    }
+
 }

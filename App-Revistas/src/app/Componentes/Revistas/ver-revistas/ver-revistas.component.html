@@ -1,7 +1,3 @@
-<app-tarjeta-revista></app-tarjeta-revista>
-<app-tarjeta-revista></app-tarjeta-revista>
-<app-tarjeta-revista></app-tarjeta-revista>
-<app-tarjeta-revista></app-tarjeta-revista>
-<app-tarjeta-revista></app-tarjeta-revista>
-<app-tarjeta-revista></app-tarjeta-revista>
-<app-tarjeta-revista></app-tarjeta-revista>
+<div *ngFor="let r of revistas">
+  <app-tarjeta-revista [revista]="r"></app-tarjeta-revista>
+</div>

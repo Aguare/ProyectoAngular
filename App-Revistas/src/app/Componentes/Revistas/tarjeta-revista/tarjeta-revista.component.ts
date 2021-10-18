@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Revista } from 'src/app/Objetos/Revista';
 
 @Component({
   selector: 'app-tarjeta-revista',
@@ -7,8 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TarjetaRevistaComponent implements OnInit {
 
+  @Input() revista: Revista;
   tieneMG: boolean = false;
   cantidadMG: number = 0;
+  cantidadCom: number = 0;
 
   constructor() { }
 

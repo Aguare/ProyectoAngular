@@ -82,13 +82,29 @@
               step="0.01"
               (keyup)="ingresoPrecioSus($event)"
               pattern="^\d*(\.\d{0,2})?$"
+              value="1"
               required
             />
           </div>
         </div>
-        <div class="row container my-2">
-          <p>Ajustes de publicación</p>
-          <div class="col">
+        <div class="row m-0 justify-content-center">
+          <div class="col-auto">
+            <div class="form-check form-switch">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                formControlName="suscripciones"
+                checked
+              />
+              <label class="form-check-label" for="defaultCheck1">
+                ¿Se puden suscribir?
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="row m-0 justify-content-center my-3">
+          <h5>Ajustes de publicación</h5>
+          <div class="col-auto">
             <div class="form-check form-switch">
               <input
                 class="form-check-input"
@@ -97,11 +113,11 @@
                 id="defaultCheck1"
               />
               <label class="form-check-label" for="defaultCheck1">
-                Comentarios
+                Permite Comentarios
               </label>
             </div>
           </div>
-          <div class="col">
+          <div class="col-auto">
             <div class="form-check form-switch">
               <input
                 class="form-check-input"
@@ -110,7 +126,7 @@
                 id="defaultCheck1"
               />
               <label class="form-check-label" for="defaultCheck1">
-                Me gusta
+                Permite Me gusta
               </label>
             </div>
           </div>

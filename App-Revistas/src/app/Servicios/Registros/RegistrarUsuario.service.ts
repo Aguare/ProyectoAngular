@@ -12,11 +12,11 @@ export class RegistrarUsuarioService {
 
   constructor(private conexion: HttpClient) { }
 
-  registrarUsuario(cliente: Cliente): Observable<Info> {
-    return this.conexion.post<Info>(
-      `${Backend.Path}RegistrarUsuario`,
-      cliente
-    );
+  registrarUsuario(cliente: Cliente, imagen: File): Observable<Info> {
+    let formData = new FormData();
+    formData.append("Cliente", JSON.stringify(cliente));
+    formData.append("Foto", imagen, imagen.name);
+    return this.conexion.post<Info>(Backend.Path + "RegistrarUsuario", formData);
   }
 
 }

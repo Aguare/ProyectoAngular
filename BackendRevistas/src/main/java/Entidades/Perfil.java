@@ -8,10 +8,12 @@ import java.util.ArrayList;
  */
 public class Perfil {
 
+    private String foto;
     private String descripcion;
     private ArrayList<Etiqueta> etiquetasInteres;
 
-    public Perfil(String descripcion, ArrayList<Etiqueta> etiquetasInteres) {
+    public Perfil(String foto, String descripcion, ArrayList<Etiqueta> etiquetasInteres) {
+        this.foto = foto;
         this.descripcion = descripcion;
         this.etiquetasInteres = etiquetasInteres;
     }
@@ -32,4 +34,11 @@ public class Perfil {
         this.etiquetasInteres = etiquetasInteres;
     }
 
+    public String getFoto() {
+        return foto;
+    }
+
+    public void setFoto(String foto) {
+        this.foto = foto;
+    }
 }

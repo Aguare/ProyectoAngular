@@ -39,9 +39,10 @@ export class RegistrarService {
     return this.conexion.post<Info>(Backend.Path + "RegistrarRevista", formData);
   }
 
-  public subirArchivo(fileToUpload: File): Observable<Info> {
+  public subirArchivo(fileToUpload: File, usuario: Usuario): Observable<Info> {
     const formData: FormData = new FormData();
-    formData.append("datafile", fileToUpload, fileToUpload.name);
+    formData.append("Archivo", fileToUpload, fileToUpload.name);
+    formData.append("Usuario", JSON.stringify(usuario));
     return this.conexion.post<Info>(Backend.Path + "SubirArchivo", formData);
   }
 

@@ -1,6 +1,7 @@
 package Controlador;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -27,7 +28,15 @@ public class ControlArchivos {
             path = PATH + nombreArchivo + extension;
             parte.write(path);
         } catch (Exception ex) {
+            System.out.println("ERROR AL GUARDAR EL ARCHIVO");
         }
         return path;
     }
+
+    public File obtenerArchivo(String path) {
+        File archivo = new File(path);
+        return archivo;
+    }
+    
+    
 }

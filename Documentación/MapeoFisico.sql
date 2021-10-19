@@ -26,7 +26,7 @@ CREATE TABLE Perfil(
     idPerfil INT NOT NULL AUTO_INCREMENT,
     foto TEXT,
     descripcion VARCHAR(100),
-    P_nombre_usuario VARCHAR(50),
+    P_nombre_usuario VARCHAR(50) NOT NULL,
     PRIMARY KEY(idPerfil),
     FOREIGN KEY(P_nombre_usuario) REFERENCES Usuario(nombre_usuario)
 );
@@ -193,9 +193,6 @@ CREATE TABLE Visualizacion(
 INSERT INTO TipoUsuario(nombre_tipo) VALUES("Administrador");
 INSERT INTO TipoUsuario(nombre_tipo) VALUES("Lector");
 INSERT INTO TipoUsuario(nombre_tipo) VALUES("Editor");
-INSERT INTO Usuario(nombre_usuario, password, U_idTipoUsuario) VALUES("admin","5r6gXIfIDxY=",1);
-INSERT INTO Usuario(nombre_usuario, password, U_idTipoUsuario) VALUES("lector","zUWLKm5KpjA=",2);
-INSERT INTO Usuario(nombre_usuario, password, U_idTipoUsuario) VALUES("editor","CHlj2IPQAes=",3);
 
 INSERT INTO Etiqueta(nombre_etiqueta) VALUES("Ropa");
 INSERT INTO Etiqueta(nombre_etiqueta) VALUES("Comida");

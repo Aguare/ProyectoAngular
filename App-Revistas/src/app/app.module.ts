@@ -29,12 +29,15 @@ import { TarjetaRevistaComponent } from './Componentes/Revistas/tarjeta-revista/
 import { PublicarRevistaComponent } from './Componentes/Revistas/publicar-revista/publicar-revista.component';
 import { CrearEtiquetaComponent } from './Componentes/SeleccionEtiquetas/CrearEtiqueta/CrearEtiqueta.component';
 import { PublicacionesComponent } from './Componentes/CompEditor/publicaciones/publicaciones.component';
+import { PerfilComponent } from './Componentes/Inicio/perfil/perfil.component';
+import { VerRevistaComponent } from './Componentes/Revistas/ver-revista/ver-revista.component';
 
 const rutas: Routes = [
   {
     path: 'InicioLector', component: MenuLectorComponent,
     children: [
-      { path: 'VerRevistas', component: BuscarComponent }
+      { path: 'VerRevistas', component: BuscarComponent },
+      { path: 'Perfil/:nombreUsuario', component: PerfilComponent }
     ]
   },
   {
@@ -55,7 +58,7 @@ const rutas: Routes = [
     path: 'Inicio', component: MenuGeneralComponent,
     children: [
       { path: 'InicioSesion', component: IniciosesionComponent },
-      { path: 'RegistroUsuario', component: RegistroUsuarioComponent }
+      { path: 'RegistroUsuario', component: RegistroUsuarioComponent },
     ]
   },
   { path: 'Mensaje', component: MostrarInformacionComponent },
@@ -85,7 +88,9 @@ const rutas: Routes = [
     TarjetaRevistaComponent,
     PublicarRevistaComponent,
     CrearEtiquetaComponent,
-    PublicacionesComponent
+    PublicacionesComponent,
+    PerfilComponent,
+    VerRevistaComponent
   ],
   imports: [
     BrowserModule,

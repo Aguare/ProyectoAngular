@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Anunciante } from 'src/app/Objetos/Anunciante';
 import { Backend } from 'src/app/Objetos/Backend';
+import { Cliente } from 'src/app/Objetos/Cliente';
+import { Perfil } from 'src/app/Objetos/Perfil';
 import { Revista } from 'src/app/Objetos/Revista';
 import { Usuario } from 'src/app/Objetos/Usuario';
 import { AlmacenamientoLocalService } from '../Almacenamiento/AlmacenamientoLocal.service';
@@ -29,5 +31,15 @@ export class ObtenerObjetosService {
 
   obtenerRevistasLector(usuario: Usuario): Observable<Revista[]> {
     return this.conexion.get<Revista[]>(Backend.Path + "RevistasInicio?usuario=" + usuario.nombreUsuario);
+  }
+
+  obtenerPerfilUsuario(usuario: string): Observable<Perfil> {
+    return this.conexion.get<Perfil>(Backend.Path + "ObtenerPerfil?usuario=" + usuario);
+  }
+
+  obtenerCliente(usuario: string): Observable<Cliente> {
+    let formData = new FormData();
+    formData.append("Usuario", usuario);
+    return this.conexion.post<Cliente>(Backend.Path + "ObtenerPerfil", formData);
   }
 }

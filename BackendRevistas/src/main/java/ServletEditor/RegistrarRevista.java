@@ -8,7 +8,6 @@ import Entidades.Usuario;
 import JSON.Convertir;
 import ObtenerObjetos.ObEditor;
 import ObtenerObjetos.ObGeneral;
-import static ServletsControl.SubirArchivo.PATH;
 import java.io.IOException;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
@@ -24,22 +23,21 @@ import javax.servlet.http.Part;
  * @author marco
  */
 @WebServlet(name = "RegistrarRevista", urlPatterns = {"/RegistrarRevista"})
-@MultipartConfig(location = PATH)
+@MultipartConfig()
 public class RegistrarRevista extends HttpServlet {
-    
-    public static final String PATH = "C:\\Users\\marco\\Documents\\ServerSources\\";
+
     private final Convertir c = new Convertir();
     private final ControlArchivos controlArch = new ControlArchivos();
     private final ControlEditor controlEditor = new ControlEditor();
     private final ObEditor obEdit = new ObEditor();
     private final ObGeneral obtenerG = new ObGeneral();
-    
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
-        try { 
+        try {
             String nombreUsuario = request.getParameter("usuario");
             Usuario usuario = obtenerG.obtenerUsuario(nombreUsuario);
             ArrayList<Revista> revistasEditor = obEdit.obtenerRevistasEditor(usuario);

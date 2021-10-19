@@ -1,6 +1,8 @@
 package ObtenerObjetos;
 
+import Entidades.Cliente;
 import Entidades.Etiqueta;
+import Entidades.Perfil;
 import Entidades.Usuario;
 import SQL.Conexion;
 import java.sql.PreparedStatement;
@@ -13,6 +15,9 @@ import java.util.ArrayList;
  * @author marco
  */
 public class ObGeneral {
+
+    public static final int ETIQUETAS_REVISTA = 1;
+    public static final int ETIQUETAS_PERFIL = 2;
 
     public Usuario obtenerUsuario(String nombre) {
         Usuario usuario = null;
@@ -29,12 +34,19 @@ public class ObGeneral {
         return usuario;
     }
 
-    public ArrayList<Etiqueta> obtenerEtiquetasRevista(int idRevista) {
+    /**
+     * Se obtiene las etiquetas de un perfil como de una revista
+     *
+     * @param opcion 1 para revista, 2 para perfil
+     * @param id
+     * @return
+     */
+    public ArrayList<Etiqueta> obtenerEtiquetas(int opcion, int id) {
         ArrayList<Etiqueta> etiquetas = new ArrayList<>();
-        String query = "SELECT * FROM Revista_Etiquetas WHERE RE_idRevista = ?;";
+        String query = opcion == 1 ? "SELECT * FROM Revista_Etiquetas WHERE RE_idRevista = ?;" : "SELECT * FROM Perfil WHERE P_nombre_usuario = ?;";
         try {
             PreparedStatement prepared = Conexion.Conexion().prepareStatement(query);
-            prepared.setInt(1, idRevista);
+            prepared.setInt(1, id);
             ResultSet r = prepared.executeQuery();
             while (r.next()) {
                 etiquetas.add(new Etiqueta(r.getString("RE_nombre_etiqueta")));
@@ -43,4 +55,26 @@ public class ObGeneral {
         }
         return etiquetas;
     }
+
+    public Perfil obtenerPerfilUsuario(String nombreUsuario) {
+        Perfil perfil = null;
+        String query = "SELECT * FROM Perfil WHERE P_nombre_usuario = ?;";
+        try {
+            PreparedStatement prepared = Conexion.Conexion().prepareStatement(query);
+            prepared.setString(1, nombreUsuario);
+            ResultSet r = prepared.executeQuery();
+            while (r.next()) {
+                perfil = new Perfil(r.getString(2), r.getString(3), obtenerEtiquetas(2, r.getInt(1)));
+            }
+        } catch (SQLException e) {
+        }
+        return perfil;
+    }
+
+    public Cliente obtenerClienteUsuario(String nombreUsuario) {
+        Cliente cliente = null;
+        cliente = new Cliente(obtenerUsuario(nombreUsuario), obtenerPerfilUsuario(nombreUsuario));
+        return cliente;
+    }
+
 }

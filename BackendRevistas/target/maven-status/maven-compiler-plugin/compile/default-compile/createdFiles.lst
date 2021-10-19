@@ -1,6 +1,7 @@
 ObtenerObjetos\ObAdmin.class
 Controlador\ControlArchivos.class
 ObtenerObjetos\ObLector.class
+ServletsControl\ObtenerPerfil.class
 SQL\ErrorSQL.class
 Entidades\Usuario.class
 Entidades\Info.class
@@ -20,9 +21,10 @@ SQL\Encriptar.class
 Entidades\Anunciante.class
 Entidades\Etiqueta.class
 ServletAdmin\ObtenerAnunciantes.class
+RegistrarUsuario.class
 ServletAdmin\RegistrarAnunciante.class
 ServletsControl\SubirArchivo.class
-ServletsUsuario\RegistrarUsuario.class
 ObtenerObjetos\ObEditor.class
 Entidades\Revista.class
 Controlador\ControlEditor.class
+ServletsControl\MostrarRevista.class

@@ -5,7 +5,10 @@ import { Etiqueta } from 'src/app/Objetos/Etiqueta';
 import { Info } from 'src/app/Objetos/Info';
 import { Perfil } from 'src/app/Objetos/Perfil';
 import { Usuario } from 'src/app/Objetos/Usuario';
+import { AlmacenamientoLocalService } from 'src/app/Servicios/Almacenamiento/AlmacenamientoLocal.service';
+import { Base64Service } from 'src/app/Servicios/ObtenerObjetos/Base64.service';
 import { RedireccionarService } from 'src/app/Servicios/Redireccionar.service';
+import { RegistrarService } from 'src/app/Servicios/Registros/Registrar.service';
 import { RegistrarUsuarioService } from 'src/app/Servicios/Registros/RegistrarUsuario.service';
 
 @Component({
@@ -22,25 +25,41 @@ export class RegistroUsuarioComponent implements OnInit {
   passwordConfirm: string = "";
   tipoUsuario: string = "";
   descripcion: string = "";
+  foto: File | null = null;
+  mostrarFoto: string;
   etiquetasSeleccionadas: Etiqueta[] = [];
   mensajeFormulario: boolean = false;
-  mensajeError: string = "Por favor llene todos los campos";
+  mensajeError: Info = new Info(false, "Error", "Rellene todos los campos");
 
   constructor(
-    private formBuilder: FormBuilder, 
+    private formBuilder: FormBuilder,
     public enviarRegistro: RegistrarUsuarioService,
-    public redireccionar: RedireccionarService
-    ) {
+    public redireccionar: RedireccionarService,
+    public base: Base64Service,
+    private subirArchivo: RegistrarService,
+    private almacenamiento: AlmacenamientoLocalService
+  ) {
     this.validarForm = new FormGroup({
       nombreUsuario: new FormControl('', [Validators.required]),
       password: new FormControl('', [Validators.required]),
       passwordConfirm: new FormControl('', [Validators.required]),
       tipoUsuario: new FormControl('', [Validators.required]),
-      descripcion: new FormControl('', Validators.min(0))
+      descripcion: new FormControl('', [Validators.required, Validators.minLength(0)]),
+      archivo: new FormControl('', [Validators.required])
     });
   }
 
   ngOnInit(): void {
+  }
+
+  obtenerImagen(event: Event) {
+    const files = (event.target as HTMLInputElement).files;
+    if (files != null) {
+      this.foto = files.item(0);
+      this.base.extraerBase64(this.foto).then((foto: any) => {
+        this.mostrarFoto = foto.base;
+      });
+    }
   }
 
   comprobarPasswords(event: any) {
@@ -63,22 +82,31 @@ export class RegistroUsuarioComponent implements OnInit {
     if (this.validarForm.valid) {
       this.tipoUsuario = this.validarForm.value.tipoUsuario;
       this.nombreUsuario = this.validarForm.value.nombreUsuario;
+      this.descripcion = this.validarForm.value.descripcion;
       this.mensajeFormulario = false;
       let cantidad = this.etiquetasSeleccionadas.length;
-      if (cantidad > 2) {
-        let cliente = new Cliente(new Usuario(this.tipoUsuario, this.nombreUsuario, this.password), new Perfil(this.descripcion, this.etiquetasSeleccionadas));
-        this.enviarRegistro.registrarUsuario(cliente).subscribe((respuesta: Info) =>{
-          this.redireccionar.enviarPagina("Mensaje");
+      if (cantidad > 2 && this.foto != null) {
+        let cliente = new Cliente(new Usuario(this.tipoUsuario, this.nombreUsuario, this.password),
+          new Perfil("", this.descripcion, this.etiquetasSeleccionadas));
+        this.enviarRegistro.registrarUsuario(cliente, this.foto).subscribe((respuesta: Info) => {
+          this.mensajeError = respuesta;
+          this.mensajeFormulario = true;
+          if (this.mensajeError.operacion) {
+            this.redireccionar.enviarPagina("Mensaje");
+          }
         },
-        error => this.redireccionar.enviarPagina("ErrorConexion")
+          (error: any) => {
+            this.mensajeError = error;
+            this.mensajeFormulario = true;
+          }
         );
       } else {
-        this.mensajeError = "Debe seleccionar al menos 3 categorias o etiquetas";
+        this.mensajeError = new Info(false, "Error", "Debe seleccionar al menos 3 categorias o etiquetas");
         this.mensajeFormulario = true;
       }
     } else {
       this.mensajeFormulario = true;
-      this.mensajeError = "Por favor llene todos los campos";
+      this.mensajeError = new Info(false, "Error", "Por favor rellene todos los campos");
     }
   }
 }

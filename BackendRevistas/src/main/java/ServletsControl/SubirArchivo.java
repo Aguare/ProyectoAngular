@@ -2,12 +2,13 @@ package ServletsControl;
 
 import Controlador.ControlArchivos;
 import Entidades.Info;
+import Entidades.Usuario;
 import JSON.Convertir;
-import static ServletsControl.SubirArchivo.PATH;
-import java.io.BufferedReader;
+import java.io.BufferedInputStream;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -21,11 +22,19 @@ import javax.servlet.http.Part;
  * @author marco
  */
 @WebServlet(name = "SubirArchivo", urlPatterns = {"/SubirArchivo"})
-@MultipartConfig(location = PATH)
+@MultipartConfig()
 public class SubirArchivo extends HttpServlet {
 
-    public static final String PATH = "C:\\Users\\marco\\Documents\\ServerSources\\";
     private Convertir c = new Convertir();
+    private ControlArchivos ctlArch = new ControlArchivos();
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        String path = request.getParameter("path");
+        String opcion = request.getParameter("opcion");
+        obtenerArchivo(response, path);
+    }
 
     /**
      * Handles the HTTP <code>POST</code> method.
@@ -40,25 +49,53 @@ public class SubirArchivo extends HttpServlet {
             throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
-        Part filePart = request.getPart("datafile");
-        String usuario = request.getParameter("usuario");
-        System.out.println("************************");
-        System.out.println(usuario);
-        ControlArchivos con = new ControlArchivos();
-        
-        InputStream fileStream = filePart.getInputStream();
-
-        try (BufferedReader in = new BufferedReader(new InputStreamReader(fileStream))) {
-            String line = in.readLine();
-            while (line != null) {
-                line = in.readLine();
-            }
-            String filePath = PATH + "archivoPrueba.pdf";
-            filePart.write(filePath);
-            response.getWriter().append(c.obtenerJSON(new Info(true, "Archivo Subido", "El archivo se subió correctamente"), Info.class));
+        Part filePart = request.getPart("Archivo");
+        String usuarioJSON = request.getParameter("Usuario");
+        Usuario usuario = (Usuario) c.obtenerObjeto(usuarioJSON, Usuario.class);
+        try {
+            String path = ctlArch.guardarArchivo(filePart, "Foto" + usuario.getNombreUsuario(), ControlArchivos.IMG);
+            response.getWriter().append(c.obtenerJSON(new Info(true, path, path), Info.class));
         } catch (Exception ex) {
-            response.getWriter().append(c.obtenerJSON(new Info(false, "Error del Servidor", "El servidor no pudo resolver la petición"), Info.class));
+            response.setStatus(HttpServletResponse.SC_NOT_ACCEPTABLE);
+            response.getWriter().append(c.obtenerJSON(new Info(false, "Error del Archivo", "La imágen es demasiado grande o no es una imágen"), Info.class));
         }
     }
 
+    /**
+     * Para mostrar un archivo en debe ir en un get y devuelve el pdf
+     *
+     * @param response
+     * @param path
+     */
+    private void obtenerArchivo(HttpServletResponse response, String path) {
+        response.setCharacterEncoding("UTF-8");
+        try (BufferedInputStream fileStream = new BufferedInputStream(new FileInputStream(path))) {
+            response.setContentType("application/pdf");
+            int data = fileStream.read();
+            while (data > -1) {
+                response.getOutputStream().write(data);
+                data = fileStream.read();
+            }
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+    }
+
+    private void descargarArchivo(HttpServletResponse response, String path) throws FileNotFoundException, IOException {
+        FileInputStream inputStream = new FileInputStream(path);
+        String filename = "Revista.pdf";
+        descargar(response, inputStream, filename);
+    }
+
+    private void descargar(HttpServletResponse response, InputStream inputStream, String fileName) throws IOException {
+        try (BufferedInputStream fileStream = new BufferedInputStream(inputStream)) {
+            response.setContentType("text/plain;charset=UTF-8");
+            response.setHeader("Content-disposition", "attachment; filename=" + fileName);
+            int data = fileStream.read();
+            while (data > -1) {
+                response.getOutputStream().write(data);
+                data = fileStream.read();
+            }
+        }
+    }
 }

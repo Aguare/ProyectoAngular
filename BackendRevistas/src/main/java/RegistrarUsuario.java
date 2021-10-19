@@ -1,23 +1,26 @@
-package ServletsUsuario;
-
+import Controlador.ControlArchivos;
 import Controlador.ControlUsuario;
 import Entidades.Cliente;
 import Entidades.Info;
 import JSON.Convertir;
-import java.io.BufferedReader;
 import java.io.IOException;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 
 /**
  *
  * @author marco
  */
 @WebServlet(name = "RegistrarUsuario", urlPatterns = {"/RegistrarUsuario"})
+@MultipartConfig()
 public class RegistrarUsuario extends HttpServlet {
+
+    private ControlArchivos ctlArch = new ControlArchivos();
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -48,14 +51,18 @@ public class RegistrarUsuario extends HttpServlet {
         response.setCharacterEncoding("UTF-8");
         Convertir c = new Convertir();
         ControlUsuario control = new ControlUsuario();
+        Info status = new Info(false, "Error", "El usuario no pudo registrarse");
         try {
-            BufferedReader lector = request.getReader();
-            String textoEntrada = c.entradaJSON(lector);
+            String textoEntrada = request.getParameter("Cliente");
+            Part foto = request.getPart("Foto");
             Cliente cliente = (Cliente) c.obtenerObjeto(textoEntrada, Cliente.class);
-            Info status = control.regitrarCliente(cliente);
+            String pathFoto = ctlArch.guardarArchivo(foto, "foto" + cliente.getUsuario().getNombreUsuario(), ControlArchivos.IMG);
+            cliente.getPerfil().setFoto(pathFoto);
+            status = control.regitrarCliente(cliente);
             response.getWriter().append(c.obtenerJSON(status, Info.class));
-        } catch (Exception e) {
-            response.getWriter().append(c.obtenerJSON(new Info(false, "Error del Servidor", "El servidor no pudo resolver la petición"), Info.class));
+        } catch (IOException | ServletException e) {
+            response.setStatus(HttpServletResponse.SC_NOT_ACCEPTABLE);
+            response.getWriter().append(c.obtenerJSON(status, Info.class));
         }
     }
 }

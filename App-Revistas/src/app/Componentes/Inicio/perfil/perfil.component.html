@@ -1,0 +1,13 @@
+<div class="container border shadow-lg my-5">
+  <app-error [espera]="error" [mensaje]="mensaje"></app-error>
+  <div>
+    <div class="card" style="width: 200px">
+      <img class="card-img-top" [src]="pathFoto" alt="Card image" />
+      <div class="card-body">
+        <h4 class="card-title">{{ usuario.nombreUsuario }}</h4>
+        <p class="card-text">{{ perfil.descripcion }}</p>
+        <a class="btn btn-primary">Editar</a>
+      </div>
+    </div>
+  </div>
+</div>

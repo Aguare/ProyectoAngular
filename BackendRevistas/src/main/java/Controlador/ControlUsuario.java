@@ -70,7 +70,6 @@ public class ControlUsuario {
     }
 
     public Info regitrarCliente(Cliente cliente) {
-
         if (registrarUsuario(cliente.getUsuario())) {
             int idPerfil = registrarPerfil(cliente.getPerfil(), cliente.getUsuario().getNombreUsuario());
             ArrayList<Etiqueta> etiquetasSelec = cliente.getPerfil().getEtiquetasInteres();
@@ -103,7 +102,7 @@ public class ControlUsuario {
         int idPerfil = -1;
         try {
             PreparedStatement prepared = Conexion.Conexion().prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS);
-            prepared.setString(1, "foto");
+            prepared.setString(1, perfil.getFoto());
             prepared.setString(2, perfil.getDescripcion());
             prepared.setString(3, nombreUsuario);
             prepared.executeUpdate();

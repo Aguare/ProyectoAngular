@@ -1,5 +1,6 @@
 package ObtenerObjetos;
 
+import Entidades.Comentario;
 import Entidades.Reaccion;
 import Entidades.Revista;
 import Entidades.Usuario;
@@ -76,5 +77,35 @@ public class ObLector {
         } catch (SQLException e) {
         }
         return reacciones;
+    }
+
+    public ArrayList<Comentario> obtenerComentariosRevista(int idRevista) {
+        ArrayList<Comentario> comentarios = new ArrayList<>();
+        String query = "SELECT * FROM Comentario_Revista WHERE CR_idRevista = ? ORDER BY fecha;";
+        try {
+            PreparedStatement prepared = Conexion.Conexion().prepareStatement(query);
+            prepared.setInt(1, idRevista);
+            ResultSet r = prepared.executeQuery();
+            while (r.next()) {
+                comentarios.add(new Comentario(r.getInt(1), obtenerComentario(r.getInt(1)), r.getDate(4).toString(), r.getString(2), r.getInt(3)));
+            }
+        } catch (SQLException e) {
+        }
+        return comentarios;
+    }
+
+    private String obtenerComentario(int idComentario) {
+        String comentario = "";
+        String query = "SELECT * FROM Comentario WHERE idComentario = ?;";
+        try {
+            PreparedStatement prepared = Conexion.Conexion().prepareStatement(query);
+            prepared.setInt(1, idComentario);
+            ResultSet r = prepared.executeQuery();
+            while (r.next()) {
+                return r.getString("comentario");
+            }
+        } catch (SQLException e) {
+        }
+        return comentario;
     }
 }

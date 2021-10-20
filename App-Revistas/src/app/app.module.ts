@@ -33,13 +33,16 @@ import { PerfilComponent } from './Componentes/Inicio/perfil/perfil.component';
 import { VerRevistaComponent } from './Componentes/Revistas/ver-revista/ver-revista.component';
 import { EditarEtiquetasComponent } from './Componentes/SeleccionEtiquetas/editar-etiquetas/editar-etiquetas.component';
 import { PrevisualizarComponent } from './Componentes/Revistas/previsualizar/previsualizar.component';
+import { SolicitarFechaComponent } from './Componentes/solicitar-fecha/solicitar-fecha.component';
+import { ComentarioComponent } from './Componentes/Revistas/comentario/comentario.component';
 
 const rutas: Routes = [
   {
     path: 'InicioLector', component: MenuLectorComponent,
     children: [
       { path: 'VerRevistas', component: BuscarComponent },
-      { path: 'Perfil/:nombreUsuario', component: PerfilComponent }
+      { path: 'Perfil/:nombreUsuario', component: PerfilComponent },
+      { path: 'Previsualizar/:idRevista', component: PrevisualizarComponent }
     ]
   },
   {
@@ -94,7 +97,9 @@ const rutas: Routes = [
     PerfilComponent,
     VerRevistaComponent,
     EditarEtiquetasComponent,
-    PrevisualizarComponent
+    PrevisualizarComponent,
+    SolicitarFechaComponent,
+    ComentarioComponent
   ],
   imports: [
     BrowserModule,

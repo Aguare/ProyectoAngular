@@ -62,5 +62,16 @@ public class RevistasInicio extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
+        try {
+            String nombreUsuario = request.getParameter("idRevista");
+            Usuario usuario = obtenerG.obtenerUsuario(nombreUsuario);
+            ArrayList<Revista> revistasLector = obLec.obtenerRevistasLector(usuario);
+            response.getWriter().append(c.obtenerJSON(revistasLector, revistasLector.getClass()));
+        } catch (Exception e) {
+            response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+            response.getWriter().append(c.obtenerJSON(new Info(false, "Error del Servidor", "El servidor no pudo resolver la petición"), Info.class));
+        }
     }
 }

@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Comentario } from 'src/app/Objetos/Comentario';
 import { Info } from 'src/app/Objetos/Info';
 import { Reaccion } from 'src/app/Objetos/Reaccion';
 import { Revista } from 'src/app/Objetos/Revista';
@@ -14,10 +15,12 @@ import { RegistrarService } from 'src/app/Servicios/Registros/Registrar.service'
 export class TarjetaRevistaComponent implements OnInit {
 
   @Input() revista: Revista;
+  @Input() fecha: Date;
   tieneMG: boolean = false;
   cantidadMG: number = 0;
   cantidadCom: number = 0;
   reacciones: Reaccion[] = [];
+  comentarios: Comentario[] = [];
 
   constructor(
     private registrar: RegistrarService,
@@ -32,6 +35,12 @@ export class TarjetaRevistaComponent implements OnInit {
       this.obtener.obtenerReacciones(this.revista.idRevista).subscribe((respuesta: Reaccion[]) => {
         this.reacciones = respuesta;
         this.verificarMegustaUsuario();
+      },
+        error => alert("error")
+      );
+      this.obtener.obtenerComentarios(this.revista.idRevista).subscribe((respuesta: Comentario[]) => {
+        this.comentarios = respuesta;
+        this.cantidadCom = this.comentarios.length;
       },
         error => alert("error")
       );
@@ -74,10 +83,17 @@ export class TarjetaRevistaComponent implements OnInit {
     }
   }
 
+  nuevaFecha(fecha: any) {
+    this.fecha = fecha;
+  }
+
   registrarReaccion() {
-    let reaccion = new Reaccion(this.revista.idRevista,
-      this.tieneMG, "2021-08-24", this.almacenamiento.obtenerUsuario().nombreUsuario, this.revista.idRevista);
-    this.registrar.registrarReaccion(reaccion).subscribe((respuesta: Info) => {
-    });
+    let fecha = prompt("Ingrese la fecha para el comentario Ejemplo: 2021-09-24");
+    if (fecha != null) {
+      let reaccion = new Reaccion(this.revista.idRevista,
+        this.tieneMG, fecha, this.almacenamiento.obtenerUsuario().nombreUsuario, this.revista.idRevista);
+      this.registrar.registrarReaccion(reaccion).subscribe((respuesta: Info) => {
+      });
+    }
   }
 }

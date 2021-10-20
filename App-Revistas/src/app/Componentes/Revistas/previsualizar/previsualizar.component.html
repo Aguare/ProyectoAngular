@@ -1,1 +1,80 @@
-<p>previsualizar works!</p>
+<!-- The Modal -->
+<div class="container shadow-lg my-5">
+  <app-error [mensaje]="mensaje" [espera]="error"></app-error>
+  <div *ngIf="revista" class="container">
+    <div class="container p-2">
+      <div class="row">
+        <div class="col-sm-4 border">
+          <div class="my-3">
+            <h2>Escritor: {{ revista.usuarioCreador.nombreUsuario }}</h2>
+          </div>
+          <ul class="nav nav-pills flex-column">
+            <li class="nav-item">
+              <a
+                class="nav-link active"
+                href="InicioLector/Perfil/{{
+                  revista.usuarioCreador.nombreUsuario
+                }}"
+                >Ver Perfil del Creador</a
+              >
+            </li>
+          </ul>
+          <h3 class="mt-2">Interacción</h3>
+          <div class="row justify-content-center">
+            <div class="col-auto m-0 p-1">
+              <a
+                class="btn btn-outline-primary btn-sm"
+                (click)="darMeGusta()"
+                id="botonMG{{ revista.idRevista }}"
+              >
+                Me Gusta
+                <span class="badge bg-danger">
+                  {{ cantidadMG }}
+                </span>
+              </a>
+            </div>
+            <div class="col-auto m-0 p-1">
+              <a class="btn btn-info btn-sm mx-2">
+                Comentarios
+                <span class="badge bg-secondary"> {{ cantidadCom }}</span>
+              </a>
+            </div>
+          </div>
+
+          <h3 class="mt-2">Etiquetas Relacionadas</h3>
+          <app-editar-etiquetas
+            [etiquetasSeleccionadas]="revista.etiquetas"
+          ></app-editar-etiquetas>
+        </div>
+        <div class="col-sm-8 border">
+          <h2>{{ revista.titulo }}</h2>
+          <h5>Fecha de creación: {{ revista.fecha | date: "dd-MM-yyyy" }}</h5>
+          <p>
+            {{ revista.descripcion }}
+          </p>
+          <h2 class="mt-5">Comentarios</h2>
+          <div class="input-group was-validated">
+            <input
+              type="text"
+              class="form-control"
+              minlength="10"
+              maxlength="200"
+              placeholder="Escriba un comentario . . ."
+              [(ngModel)]="comentarioNuevo"
+            />
+            <div class="input-group-append">
+              <button class="btn btn-primary" (click)="hacerComentario()">
+                Agregar
+              </button>
+            </div>
+          </div>
+          <div class="overflow-auto" style="height: 500px">
+            <div *ngFor="let coment of comentarios">
+              <app-comentario [comentario]="coment"></app-comentario>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

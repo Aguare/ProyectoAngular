@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { Anunciante } from 'src/app/Objetos/Anunciante';
 import { Backend } from 'src/app/Objetos/Backend';
 import { Cliente } from 'src/app/Objetos/Cliente';
+import { Comentario } from 'src/app/Objetos/Comentario';
 import { Perfil } from 'src/app/Objetos/Perfil';
 import { Reaccion } from 'src/app/Objetos/Reaccion';
 import { Revista } from 'src/app/Objetos/Revista';
@@ -46,5 +47,13 @@ export class ObtenerObjetosService {
 
   obtenerReacciones(idRevista: number): Observable<Reaccion[]> {
     return this.conexion.get<Reaccion[]>(Backend.Path + "RegistrarInteraccion?idRevista=" + idRevista);
+  }
+
+  obtenerComentarios(idRevista: number): Observable<Comentario[]> {
+    return this.conexion.get<Comentario[]>(Backend.Path + "RegistrarComentario?idRevista=" + idRevista);
+  }
+
+  obtenerRevista(idRevista: string): Observable<Revista> {
+    return this.conexion.get<Revista>(Backend.Path + "ObtenerRevista?idRevista=" + idRevista);
   }
 }

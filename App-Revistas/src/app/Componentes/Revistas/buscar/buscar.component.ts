@@ -15,6 +15,7 @@ export class BuscarComponent implements OnInit {
 
   revistas: Revista[];
   usuario: Usuario;
+  fecha: Date = new Date();
 
   constructor(
     private obtener: ObtenerObjetosService,
@@ -32,4 +33,5 @@ export class BuscarComponent implements OnInit {
     );
   }
 
+  
 }

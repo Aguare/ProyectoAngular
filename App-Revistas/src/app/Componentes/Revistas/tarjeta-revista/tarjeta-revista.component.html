@@ -10,11 +10,20 @@
       (click)="darMeGusta()"
       id="botonMG{{ revista.idRevista }}"
     >
-      Me Gusta <span class="badge bg-danger"> {{ cantidadMG }} </span>
+      Me Gusta
+      <span class="badge bg-danger">
+        {{ cantidadMG }}
+      </span>
     </a>
-    <a class="btn btn-outline-info btn-sm mx-2">
+    <a class="btn btn-info btn-sm mx-2">
       Comentarios <span class="badge bg-secondary"> {{ cantidadCom }}</span>
     </a>
-    <a class="btn btn-outline-info btn-sm mx-1"> Previsualizar </a>
+    <a
+      class="btn btn-outline-info btn-sm mx-1"
+      role="button"
+      href="InicioLector/Previsualizar/{{ revista.idRevista }}"
+    >
+      Previsualizar
+    </a>
   </div>
 </div>

@@ -80,7 +80,7 @@ CREATE TABLE Revista(
 
 CREATE TABLE Comentario(
     idComentario INT NOT NULL AUTO_INCREMENT,
-    comentario VARCHAR(100) NOT NULL,
+    comentario VARCHAR(200) NOT NULL,
     fecha DATE NOT NULL,
     C_nombre_usuario VARCHAR(50) NOT NULL,
     PRIMARY KEY(idComentario),

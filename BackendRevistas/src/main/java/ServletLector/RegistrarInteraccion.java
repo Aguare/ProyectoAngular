@@ -67,6 +67,8 @@ public class RegistrarInteraccion extends HttpServlet {
             Reaccion reaccion = (Reaccion) c.obtenerObjeto(reac, Reaccion.class);
             ctlL.darMG(reaccion);
         } catch (Exception e) {
+            response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+            response.getWriter().append(c.obtenerJSON(new Info(false, "Error del Servidor", "El servidor no pudo resolver la petición"), Info.class));
 
         }
     }

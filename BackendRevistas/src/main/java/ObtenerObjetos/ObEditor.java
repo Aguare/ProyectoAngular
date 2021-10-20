@@ -34,4 +34,21 @@ public class ObEditor {
         return revistas;
     }
 
+    public Revista obtenerRevistaID(int idRevista) {
+        Revista revista = null;
+        String query = "SELECT * FROM Revista WHERE idRevista = ?;";
+        try {
+            PreparedStatement prepared = Conexion.Conexion().prepareStatement(query);
+            prepared.setInt(1, idRevista);
+            ResultSet r = prepared.executeQuery();
+            while (r.next()) {
+                revista = new Revista(r.getInt(1), r.getString(2), r.getString(3), r.getString(4),
+                        r.getInt(5), r.getDouble(6), r.getBoolean(7), r.getBoolean(8), r.getDouble(9), r.getBoolean(10), r.getBoolean(11), r.getBoolean(12),
+                        r.getDate(13).toString(), obtenerG.obtenerUsuario(r.getString(14)), obtenerG.obtenerEtiquetas(1, r.getInt(1)));
+            }
+        } catch (SQLException e) {
+        }
+        return revista;
+    }
+
 }

@@ -9,6 +9,7 @@ import { Revista } from 'src/app/Objetos/Revista';
 export class VerRevistasComponent implements OnInit {
 
   @Input() revistas: Revista[];
+  @Input() fecha: Date;
   constructor() {
    }
 

@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Anunciante } from 'src/app/Objetos/Anunciante';
 import { Backend } from 'src/app/Objetos/Backend';
+import { Comentario } from 'src/app/Objetos/Comentario';
 import { Etiqueta } from 'src/app/Objetos/Etiqueta';
 import { Info } from 'src/app/Objetos/Info';
 import { Reaccion } from 'src/app/Objetos/Reaccion';
@@ -57,5 +58,11 @@ export class RegistrarService {
     let formData = new FormData();
     formData.append("Reaccion", JSON.stringify(reaccion));
     return this.conexion.post<Info>(Backend.Path + "RegistrarInteraccion", formData);
+  }
+
+  public registrarComentario(comentario: Comentario): Observable<Info> {
+    let formData = new FormData();
+    formData.append("Comentario", JSON.stringify(comentario));
+    return this.conexion.post<Info>(Backend.Path + "RegistrarComentario", formData);
   }
 }

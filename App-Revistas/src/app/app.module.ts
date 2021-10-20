@@ -31,6 +31,8 @@ import { CrearEtiquetaComponent } from './Componentes/SeleccionEtiquetas/CrearEt
 import { PublicacionesComponent } from './Componentes/CompEditor/publicaciones/publicaciones.component';
 import { PerfilComponent } from './Componentes/Inicio/perfil/perfil.component';
 import { VerRevistaComponent } from './Componentes/Revistas/ver-revista/ver-revista.component';
+import { EditarEtiquetasComponent } from './Componentes/SeleccionEtiquetas/editar-etiquetas/editar-etiquetas.component';
+import { PrevisualizarComponent } from './Componentes/Revistas/previsualizar/previsualizar.component';
 
 const rutas: Routes = [
   {
@@ -90,7 +92,9 @@ const rutas: Routes = [
     CrearEtiquetaComponent,
     PublicacionesComponent,
     PerfilComponent,
-    VerRevistaComponent
+    VerRevistaComponent,
+    EditarEtiquetasComponent,
+    PrevisualizarComponent
   ],
   imports: [
     BrowserModule,

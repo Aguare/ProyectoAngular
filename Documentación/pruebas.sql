@@ -3,10 +3,16 @@ SELECT * FROM Usuario WHERE nombre_usuario = 'admin';
 SELECT * FROM TipoUsuario;
 SELECT * FROM Usuario;
 SELECT * FROM Perfil;
+DESCRIBE Perfil;
 SELECT * FROM Perfil_Etiquetas;
 SELECT * FROM Anunciante;
 SELECT * FROM Etiqueta;
 SELECT * FROM Revista;
+SELECT * FROM Revista_Etiquetas;
 DESCRIBE Revista;
-INSERT INTO Revista (revista, titulo, descripcion, no_version, precio_costo, precio_suscripcion, es_pago, tiene_comentarios, tiene_reacciones, R_nombre_usuario)
-VALUES("pathRevista", "Titulo", "debe tener descripcion", 1, 0, 0, 0, 1,1,"editor");
+INSERT INTO Revista (revista, titulo, descripcion, no_version, precio_costo,aprobado,suscripciones, precio_suscripcion, es_pago, tiene_comentarios, tiene_reacciones,fecha, R_nombre_usuario) VALUES("pathRevista", "Titulo", "debe tener descripcion", 1,1, 0,1, 0, 0, true,true,"2021-10-13","editor");
+SELECT idRevista, RE_nombre_etiqueta FROM Revista INNER JOIN Revista_Etiquetas ON Revista.idRevista = Revista_Etiquetas.RE_idRevista;
+SELECT * FROM Revista WHERE R_nombre_usuario = "editor";
+SELECT * FROM Usuario;
+SELECT * FROM Revista_Etiquetas WHERE RE_idRevista = 2;
+SELECT * FROM Reaccion_Revista WHERE RR_idRevista = 1 AND RR_nombre_usuario = "lector";

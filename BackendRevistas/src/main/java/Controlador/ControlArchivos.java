@@ -37,6 +37,5 @@ public class ControlArchivos {
         File archivo = new File(path);
         return archivo;
     }
-    
-    
+
 }

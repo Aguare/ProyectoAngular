@@ -33,6 +33,7 @@ export class PublicarRevistaComponent implements OnInit {
   tiene_reaccion: boolean = false;
   usuario: Usuario;
   suscripciones: boolean = true;
+  fecha: string;
 
   constructor(
     private registrar: RegistrarService,
@@ -46,6 +47,7 @@ export class PublicarRevistaComponent implements OnInit {
       version: new FormControl('', Validators.required),
       descripcion: new FormControl('', Validators.required),
       archivo: new FormControl('', Validators.required),
+      fecha: new FormControl('', Validators.required),
       suscripciones: new FormControl(),
       tiene_comentarios: new FormControl(),
       tiene_reaccion: new FormControl()
@@ -94,13 +96,14 @@ export class PublicarRevistaComponent implements OnInit {
     this.suscripciones = this.validarForm.value.suscripciones;
     this.tiene_comentarios = this.validarForm.value.tiene_comentarios;
     this.tiene_reaccion = this.validarForm.value.tiene_reaccion;
+    this.fecha = this.validarForm.value.fecha;
     if (this.validarForm.valid) {
       if (this.etiquetas != null) {
         if (this.etiquetas.length >= 1) {
           this.usuario = this.almacenamiento.obtenerUsuario();
           let objeto = new Revista(1, "", this.titulo, this.descripcion,
             this.version, 0, false, this.suscripciones, this.precioSuscripcion, !this.esGratuita, this.tiene_comentarios,
-            this.tiene_reaccion, this.usuario, this.etiquetas);
+            this.tiene_reaccion, this.fecha, this.usuario, this.etiquetas);
           this.registrar.registrarRevista(objeto, this.archivo).subscribe((respuesta: Info) => {
             this.mensaje = respuesta;
             this.error = true;

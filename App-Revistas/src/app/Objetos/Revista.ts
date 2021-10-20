@@ -15,6 +15,7 @@ export class Revista {
     es_pago: boolean;
     tiene_comentarios: boolean;
     tiene_reacciones: boolean;
+    fecha: string;
     usuarioCreador: Usuario;
     etiquetas: Etiqueta[];
 
@@ -31,6 +32,7 @@ export class Revista {
         es_pag: boolean,
         tiene_comentario: boolean,
         tiene_reaccione: boolean,
+        fech: string,
         usuarioCreado: Usuario,
         etiquet: Etiqueta[]
     ) {
@@ -47,6 +49,7 @@ export class Revista {
         this.tiene_comentarios = tiene_comentario;
         this.tiene_reacciones = tiene_reaccione;
         this.usuarioCreador = usuarioCreado;
+        this.fecha = fech;
         this.etiquetas = etiquet;
     }
 }

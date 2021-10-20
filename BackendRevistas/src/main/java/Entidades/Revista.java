@@ -20,11 +20,12 @@ public class Revista {
     private boolean es_pago;
     private boolean tiene_comentarios;
     private boolean tiene_reacciones;
+    private String fecha;
     private Usuario usuarioCreador;
     private ArrayList<Etiqueta> etiquetas;
 
     public Revista(int idRevista, String revista, String titulo, String descripcion, int no_version, double precio_costo, boolean aprobado,boolean suscripciones,
-             double precio_suscripcion, boolean es_pago, boolean tiene_comentarios, boolean tiene_reacciones, Usuario usuarioCreador, ArrayList<Etiqueta> etiquetas) {
+             double precio_suscripcion, boolean es_pago, boolean tiene_comentarios, boolean tiene_reacciones,String fecha, Usuario usuarioCreador, ArrayList<Etiqueta> etiquetas) {
         this.idRevista = idRevista;
         this.revista = revista;
         this.titulo = titulo;
@@ -37,6 +38,7 @@ public class Revista {
         this.es_pago = es_pago;
         this.tiene_comentarios = tiene_comentarios;
         this.tiene_reacciones = tiene_reacciones;
+        this.fecha = fecha;
         this.usuarioCreador = usuarioCreador;
         this.etiquetas = etiquetas;
     }
@@ -151,5 +153,13 @@ public class Revista {
 
     public void setSuscripciones(boolean suscripciones) {
         this.suscripciones = suscripciones;
+    }
+
+    public String getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(String fecha) {
+        this.fecha = fecha;
     }
 }

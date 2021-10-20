@@ -65,12 +65,11 @@ public class ObtenerPerfil extends HttpServlet {
         try {
             String nombreUsuario = request.getParameter("Usuario");
             Cliente cliente = obG.obtenerClienteUsuario(nombreUsuario);
-            System.out.println(cliente.getUsuario().getNombreUsuario());
             if (cliente != null) {
                 response.getWriter().append(c.obtenerJSON(cliente, Cliente.class));
             } else {
                 response.setStatus(HttpServletResponse.SC_NOT_ACCEPTABLE);
-                response.getWriter().append(c.obtenerJSON(new Info(false, "Error", "El usuario no existe"), Info.class));
+                response.getWriter().append(c.obtenerJSON(error, Info.class));
             }
         } catch (Exception e) {
             response.setStatus(HttpServletResponse.SC_NOT_ACCEPTABLE);

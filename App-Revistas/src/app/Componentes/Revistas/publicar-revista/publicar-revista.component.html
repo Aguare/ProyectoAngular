@@ -33,7 +33,7 @@
           </div>
         </div>
         <div class="row">
-          <div class="input-group mb-3">
+          <div class="col">
             <input
               type="file"
               class="form-control"
@@ -43,6 +43,16 @@
               (change)="obtenerPath($event)"
               required
             />
+          </div>
+          <div class="col-auto">
+            <div class="input-group mb-3">
+              <input
+                type="date"
+                class="form-control"
+                formControlName="fecha"
+                required
+              />
+            </div>
           </div>
         </div>
         <div class="row">

@@ -5,6 +5,7 @@ import { Anunciante } from 'src/app/Objetos/Anunciante';
 import { Backend } from 'src/app/Objetos/Backend';
 import { Etiqueta } from 'src/app/Objetos/Etiqueta';
 import { Info } from 'src/app/Objetos/Info';
+import { Reaccion } from 'src/app/Objetos/Reaccion';
 import { Revista } from 'src/app/Objetos/Revista';
 import { Usuario } from 'src/app/Objetos/Usuario';
 import { Base64Service } from '../ObtenerObjetos/Base64.service';
@@ -50,5 +51,11 @@ export class RegistrarService {
     this.convertir.extraerBase64(file).then((respuesta: any) => {
       return respuesta;
     });
+  }
+
+  public registrarReaccion(reaccion: Reaccion): Observable<Info> {
+    let formData = new FormData();
+    formData.append("Reaccion", JSON.stringify(reaccion));
+    return this.conexion.post<Info>(Backend.Path + "RegistrarInteraccion", formData);
   }
 }

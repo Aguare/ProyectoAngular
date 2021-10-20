@@ -21,15 +21,15 @@ export class BuscarComponent implements OnInit {
     private almacenamiento: AlmacenamientoLocalService,
     private redireccionar: RedireccionarService
   ) {
+  }
+
+  ngOnInit(): void {
     this.usuario = this.almacenamiento.obtenerUsuario();
     this.obtener.obtenerRevistasLector(this.usuario).subscribe((respuesta: Revista[]) => {
       this.revistas = respuesta;
     },
       error => this.redireccionar.enviarPagina("ErrorConexion")
     );
-  }
-
-  ngOnInit(): void {
   }
 
 }

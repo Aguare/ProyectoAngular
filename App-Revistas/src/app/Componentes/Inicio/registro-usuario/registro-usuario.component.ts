@@ -44,7 +44,7 @@ export class RegistroUsuarioComponent implements OnInit {
       password: new FormControl('', [Validators.required]),
       passwordConfirm: new FormControl('', [Validators.required]),
       tipoUsuario: new FormControl('', [Validators.required]),
-      descripcion: new FormControl('', [Validators.required, Validators.minLength(0)]),
+      descripcion: new FormControl('', [Validators.required, Validators.minLength(5)]),
       archivo: new FormControl('', [Validators.required])
     });
   }

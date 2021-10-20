@@ -9,6 +9,7 @@ import JSON.Convertir;
 import ObtenerObjetos.ObEditor;
 import ObtenerObjetos.ObGeneral;
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -63,13 +64,14 @@ public class RegistrarRevista extends HttpServlet {
         response.setCharacterEncoding("UTF-8");
         Part archivo = request.getPart("archivo");
         String revista = request.getParameter("revista");
-        System.out.println(revista);
-        Revista nueva = (Revista) c.obtenerObjeto(revista, Revista.class);
-        String pathArchivo = controlArch.guardarArchivo(archivo, nueva.getNo_version() + nueva.getTitulo() + "Revista", ControlArchivos.PDF);
-        Info info = controlEditor.registrarRevista(nueva, pathArchivo);
+        LocalDateTime fecha = LocalDateTime.now();
         try {
+            Revista nueva = (Revista) c.obtenerObjeto(revista, Revista.class);
+            String hora = "" + fecha.getHour() + fecha.getMinute() + fecha.getSecond();
+            String pathArchivo = controlArch.guardarArchivo(archivo, "Revista_" + nueva.getUsuarioCreador().getNombreUsuario() + hora, ControlArchivos.PDF);
+            Info info = controlEditor.registrarRevista(nueva, pathArchivo);
             response.getWriter().append(c.obtenerJSON(info, Info.class));
-        } catch (Exception e) {
+        } catch (IOException e) {
             response.getWriter().append(c.obtenerJSON(new Info(false, "Error del Servidor", "El servidor no pudo resolver la petición"), Info.class));
         }
     }

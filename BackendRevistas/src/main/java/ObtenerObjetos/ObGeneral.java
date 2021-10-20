@@ -43,13 +43,14 @@ public class ObGeneral {
      */
     public ArrayList<Etiqueta> obtenerEtiquetas(int opcion, int id) {
         ArrayList<Etiqueta> etiquetas = new ArrayList<>();
-        String query = opcion == 1 ? "SELECT * FROM Revista_Etiquetas WHERE RE_idRevista = ?;" : "SELECT * FROM Perfil WHERE P_nombre_usuario = ?;";
+        String query = opcion == 1 ? "SELECT * FROM Revista_Etiquetas WHERE RE_idRevista = ?;" : "SELECT * FROM Perfil_Etiquetas WHERE PE_idperfil = ?;";
+        String atributo = opcion == 1 ? "RE_nombre_etiqueta" : "PE_nombre_etiqueta";
         try {
             PreparedStatement prepared = Conexion.Conexion().prepareStatement(query);
             prepared.setInt(1, id);
             ResultSet r = prepared.executeQuery();
             while (r.next()) {
-                etiquetas.add(new Etiqueta(r.getString("RE_nombre_etiqueta")));
+                etiquetas.add(new Etiqueta(r.getString(atributo)));
             }
         } catch (SQLException e) {
         }

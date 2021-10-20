@@ -72,6 +72,7 @@ CREATE TABLE Revista(
     es_pago TINYINT NOT NULL,
     tiene_comentarios TINYINT NOT NULL,
     tiene_reacciones TINYINT NOT NULL,
+    fecha DATE NOT NULL,
     R_nombre_usuario VARCHAR(50) NOT NULL,
     PRIMARY KEY(idRevista),
     FOREIGN KEY(R_nombre_usuario) REFERENCES Usuario(nombre_usuario)
@@ -80,6 +81,7 @@ CREATE TABLE Revista(
 CREATE TABLE Comentario(
     idComentario INT NOT NULL AUTO_INCREMENT,
     comentario VARCHAR(100) NOT NULL,
+    fecha DATE NOT NULL,
     C_nombre_usuario VARCHAR(50) NOT NULL,
     PRIMARY KEY(idComentario),
     FOREIGN KEY(C_nombre_usuario) REFERENCES Usuario(nombre_usuario)
@@ -88,6 +90,7 @@ CREATE TABLE Comentario(
 CREATE TABLE Reaccion(
     idReaccion INT NOT NULL AUTO_INCREMENT,
     reaccion TINYINT NOT NULL,
+    fecha DATE NOT NULL,
     RM_nombre_usuario VARCHAR(50) NOT NULL,
     PRIMARY KEY(idReaccion),
     FOREIGN KEY(RM_nombre_usuario) REFERENCES Usuario(nombre_usuario)
@@ -111,6 +114,7 @@ CREATE TABLE Comentario_Revista(
     CR_idComentario INT NOT NULL,
     CR_nombre_usuario VARCHAR(50) NOT NULL,
     CR_idRevista INT NOT NULL,
+    fecha DATE NOT NULL,
     FOREIGN KEY(CR_idComentario) REFERENCES Comentario(idComentario),
     FOREIGN KEY(CR_nombre_usuario) REFERENCES Usuario(nombre_usuario),
     FOREIGN KEY(CR_idRevista) REFERENCES Revista(idRevista)
@@ -120,6 +124,7 @@ CREATE TABLE Reaccion_Revista(
     RR_idReaccion INT NOT NULL,
     RR_nombre_usuario VARCHAR(50),
     RR_idRevista INT NOT NULL,
+    fecha DATE NOT NULL,
     FOREIGN KEY(RR_idReaccion) REFERENCES Reaccion(idReaccion),
     FOREIGN KEY(RR_nombre_usuario) REFERENCES Usuario(nombre_usuario),
     FOREIGN KEY(RR_idRevista) REFERENCES Revista(idRevista)

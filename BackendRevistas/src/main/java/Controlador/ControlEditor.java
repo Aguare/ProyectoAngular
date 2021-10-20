@@ -4,6 +4,7 @@ import Entidades.Etiqueta;
 import Entidades.Info;
 import Entidades.Revista;
 import SQL.Conexion;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -33,8 +34,8 @@ public class ControlEditor {
 
     public Info registrarRevista(Revista revista, String pathArchivo) {
         String query = "INSERT INTO Revista(revista,titulo,descripcion,no_version,precio_costo,aprobado,suscripciones,"
-                + "precio_suscripcion,es_pago,tiene_comentarios,tiene_reacciones,R_nombre_usuario) "
-                + "VALUES(?,?,?,?,?,?,?,?,?,?,?,?);";
+                + "precio_suscripcion,es_pago,tiene_comentarios,tiene_reacciones,fecha,R_nombre_usuario) "
+                + "VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?);";
         PreparedStatement prepared = null;
         try {
             Conexion.Conexion().setAutoCommit(false);
@@ -50,7 +51,9 @@ public class ControlEditor {
             prepared.setBoolean(9, revista.isEs_pago());
             prepared.setBoolean(10, revista.isTiene_comentarios());
             prepared.setBoolean(11, revista.isTiene_reacciones());
-            prepared.setString(12, revista.getUsuarioCreador().getNombreUsuario());
+            Date nuevaFecha = Date.valueOf(revista.getFecha());
+            prepared.setDate(12, nuevaFecha);
+            prepared.setString(13, revista.getUsuarioCreador().getNombreUsuario());
             prepared.executeUpdate();
             ResultSet resultado = prepared.getGeneratedKeys();
             while (resultado.next()) {
@@ -92,4 +95,5 @@ public class ControlEditor {
             errorGeneral = modificar.obtenerTipoError(ex.getErrorCode());
         }
     }
+
 }

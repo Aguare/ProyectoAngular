@@ -5,6 +5,7 @@ import { Anunciante } from 'src/app/Objetos/Anunciante';
 import { Backend } from 'src/app/Objetos/Backend';
 import { Cliente } from 'src/app/Objetos/Cliente';
 import { Perfil } from 'src/app/Objetos/Perfil';
+import { Reaccion } from 'src/app/Objetos/Reaccion';
 import { Revista } from 'src/app/Objetos/Revista';
 import { Usuario } from 'src/app/Objetos/Usuario';
 import { AlmacenamientoLocalService } from '../Almacenamiento/AlmacenamientoLocal.service';
@@ -41,5 +42,9 @@ export class ObtenerObjetosService {
     let formData = new FormData();
     formData.append("Usuario", usuario);
     return this.conexion.post<Cliente>(Backend.Path + "ObtenerPerfil", formData);
+  }
+
+  obtenerReacciones(idRevista: number): Observable<Reaccion[]> {
+    return this.conexion.get<Reaccion[]>(Backend.Path + "RegistrarInteraccion?idRevista=" + idRevista);
   }
 }

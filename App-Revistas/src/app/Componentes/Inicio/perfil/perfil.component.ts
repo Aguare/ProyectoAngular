@@ -4,6 +4,7 @@ import { Cliente } from 'src/app/Objetos/Cliente';
 import { Info } from 'src/app/Objetos/Info';
 import { Perfil } from 'src/app/Objetos/Perfil';
 import { Usuario } from 'src/app/Objetos/Usuario';
+import { AlmacenamientoLocalService } from 'src/app/Servicios/Almacenamiento/AlmacenamientoLocal.service';
 import { ObtenerObjetosService } from 'src/app/Servicios/ObtenerObjetos/ObtenerObjetos.service';
 
 @Component({
@@ -17,38 +18,49 @@ export class PerfilComponent implements OnInit {
   nombreUsuario: string = "";
   cliente: Cliente;
   error: boolean = true;
-  mensaje: Info;
+  mensaje: Info = new Info(false, "Error", "El usuario no existe");
   usuario: Usuario;
   perfil: Perfil;
+  puedeEditar: boolean = false;
 
   constructor(
     private ruta: ActivatedRoute,
-    private obtener: ObtenerObjetosService
+    private obtener: ObtenerObjetosService,
+    private almacenamiento: AlmacenamientoLocalService
   ) {
-    this.mensaje = new Info(false, "Error", "El usuario no existe");
-  }
-
-  ngOnInit(): void {
-    this.cargarCliente();
-  }
-
-  cargarCliente() {
     let temporal = this.ruta.snapshot.paramMap.get("nombreUsuario");
     if (temporal != null) {
       this.nombreUsuario = temporal;
+      if (this.nombreUsuario != null) {
+        this.obtener.obtenerCliente(this.nombreUsuario).subscribe((c: Cliente) => {
+          if (c.usuario != null && c.perfil != null) {
+            this.cliente = c;
+            this.usuario = this.cliente.usuario;
+            this.perfil = this.cliente.perfil;
+            this.error = false;
+          } else {
+            this.error = true;
+          }
+        },
+          (er: any) => {
+            this.mensaje = er;
+            this.error = true;
+          }
+        );
+      }
+    } else {
+      this.error = true;
     }
-    if (this.nombreUsuario != null) {
-      this.obtener.obtenerCliente(this.nombreUsuario).subscribe((c: Cliente) => {
-        this.cliente = c;
-        this.usuario = this.cliente.usuario;
-        this.perfil = this.cliente.perfil;
-        this.error = false;
-      },
-        (er: any) => {
+    this.verificarEditar();
+  }
 
-          this.error = true;
-        }
-      );
+  ngOnInit(): void {
+  }
+
+  verificarEditar() {
+    let nombreSesion = this.almacenamiento.obtenerUsuario();
+    if (nombreSesion.nombreUsuario == this.nombreUsuario) {
+      this.puedeEditar = true;
     }
   }
 }

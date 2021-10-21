@@ -8,6 +8,7 @@ Entidades\Info.class
 Entidades\Perfil.class
 Entidades\Cliente.class
 Entidades\Comentario.class
+Entidades\Suscripcion.class
 ServletsUsuario\InicioSesion.class
 ServletEditor\RegistrarRevista.class
 ServletLector\RevistasInicio.class
@@ -15,6 +16,8 @@ SQL\Conexion.class
 Controlador\ControlLector.class
 ObtenerObjetos\ObGeneral.class
 ServletLector\ObtenerRevista.class
+Entidades\ValorSistema.class
+ServletAdmin\ObtenerComision.class
 Controlador\ControlUsuario.class
 Controlador\ControlAdmin.class
 Controlador\ModificarError.class
@@ -26,7 +29,9 @@ Entidades\Etiqueta.class
 ServletAdmin\ObtenerAnunciantes.class
 Entidades\Reaccion.class
 ServletAdmin\RegistrarAnunciante.class
+ServletLector\Suscripciones.class
 ServletLector\RegistrarComentario.class
+Entidades\Pago.class
 ServletsControl\SubirArchivo.class
 ServletsUsuario\RegistrarUsuario.class
 ObtenerObjetos\ObEditor.class

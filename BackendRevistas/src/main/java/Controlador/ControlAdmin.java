@@ -4,9 +4,7 @@ import Entidades.Anunciante;
 import Entidades.Info;
 import SQL.Conexion;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 /**
  *

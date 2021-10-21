@@ -21,7 +21,7 @@
           </ul>
           <h3 class="mt-2">Interacción</h3>
           <div class="row justify-content-center">
-            <div class="col-auto m-0 p-1">
+            <div *ngIf="revista.tiene_reacciones" class="col-auto m-0 p-1">
               <a
                 class="btn btn-outline-primary btn-sm"
                 (click)="darMeGusta()"
@@ -33,7 +33,7 @@
                 </span>
               </a>
             </div>
-            <div class="col-auto m-0 p-1">
+            <div *ngIf="revista.tiene_comentarios" class="col-auto m-0 p-1">
               <a class="btn btn-info btn-sm mx-2">
                 Comentarios
                 <span class="badge bg-secondary"> {{ cantidadCom }}</span>
@@ -45,15 +45,51 @@
           <app-editar-etiquetas
             [etiquetasSeleccionadas]="revista.etiquetas"
           ></app-editar-etiquetas>
+          <div class="text-center">
+            <h6 *ngIf="revista.es_pago">Revista de Pago</h6>
+            <h6 *ngIf="!revista.es_pago">Revista Gratuita</h6>
+          </div>
+
+          <div class="row justify-content-center p-2">
+            <div
+              *ngIf="revista.suscripciones && revista.es_pago"
+              class="col-auto m-0 input-group-append p-1"
+            >
+              <a
+                class="btn btn-success"
+                href="InicioLector/Suscribirse/{{ revista.idRevista }}"
+              >
+                Suscribirse
+              </a>
+            </div>
+            <div
+              *ngIf="!revista.es_pago"
+              class="col-auto m-0 input-group-append p-1"
+            >
+              <a
+                class="btn btn-info"
+                href="InicioLector/Visualizar/{{ revista.idRevista }}"
+                >Visualizar</a
+              >
+            </div>
+          </div>
         </div>
         <div class="col-sm-8 border">
-          <h2>{{ revista.titulo }}</h2>
+          <div class="my-2">
+            <h2>{{ revista.titulo }}, No. {{ revista.no_version }}</h2>
+          </div>
           <h5>Fecha de creación: {{ revista.fecha | date: "dd-MM-yyyy" }}</h5>
           <p>
             {{ revista.descripcion }}
           </p>
-          <h2 class="mt-5">Comentarios</h2>
-          <div class="input-group was-validated">
+          <h2 *ngIf="!revista.tiene_comentarios" class="mt-5">
+            Comentarios (Deshabilitados)
+          </h2>
+          <h2 *ngIf="revista.tiene_comentarios" class="mt-5">Comentarios</h2>
+          <div
+            *ngIf="revista.tiene_comentarios"
+            class="input-group was-validated"
+          >
             <input
               type="text"
               class="form-control"
@@ -66,9 +102,20 @@
               <button class="btn btn-primary" (click)="hacerComentario()">
                 Agregar
               </button>
+              <button
+                class="btn btn-outline-secondary"
+                data-bs-toggle="modal"
+                data-bs-target="#myModal"
+              >
+                Fecha
+              </button>
             </div>
           </div>
-          <div class="overflow-auto" style="height: 500px">
+          <div
+            *ngIf="revista.tiene_comentarios"
+            class="overflow-auto"
+            style="height: 500px"
+          >
             <div *ngFor="let coment of comentarios">
               <app-comentario [comentario]="coment"></app-comentario>
             </div>
@@ -78,3 +125,4 @@
     </div>
   </div>
 </div>
+<app-solicitar-fecha (cambioFecha)="recibirFecha($event)"></app-solicitar-fecha>

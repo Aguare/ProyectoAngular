@@ -35,6 +35,9 @@ import { EditarEtiquetasComponent } from './Componentes/SeleccionEtiquetas/edita
 import { PrevisualizarComponent } from './Componentes/Revistas/previsualizar/previsualizar.component';
 import { SolicitarFechaComponent } from './Componentes/solicitar-fecha/solicitar-fecha.component';
 import { ComentarioComponent } from './Componentes/Revistas/comentario/comentario.component';
+import { VisualizarComponent } from './Componentes/Revistas/visualizar/visualizar.component';
+import { VerSuscripcionesComponent } from './Componentes/CompLector/ver-suscripciones/ver-suscripciones.component';
+import { SuscribirseComponent } from './Componentes/CompLector/suscribirse/suscribirse.component';
 
 const rutas: Routes = [
   {
@@ -42,14 +45,18 @@ const rutas: Routes = [
     children: [
       { path: 'VerRevistas', component: BuscarComponent },
       { path: 'Perfil/:nombreUsuario', component: PerfilComponent },
-      { path: 'Previsualizar/:idRevista', component: PrevisualizarComponent }
+      { path: 'Previsualizar/:idRevista', component: PrevisualizarComponent },
+      { path: 'Visualizar/:idRevista', component: VisualizarComponent },
+      { path: 'Suscripciones', component: VerSuscripcionesComponent },
+      { path: 'Suscribirse/:idRevista', component: SuscribirseComponent }
     ]
   },
   {
     path: 'InicioEditor', component: MenuEditorComponent,
     children: [
       { path: 'NuevaPublicacion', component: PublicarRevistaComponent },
-      { path: 'Publicaciones', component: PublicacionesComponent }
+      { path: 'Publicaciones', component: PublicacionesComponent },
+      { path: 'Perfil/:nombreUsuario', component: PerfilComponent },
     ]
   },
   {
@@ -99,7 +106,10 @@ const rutas: Routes = [
     EditarEtiquetasComponent,
     PrevisualizarComponent,
     SolicitarFechaComponent,
-    ComentarioComponent
+    ComentarioComponent,
+    VisualizarComponent,
+    VerSuscripcionesComponent,
+    SuscribirseComponent
   ],
   imports: [
     BrowserModule,

@@ -25,6 +25,8 @@ export class PrevisualizarComponent implements OnInit {
   error: boolean = true;
   mensaje: Info = new Info(false, "Error", "La revista no existe");
   comentarioNuevo: string;
+  fecha: string;
+  nombreUsuario: string;
 
   constructor(
     private registrar: RegistrarService,
@@ -49,6 +51,7 @@ export class PrevisualizarComponent implements OnInit {
           this.obtener.obtenerComentarios(this.revista.idRevista).subscribe((respuesta: Comentario[]) => {
             this.comentarios = respuesta;
             this.cantidadCom = this.comentarios.length;
+            this.nombreUsuario = this.almacenamiento.obtenerUsuario().nombreUsuario;
           },
             (error: Info) => {
               this.error = true;
@@ -104,20 +107,17 @@ export class PrevisualizarComponent implements OnInit {
   }
 
   registrarReaccion() {
-    let fecha = prompt("Ingrese la fecha para el comentario Ejemplo: 2021-09-24");
-    if (fecha != null) {
+    if (this.fecha != null) {
       let reaccion = new Reaccion(this.revista.idRevista,
-        this.tieneMG, fecha, this.almacenamiento.obtenerUsuario().nombreUsuario, this.revista.idRevista);
+        this.tieneMG, this.fecha, this.almacenamiento.obtenerUsuario().nombreUsuario, this.revista.idRevista);
       this.registrar.registrarReaccion(reaccion).subscribe((respuesta: Info) => {
       });
     }
   }
 
   hacerComentario() {
-    alert(this.comentarioNuevo);
-    let fecha = prompt("Ingrese la fecha para el comentario Ejemplo: 2021-09-24");
-    if (fecha != null) {
-      let coment = new Comentario(1, this.comentarioNuevo, fecha,
+    if (this.fecha != null) {
+      let coment = new Comentario(1, this.comentarioNuevo, this.fecha,
         this.almacenamiento.obtenerUsuario().nombreUsuario, this.revista.idRevista);
       this.registrar.registrarComentario(coment).subscribe((respuesta: Info) => {
         this.mensaje = respuesta;
@@ -130,6 +130,10 @@ export class PrevisualizarComponent implements OnInit {
         }
       );
     }
+  }
+
+  recibirFecha(fecha: string){
+    this.fecha = fecha;
   }
 
 }

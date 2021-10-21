@@ -43,7 +43,7 @@ public class RevistasInicio extends HttpServlet {
             String nombreUsuario = request.getParameter("usuario");
             System.out.println(nombreUsuario);
             Usuario usuario = obtenerG.obtenerUsuario(nombreUsuario);
-            ArrayList<Revista> revistasLector = obLec.obtenerRevistasLector(usuario);
+            ArrayList<Revista> revistasLector = obLec.obtenerRevistasLector(usuario, 1);
             response.getWriter().append(c.obtenerJSON(revistasLector, revistasLector.getClass()));
         } catch (Exception e) {
             response.setStatus(HttpServletResponse.SC_NOT_FOUND);
@@ -67,7 +67,7 @@ public class RevistasInicio extends HttpServlet {
         try {
             String nombreUsuario = request.getParameter("idRevista");
             Usuario usuario = obtenerG.obtenerUsuario(nombreUsuario);
-            ArrayList<Revista> revistasLector = obLec.obtenerRevistasLector(usuario);
+            ArrayList<Revista> revistasLector = obLec.obtenerRevistasLector(usuario, 1);
             response.getWriter().append(c.obtenerJSON(revistasLector, revistasLector.getClass()));
         } catch (Exception e) {
             response.setStatus(HttpServletResponse.SC_NOT_FOUND);

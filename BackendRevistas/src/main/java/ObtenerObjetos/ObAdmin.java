@@ -1,6 +1,7 @@
 package ObtenerObjetos;
 
 import Entidades.Anunciante;
+import Entidades.ValorSistema;
 import SQL.Conexion;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -24,5 +25,20 @@ public class ObAdmin {
         } catch (Exception e) {
         }
         return anunciantes;
+    }
+
+    public ValorSistema obtenerComision() {
+        String query = "SELECT * FROM ValoresSistema ORDER BY idValores DESC";
+        ValorSistema valor = null;
+        try {
+            PreparedStatement prepared = Conexion.Conexion().prepareStatement(query);
+            ResultSet r = prepared.executeQuery();
+            while (r.next()) {
+                valor = new ValorSistema(r.getDouble(2), r.getDate(3).toString());
+            }
+        } catch (Exception e) {
+        }
+
+        return valor;
     }
 }

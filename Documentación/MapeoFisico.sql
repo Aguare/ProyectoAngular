@@ -3,9 +3,10 @@ CREATE DATABASE IF NOT EXISTS AppRevistas;
 USE AppRevistas;
 
 CREATE TABLE ValoresSistema(
-    idValores INT NOT NULL,
+    idValores INT NOT NULL AUTO_INCREMENT,
     porcentaje_comision DOUBLE NOT NULL,
-    fecha DATE NOT NULL
+    fecha DATE NOT NULL,
+    PRIMARY KEY(idValores)
 );
 
 CREATE TABLE TipoUsuario(
@@ -198,6 +199,7 @@ CREATE TABLE Visualizacion(
 INSERT INTO TipoUsuario(nombre_tipo) VALUES("Administrador");
 INSERT INTO TipoUsuario(nombre_tipo) VALUES("Lector");
 INSERT INTO TipoUsuario(nombre_tipo) VALUES("Editor");
+INSERT INTO ValoresSistema(porcentaje_comision, fecha) VALUES(0.10,"2021-10-25");
 
 INSERT INTO Etiqueta(nombre_etiqueta) VALUES("Ropa");
 INSERT INTO Etiqueta(nombre_etiqueta) VALUES("Comida");

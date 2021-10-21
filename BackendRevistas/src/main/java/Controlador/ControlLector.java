@@ -1,13 +1,16 @@
 package Controlador;
 
 import Entidades.Comentario;
+import Entidades.Info;
 import Entidades.Reaccion;
+import Entidades.Suscripcion;
 import ObtenerObjetos.ObLector;
 import SQL.Conexion;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 
 /**
  *
@@ -16,6 +19,8 @@ import java.sql.SQLException;
 public class ControlLector {
 
     private ObLector obLec = new ObLector();
+    private String errorGeneral = "";
+    private final ModificarError obtenerError = new ModificarError();
 
     public void darMG(Reaccion reaccion) {
         Reaccion nueva = obLec.verificarMG(reaccion);
@@ -44,6 +49,7 @@ public class ControlLector {
             }
             return n;
         } catch (SQLException ex) {
+            errorGeneral = obtenerError.obtenerTipoError(ex.getErrorCode());
         }
         return -1;
     }
@@ -59,6 +65,7 @@ public class ControlLector {
             prepared.setDate(4, fechaNueva);
             prepared.executeUpdate();
         } catch (SQLException ex) {
+            errorGeneral = obtenerError.obtenerTipoError(ex.getErrorCode());
         }
     }
 
@@ -73,6 +80,7 @@ public class ControlLector {
             prepared.executeUpdate();
             cambiarFechaMG(reaccion);
         } catch (SQLException ex) {
+            errorGeneral = obtenerError.obtenerTipoError(ex.getErrorCode());
         }
     }
 
@@ -85,6 +93,7 @@ public class ControlLector {
             prepared.setInt(2, reaccion.getIdReaccion());
             prepared.executeUpdate();
         } catch (SQLException ex) {
+            errorGeneral = obtenerError.obtenerTipoError(ex.getErrorCode());
         }
     }
 
@@ -110,6 +119,7 @@ public class ControlLector {
             }
             return n;
         } catch (SQLException ex) {
+            errorGeneral = obtenerError.obtenerTipoError(ex.getErrorCode());
         }
         return -1;
     }
@@ -125,6 +135,72 @@ public class ControlLector {
             prepared.setDate(4, fechaNueva);
             prepared.executeUpdate();
         } catch (SQLException ex) {
+            errorGeneral = obtenerError.obtenerTipoError(ex.getErrorCode());
+        }
+    }
+
+    /**
+     * Registra una nueva suscripción
+     *
+     * @param suscripcion
+     * @return
+     */
+    public Info registrarSuscripcionLog(Suscripcion suscripcion) {
+        try {
+            Date fechaInicio = Date.valueOf(suscripcion.getFechaInicio());
+            LocalDate fecha = fechaInicio.toLocalDate();
+            LocalDate fechaFinal = fecha.plusMonths(suscripcion.getMeses());
+            suscripcion.setFechaFinal(fechaFinal.toString());
+            int n = registrarSuscripcion(suscripcion);
+            if (n != -1) {
+                suscripcion.setIdSuscripcion(n);
+                registrarPago(suscripcion);
+                return new Info(true, "Exito", "La suscripción se realizó correctamente");
+            } else {
+                return new Info(false, "Error", errorGeneral);
+            }
+        } catch (Exception e) {
+            return new Info(false, "Error", "Los valores ingresado no son correctos");
+        }
+
+    }
+
+    private int registrarSuscripcion(Suscripcion suscripcion) {
+        String query = "INSERT INTO Suscripcion(fecha_inicio,fecha_final,meses,esta_anulado,S_usuario_lector,S_idRevista,S_usuario_editor) VALUES(?,?,?,?,?,?,?);";
+        int n = -1;
+        try {
+            PreparedStatement prepared = Conexion.Conexion().prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS);
+            prepared.setDate(1, suscripcion.getFechaInicioDate());
+            prepared.setDate(2, suscripcion.getFechaFinalDate());
+            prepared.setInt(3, suscripcion.getMeses());
+            prepared.setBoolean(4, suscripcion.isEsta_anulado());
+            prepared.setString(5, suscripcion.getLector().getNombreUsuario());
+            prepared.setInt(6, suscripcion.getIdRevista());
+            prepared.setString(7, suscripcion.getEditor().getNombreUsuario());
+            prepared.executeUpdate();
+            ResultSet r = prepared.getGeneratedKeys();
+            while (r.next()) {
+                n = r.getInt(1);
+            }
+            return n;
+        } catch (SQLException ex) {
+            errorGeneral = obtenerError.obtenerTipoError(ex.getErrorCode());
+            return -1;
+        }
+    }
+
+    private void registrarPago(Suscripcion suscripcion) {
+        String query = "INSERT INTO Pago(fecha, parte_obtenido, parte_editor, total, P_idSuscripcion) VALUES(?,?,?,?,?);";
+        try {
+            PreparedStatement prepared = Conexion.Conexion().prepareStatement(query);
+            prepared.setDate(1, suscripcion.getFechaInicioDate());
+            prepared.setDouble(2, suscripcion.getPago().getParte_obtenido());
+            prepared.setDouble(3, suscripcion.getPago().getParte_editor());
+            prepared.setDouble(4, suscripcion.getPago().getTotal());
+            prepared.setInt(5, suscripcion.getIdSuscripcion());
+            prepared.executeUpdate();
+        } catch (SQLException ex) {
+            errorGeneral = obtenerError.obtenerTipoError(ex.getErrorCode());
         }
     }
 }

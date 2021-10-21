@@ -1,3 +1,4 @@
+C:\Users\marco\Documents\GITHUB\ProyectoAngular\BackendRevistas\src\main\java\Entidades\Pago.java
 C:\Users\marco\Documents\GITHUB\ProyectoAngular\BackendRevistas\src\main\java\SQL\Encriptar.java
 C:\Users\marco\Documents\GITHUB\ProyectoAngular\BackendRevistas\src\main\java\Controlador\ModificarError.java
 C:\Users\marco\Documents\GITHUB\ProyectoAngular\BackendRevistas\src\main\java\ServletAdmin\RegistrarAnunciante.java
@@ -5,6 +6,7 @@ C:\Users\marco\Documents\GITHUB\ProyectoAngular\BackendRevistas\src\main\java\SQ
 C:\Users\marco\Documents\GITHUB\ProyectoAngular\BackendRevistas\src\main\java\JSON\Convertir.java
 C:\Users\marco\Documents\GITHUB\ProyectoAngular\BackendRevistas\src\main\java\Controlador\ControlEditor.java
 C:\Users\marco\Documents\GITHUB\ProyectoAngular\BackendRevistas\src\main\java\Entidades\Etiqueta.java
+C:\Users\marco\Documents\GITHUB\ProyectoAngular\BackendRevistas\src\main\java\ServletLector\Suscripciones.java
 C:\Users\marco\Documents\GITHUB\ProyectoAngular\BackendRevistas\src\main\java\ServletAdmin\ObtenerAnunciantes.java
 C:\Users\marco\Documents\GITHUB\ProyectoAngular\BackendRevistas\src\main\java\ObtenerObjetos\ObEditor.java
 C:\Users\marco\Documents\GITHUB\ProyectoAngular\BackendRevistas\src\main\java\ServletLector\RevistasInicio.java
@@ -14,11 +16,13 @@ C:\Users\marco\Documents\GITHUB\ProyectoAngular\BackendRevistas\src\main\java\Se
 C:\Users\marco\Documents\GITHUB\ProyectoAngular\BackendRevistas\src\main\java\Entidades\Info.java
 C:\Users\marco\Documents\GITHUB\ProyectoAngular\BackendRevistas\src\main\java\Controlador\ControlUsuario.java
 C:\Users\marco\Documents\GITHUB\ProyectoAngular\BackendRevistas\src\main\java\Entidades\Perfil.java
+C:\Users\marco\Documents\GITHUB\ProyectoAngular\BackendRevistas\src\main\java\ServletAdmin\ObtenerComision.java
 C:\Users\marco\Documents\GITHUB\ProyectoAngular\BackendRevistas\src\main\java\ServletsControl\MostrarRevista.java
 C:\Users\marco\Documents\GITHUB\ProyectoAngular\BackendRevistas\src\main\java\ServletsControl\ObtenerPerfil.java
 C:\Users\marco\Documents\GITHUB\ProyectoAngular\BackendRevistas\src\main\java\ServletLector\ObtenerRevista.java
 C:\Users\marco\Documents\GITHUB\ProyectoAngular\BackendRevistas\src\main\java\ServletEditor\RegistrarRevista.java
 C:\Users\marco\Documents\GITHUB\ProyectoAngular\BackendRevistas\src\main\java\ObtenerObjetos\ObLector.java
+C:\Users\marco\Documents\GITHUB\ProyectoAngular\BackendRevistas\src\main\java\Entidades\Suscripcion.java
 C:\Users\marco\Documents\GITHUB\ProyectoAngular\BackendRevistas\src\main\java\ServletLector\RegistrarInteraccion.java
 C:\Users\marco\Documents\GITHUB\ProyectoAngular\BackendRevistas\src\main\java\Entidades\Cliente.java
 C:\Users\marco\Documents\GITHUB\ProyectoAngular\BackendRevistas\src\main\java\Entidades\Usuario.java
@@ -32,5 +36,6 @@ C:\Users\marco\Documents\GITHUB\ProyectoAngular\BackendRevistas\src\main\java\SQ
 C:\Users\marco\Documents\GITHUB\ProyectoAngular\BackendRevistas\src\main\java\ServletsUsuario\RegistrarUsuario.java
 C:\Users\marco\Documents\GITHUB\ProyectoAngular\BackendRevistas\src\main\java\Controlador\ControlArchivos.java
 C:\Users\marco\Documents\GITHUB\ProyectoAngular\BackendRevistas\src\main\java\ServletsUsuario\ObtenerEtiquetas.java
+C:\Users\marco\Documents\GITHUB\ProyectoAngular\BackendRevistas\src\main\java\Entidades\ValorSistema.java
 C:\Users\marco\Documents\GITHUB\ProyectoAngular\BackendRevistas\src\main\java\Controlador\ControlAdmin.java
 C:\Users\marco\Documents\GITHUB\ProyectoAngular\BackendRevistas\src\main\java\ObtenerObjetos\ObAdmin.java

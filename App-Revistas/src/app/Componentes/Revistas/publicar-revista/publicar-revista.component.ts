@@ -60,7 +60,6 @@ export class PublicarRevistaComponent implements OnInit {
 
   ingresoPrecioSus(evento: any) {
     this.precioSuscripcion = evento.target.value;
-    alert(this.precioSuscripcion);
   }
 
   cambiarEsGratuita() {

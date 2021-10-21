@@ -2,7 +2,6 @@
 <div class="modal" id="myModal">
   <div class="modal-dialog">
     <div class="modal-content">
-      <!-- Modal Header -->
       <div class="modal-header">
         <h4 class="modal-title">INGRESE LA FECHA</h4>
         <button
@@ -11,22 +10,18 @@
           data-bs-dismiss="modal"
         ></button>
       </div>
-
-      <div class="modal-body">Con esta fecha se realizará el registro</div>
-      <div class="was-validated mb-3">
-        <input
-          type="date"
-          class="form-control"
-          [ngModel]="fecha | date: 'yyyy-MM-dd'"
-          (change)="usuarioCambiaFecha(fechaInput.value)"
-          #fechaInput
-          required
-        />
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
-          Close
-        </button>
+      <div class="modal-body">
+        Con esta fecha se realizará el registro
+        <div class="was-validated mb-3">
+          <input
+            type="date"
+            class="form-control"
+            [ngModel]="fecha | date: 'yyyy-MM-dd'"
+            (change)="usuarioCambiaFecha(fechaInput.value)"
+            #fechaInput
+            required
+          />
+        </div>
       </div>
     </div>
   </div>

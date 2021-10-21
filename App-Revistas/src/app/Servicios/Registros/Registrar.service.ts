@@ -8,6 +8,7 @@ import { Etiqueta } from 'src/app/Objetos/Etiqueta';
 import { Info } from 'src/app/Objetos/Info';
 import { Reaccion } from 'src/app/Objetos/Reaccion';
 import { Revista } from 'src/app/Objetos/Revista';
+import { Suscripcion } from 'src/app/Objetos/Suscripcion';
 import { Usuario } from 'src/app/Objetos/Usuario';
 import { Base64Service } from '../ObtenerObjetos/Base64.service';
 
@@ -64,5 +65,11 @@ export class RegistrarService {
     let formData = new FormData();
     formData.append("Comentario", JSON.stringify(comentario));
     return this.conexion.post<Info>(Backend.Path + "RegistrarComentario", formData);
+  }
+
+  public registrarSuscripcion(suscripcion: Suscripcion): Observable<Info> {
+    let formData = new FormData();
+    formData.append("Suscripcion", JSON.stringify(suscripcion));
+    return this.conexion.post<Info>(Backend.Path+"Suscripciones", formData);
   }
 }

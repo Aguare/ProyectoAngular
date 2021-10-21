@@ -27,13 +27,40 @@ public class SubirArchivo extends HttpServlet {
 
     private Convertir c = new Convertir();
     private ControlArchivos ctlArch = new ControlArchivos();
-
+    
+    /**
+     * opcion = 1 -> visualizar
+     * opcion = 2 -> descargar
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException 
+     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String path = request.getParameter("path");
-        String opcion = request.getParameter("opcion");
-        obtenerArchivo(response, path);
+        try {
+            String path = request.getParameter("path");
+            String opcion = request.getParameter("opcion");
+            System.out.println("Path-> "+path);
+            System.out.println("OP-> "+opcion);
+            int n = Integer.parseInt(opcion);
+            switch (n) {
+                case 1:
+                    obtenerArchivo(response, path);
+                    break;
+                case 2:
+                    descargarArchivo(response, path);
+                    break;
+                default:
+                    response.setStatus(HttpServletResponse.SC_NOT_ACCEPTABLE);
+                    response.getWriter().append(c.obtenerJSON(new Info(false, "Error del Archivo", "No se pudo cargar el archivo"), Info.class));
+                    break;
+            }
+        } catch (Exception e) {
+            response.setStatus(HttpServletResponse.SC_NOT_ACCEPTABLE);
+                    response.getWriter().append(c.obtenerJSON(new Info(false, "Error del Archivo", "No se pudo cargar el archivo"), Info.class));
+        }
     }
 
     /**
@@ -67,8 +94,7 @@ public class SubirArchivo extends HttpServlet {
      * @param response
      * @param path
      */
-    private void obtenerArchivo(HttpServletResponse response, String path) {
-        response.setCharacterEncoding("UTF-8");
+    private void obtenerArchivo(HttpServletResponse response, String path) throws IOException {
         try (BufferedInputStream fileStream = new BufferedInputStream(new FileInputStream(path))) {
             response.setContentType("application/pdf");
             int data = fileStream.read();
@@ -77,7 +103,7 @@ public class SubirArchivo extends HttpServlet {
                 data = fileStream.read();
             }
         } catch (Exception e) {
-            System.out.println("Error: " + e.getMessage());
+            System.out.println("Error-> " + e.getMessage());
         }
     }
 

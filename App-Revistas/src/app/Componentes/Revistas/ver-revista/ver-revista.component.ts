@@ -12,11 +12,13 @@ export class VerRevistaComponent implements OnInit {
   @Input() path: string;
   url: SafeResourceUrl;
 
-  constructor(private sanitizer: DomSanitizer) {
-    this.obtenerLink();
+  constructor(
+    private sanitizer: DomSanitizer
+    ) {
   }
 
   ngOnInit(): void {
+    this.obtenerLink();
   }
 
   obtenerLink() {

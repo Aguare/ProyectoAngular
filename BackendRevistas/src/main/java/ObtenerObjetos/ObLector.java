@@ -18,11 +18,21 @@ public class ObLector {
 
     private ObGeneral obtenerG = new ObGeneral();
 
-    public ArrayList<Revista> obtenerRevistasLector(Usuario usuario) {
+    /**
+     * Obtiene las revistas para el lector según la opción 1 -> devuelve las
+     * revistas de interés 2 -> devuelve sus suscripciones
+     *
+     * @param usuario
+     * @return
+     */
+    public ArrayList<Revista> obtenerRevistasLector(Usuario usuario, int opcion) {
         ArrayList<Revista> revistas = new ArrayList<>();
-        String query = "SELECT * FROM Revista;";
+        String query = opcion == 1 ? "SELECT * FROM Revista;" : "SELECT * FROM Revista WHERE EXISTS (SELECT S_idRevista FROM Suscripcion WHERE S_usuario_lector = ? AND fecha_final >= NOW());";
         try {
             PreparedStatement prepared = Conexion.Conexion().prepareStatement(query);
+            if (opcion != 1) {
+                prepared.setString(1, usuario.getNombreUsuario());
+            }
             ResultSet r = prepared.executeQuery();
             while (r.next()) {
                 revistas.add(new Revista(r.getInt(1), r.getString(2), r.getString(3), r.getString(4),

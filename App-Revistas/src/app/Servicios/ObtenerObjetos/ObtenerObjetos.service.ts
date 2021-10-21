@@ -9,6 +9,7 @@ import { Perfil } from 'src/app/Objetos/Perfil';
 import { Reaccion } from 'src/app/Objetos/Reaccion';
 import { Revista } from 'src/app/Objetos/Revista';
 import { Usuario } from 'src/app/Objetos/Usuario';
+import { ValorSistema } from 'src/app/Objetos/ValorSistema';
 import { AlmacenamientoLocalService } from '../Almacenamiento/AlmacenamientoLocal.service';
 
 @Injectable({
@@ -55,5 +56,13 @@ export class ObtenerObjetosService {
 
   obtenerRevista(idRevista: string): Observable<Revista> {
     return this.conexion.get<Revista>(Backend.Path + "ObtenerRevista?idRevista=" + idRevista);
+  }
+
+  obtenerRevistaSuscripciones(nombreUsuario: string): Observable<Revista[]> {
+    return this.conexion.get<Revista[]>(Backend.Path + "Suscripciones?usuario=" + nombreUsuario);
+  }
+
+  obtenerValorSistema(): Observable<ValorSistema> {
+    return this.conexion.get<ValorSistema>(Backend.Path + "ObtenerComision");
   }
 }

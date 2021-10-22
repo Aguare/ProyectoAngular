@@ -15,15 +15,28 @@
         <a class="nav-link" href="InicioEditor">Inicio</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Perfil</a>
+        <a
+          class="nav-link"
+          href="InicioEditor/Perfil/{{ usuario.nombreUsuario }}"
+        >
+          Perfil
+        </a>
       </li>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#">
           Revistas
         </a>
         <ul class="dropdown-menu">
-          <li><a class="dropdown-item" href="InicioEditor/Publicaciones">Publicaciones</a></li>
-          <li><a class="dropdown-item" href="InicioEditor/NuevaPublicacion">Nueva Publicación</a></li>
+          <li>
+            <a class="dropdown-item" href="InicioEditor/Publicaciones"
+              >Publicaciones</a
+            >
+          </li>
+          <li>
+            <a class="dropdown-item" href="InicioEditor/NuevaPublicacion"
+              >Nueva Publicación</a
+            >
+          </li>
         </ul>
       </li>
       <li class="nav-item dropdown">

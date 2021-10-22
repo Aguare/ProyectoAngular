@@ -1,7 +1,7 @@
 package ServletsUsuario;
 
 import Controlador.ControlUsuario;
-import Entidades.Usuario;
+import EntidadesPrincipales.Usuario;
 import JSON.Convertir;
 import java.io.BufferedReader;
 import java.io.IOException;

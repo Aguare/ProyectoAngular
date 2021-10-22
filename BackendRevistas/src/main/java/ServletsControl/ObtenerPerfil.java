@@ -1,8 +1,8 @@
 package ServletsControl;
 
-import Entidades.Cliente;
-import Entidades.Info;
-import Entidades.Perfil;
+import EntidadesAuxiliares.Cliente;
+import EntidadesAuxiliares.Info;
+import EntidadesPrincipales.Perfil;
 import JSON.Convertir;
 import ObtenerObjetos.ObGeneral;
 import java.io.IOException;

@@ -1,7 +1,7 @@
 package ServletAdmin;
 
 import Controlador.ControlAdmin;
-import Entidades.Anunciante;
+import EntidadesPrincipales.Anunciante;
 import JSON.Convertir;
 import ObtenerObjetos.ObAdmin;
 import java.io.IOException;

@@ -2,8 +2,8 @@ package ServletsUsuario;
 
 import Controlador.ControlEditor;
 import Controlador.ControlUsuario;
-import Entidades.Etiqueta;
-import Entidades.Info;
+import EntidadesPrincipales.Etiqueta;
+import EntidadesAuxiliares.Info;
 import JSON.Convertir;
 import java.io.IOException;
 import java.util.ArrayList;

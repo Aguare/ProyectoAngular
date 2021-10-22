@@ -24,6 +24,7 @@ export class SuscribirseComponent implements OnInit {
   espera: boolean = true;
   valorSistema: ValorSistema;
   validarForm: FormGroup;
+  suscripciones: Suscripcion[];
 
   //variables de retorno
   usuario: Usuario;
@@ -58,6 +59,15 @@ export class SuscribirseComponent implements OnInit {
       this.espera = false;
       this.obtener.obtenerValorSistema().subscribe((respuesta: ValorSistema) => {
         this.valorSistema = respuesta;
+        this.obtener.obtenerSuscripciones(this.revista.idRevista + "").subscribe((r: Suscripcion[]) => {
+          this.suscripciones = r;
+          this.verificarSuscripcionActiva();
+        },
+          (error: any) => {
+            this.mensaje = error;
+            this.espera = true;
+          }
+        );
       },
         (error: any) => {
           this.mensaje = error;
@@ -65,6 +75,18 @@ export class SuscribirseComponent implements OnInit {
         });
       this.calcularTotal();
     });
+  }
+
+  verificarSuscripcionActiva() {
+    for (let i = 0; i < this.suscripciones.length; i++) {
+      const sus = this.suscripciones[i];
+      if (sus.lector.nombreUsuario == this.usuario.nombreUsuario) {
+        this.mensaje = new Info(true, "Ya lo tienes", "Tienes una suscripción activa");
+        this.espera = true;
+        this.esconder = true;
+        break;
+      }
+    }
   }
 
   calcularTotal() {

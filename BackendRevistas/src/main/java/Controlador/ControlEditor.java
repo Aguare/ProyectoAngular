@@ -1,8 +1,8 @@
 package Controlador;
 
-import Entidades.Etiqueta;
-import Entidades.Info;
-import Entidades.Revista;
+import EntidadesPrincipales.Etiqueta;
+import EntidadesAuxiliares.Info;
+import EntidadesPrincipales.Revista;
 import SQL.Conexion;
 import java.sql.Date;
 import java.sql.PreparedStatement;

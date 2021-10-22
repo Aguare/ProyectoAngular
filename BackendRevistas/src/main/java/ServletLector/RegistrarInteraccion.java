@@ -1,8 +1,8 @@
 package ServletLector;
 
 import Controlador.ControlLector;
-import Entidades.Info;
-import Entidades.Reaccion;
+import EntidadesAuxiliares.Info;
+import EntidadesPrincipales.Reaccion;
 import JSON.Convertir;
 import ObtenerObjetos.ObLector;
 import java.io.IOException;

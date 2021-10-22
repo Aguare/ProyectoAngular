@@ -1,10 +1,10 @@
 package Controlador;
 
-import Entidades.Cliente;
-import Entidades.Etiqueta;
-import Entidades.Info;
-import Entidades.Perfil;
-import Entidades.Usuario;
+import EntidadesAuxiliares.Cliente;
+import EntidadesPrincipales.Etiqueta;
+import EntidadesAuxiliares.Info;
+import EntidadesPrincipales.Perfil;
+import EntidadesPrincipales.Usuario;
 import SQL.Conexion;
 import SQL.Encriptar;
 import java.sql.PreparedStatement;

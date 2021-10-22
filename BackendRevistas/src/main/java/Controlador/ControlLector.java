@@ -1,9 +1,9 @@
 package Controlador;
 
-import Entidades.Comentario;
-import Entidades.Info;
-import Entidades.Reaccion;
-import Entidades.Suscripcion;
+import EntidadesPrincipales.Comentario;
+import EntidadesAuxiliares.Info;
+import EntidadesPrincipales.Reaccion;
+import EntidadesAuxiliares.Suscripcion;
 import ObtenerObjetos.ObLector;
 import SQL.Conexion;
 import java.sql.Date;

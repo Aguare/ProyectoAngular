@@ -2,8 +2,8 @@ package ServletsUsuario;
 
 import Controlador.ControlArchivos;
 import Controlador.ControlUsuario;
-import Entidades.Cliente;
-import Entidades.Info;
+import EntidadesAuxiliares.Cliente;
+import EntidadesAuxiliares.Info;
 import JSON.Convertir;
 import java.io.IOException;
 import javax.servlet.ServletException;

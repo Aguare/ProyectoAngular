@@ -2,9 +2,9 @@ package ServletEditor;
 
 import Controlador.ControlArchivos;
 import Controlador.ControlEditor;
-import Entidades.Info;
-import Entidades.Revista;
-import Entidades.Usuario;
+import EntidadesAuxiliares.Info;
+import EntidadesPrincipales.Revista;
+import EntidadesPrincipales.Usuario;
 import JSON.Convertir;
 import ObtenerObjetos.ObEditor;
 import ObtenerObjetos.ObGeneral;

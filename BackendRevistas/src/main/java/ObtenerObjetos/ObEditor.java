@@ -1,8 +1,7 @@
 package ObtenerObjetos;
 
-import Entidades.Reaccion;
-import Entidades.Revista;
-import Entidades.Usuario;
+import EntidadesPrincipales.Revista;
+import EntidadesPrincipales.Usuario;
 import SQL.Conexion;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -50,5 +49,6 @@ public class ObEditor {
         }
         return revista;
     }
-
+    
+    
 }

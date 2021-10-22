@@ -38,6 +38,7 @@ import { ComentarioComponent } from './Componentes/Revistas/comentario/comentari
 import { VisualizarComponent } from './Componentes/Revistas/visualizar/visualizar.component';
 import { VerSuscripcionesComponent } from './Componentes/CompLector/ver-suscripciones/ver-suscripciones.component';
 import { SuscribirseComponent } from './Componentes/CompLector/suscribirse/suscribirse.component';
+import { ListaEsperaComponent } from './Componentes/CompAdmin/lista-espera/lista-espera.component';
 
 const rutas: Routes = [
   {
@@ -63,7 +64,8 @@ const rutas: Routes = [
     path: 'InicioAdmin', component: MenuadminComponent,
     children: [
       { path: 'RegistrarAnunciante', component: RegistrarAnuncianteComponent },
-      { path: 'VerAnunciantes', component: VerAnunciantesComponent }
+      { path: 'VerAnunciantes', component: VerAnunciantesComponent },
+      { path: 'ListaEspera', component: ListaEsperaComponent }
     ]
   },
   {
@@ -109,7 +111,8 @@ const rutas: Routes = [
     ComentarioComponent,
     VisualizarComponent,
     VerSuscripcionesComponent,
-    SuscribirseComponent
+    SuscribirseComponent,
+    ListaEsperaComponent
   ],
   imports: [
     BrowserModule,

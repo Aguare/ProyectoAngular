@@ -8,6 +8,7 @@ import { Comentario } from 'src/app/Objetos/Comentario';
 import { Perfil } from 'src/app/Objetos/Perfil';
 import { Reaccion } from 'src/app/Objetos/Reaccion';
 import { Revista } from 'src/app/Objetos/Revista';
+import { Suscripcion } from 'src/app/Objetos/Suscripcion';
 import { Usuario } from 'src/app/Objetos/Usuario';
 import { ValorSistema } from 'src/app/Objetos/ValorSistema';
 import { AlmacenamientoLocalService } from '../Almacenamiento/AlmacenamientoLocal.service';
@@ -64,5 +65,18 @@ export class ObtenerObjetosService {
 
   obtenerValorSistema(): Observable<ValorSistema> {
     return this.conexion.get<ValorSistema>(Backend.Path + "ObtenerComision");
+  }
+
+  obtenerSuscripciones(idRevista: string): Observable<Suscripcion[]> {
+    return this.conexion.get<Suscripcion[]>(Backend.Path + "ObtenerSuscripciones?idRevista=" + idRevista);
+  }
+
+  //falta el servlet
+  obtenerRevistasPendientes(): Observable<Revista[]>{
+    return this.conexion.get<Revista[]>(Backend.Path+"EstadoRevista");
+  }
+
+  obtenerRevistasAceptadas(): Observable<Revista[]>{
+    return this.conexion.get<Revista[]>(Backend.Path+"pendiente");
   }
 }

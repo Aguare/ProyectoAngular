@@ -1,8 +1,8 @@
 package ServletLector;
 
-import Entidades.Info;
-import Entidades.Revista;
-import Entidades.Usuario;
+import EntidadesAuxiliares.Info;
+import EntidadesPrincipales.Revista;
+import EntidadesPrincipales.Usuario;
 import JSON.Convertir;
 import ObtenerObjetos.ObGeneral;
 import ObtenerObjetos.ObLector;

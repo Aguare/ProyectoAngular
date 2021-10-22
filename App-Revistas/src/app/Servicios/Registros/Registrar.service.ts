@@ -10,6 +10,7 @@ import { Reaccion } from 'src/app/Objetos/Reaccion';
 import { Revista } from 'src/app/Objetos/Revista';
 import { Suscripcion } from 'src/app/Objetos/Suscripcion';
 import { Usuario } from 'src/app/Objetos/Usuario';
+import { ValorSistema } from 'src/app/Objetos/ValorSistema';
 import { Base64Service } from '../ObtenerObjetos/Base64.service';
 
 @Injectable({
@@ -70,6 +71,25 @@ export class RegistrarService {
   public registrarSuscripcion(suscripcion: Suscripcion): Observable<Info> {
     let formData = new FormData();
     formData.append("Suscripcion", JSON.stringify(suscripcion));
-    return this.conexion.post<Info>(Backend.Path+"Suscripciones", formData);
+    return this.conexion.post<Info>(Backend.Path + "Suscripciones", formData);
+  }
+
+  //falta el servlet
+  public registrarEstadoRevista(revista: Revista): Observable<Info> {
+    let formData = new FormData();
+    formData.append("Revista", JSON.stringify(revista));
+    return this.conexion.post<Info>(Backend.Path + "EstadoRevista", formData);
+  }
+
+  public registrarCambioPrecioCosto(revista: Revista): Observable<Info> {
+    let formData = new FormData();
+    formData.append("Revista", JSON.stringify(revista));
+    return this.conexion.post<Info>(Backend.Path + "CambioRevista", formData);
+  }
+
+  public registrarComision(valor: ValorSistema): Observable<Info> {
+    let formData = new FormData();
+    formData.append("Revista", JSON.stringify(valor));
+    return this.conexion.post<Info>(Backend.Path + "CambioComision", formData);
   }
 }

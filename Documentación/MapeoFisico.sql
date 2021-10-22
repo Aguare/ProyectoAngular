@@ -132,7 +132,7 @@ CREATE TABLE Reaccion_Revista(
 );
 
 CREATE TABLE CambioRevista(
-    idCambioRevista INT NOT NULL,
+    idCambioRevista INT NOT NULL AUTO_INCREMENT,
     precio_costo DOUBLE NOT NULL,
     fecha_inicio DATE NOT NULL,
     fecha_final DATE,

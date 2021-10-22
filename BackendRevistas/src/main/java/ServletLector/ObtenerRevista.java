@@ -1,7 +1,7 @@
 package ServletLector;
 
-import Entidades.Info;
-import Entidades.Revista;
+import EntidadesAuxiliares.Info;
+import EntidadesPrincipales.Revista;
 import JSON.Convertir;
 import ObtenerObjetos.ObEditor;
 import java.io.IOException;

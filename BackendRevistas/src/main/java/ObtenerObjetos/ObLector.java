@@ -1,9 +1,11 @@
 package ObtenerObjetos;
 
-import Entidades.Comentario;
-import Entidades.Reaccion;
-import Entidades.Revista;
-import Entidades.Usuario;
+import EntidadesPrincipales.Comentario;
+import EntidadesAuxiliares.Pago;
+import EntidadesPrincipales.Reaccion;
+import EntidadesPrincipales.Revista;
+import EntidadesAuxiliares.Suscripcion;
+import EntidadesPrincipales.Usuario;
 import SQL.Conexion;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -16,13 +18,14 @@ import java.util.ArrayList;
  */
 public class ObLector {
 
-    private ObGeneral obtenerG = new ObGeneral();
+    private final ObGeneral obtenerG = new ObGeneral();
 
     /**
      * Obtiene las revistas para el lector según la opción 1 -> devuelve las
      * revistas de interés 2 -> devuelve sus suscripciones
      *
      * @param usuario
+     * @param opcion
      * @return
      */
     public ArrayList<Revista> obtenerRevistasLector(Usuario usuario, int opcion) {
@@ -117,5 +120,38 @@ public class ObLector {
         } catch (SQLException e) {
         }
         return comentario;
+    }
+
+    public ArrayList<Suscripcion> obtenerSuscripcionesRevista(int idRevista) {
+        ArrayList<Suscripcion> suscripciones = new ArrayList<>();
+        String query = "SELECT * FROM Suscripcion WHERE fecha_final >= NOW() AND S_idRevista= ?;";
+        try {
+            PreparedStatement prepared = Conexion.Conexion().prepareStatement(query);
+            prepared.setInt(1, idRevista);
+            ResultSet r = prepared.executeQuery();
+            while (r.next()) {
+                suscripciones.add(new Suscripcion(r.getInt(1), r.getString(2), r.getString(3), r.getInt(4),
+                        r.getBoolean(5), obtenerG.obtenerUsuario(r.getString(6)), r.getInt(7),
+                        obtenerG.obtenerUsuario(r.getString(8)), obtenerPago(r.getInt(1))));
+            }
+        } catch (SQLException e) {
+            
+        }
+        return suscripciones;
+    }
+
+    private Pago obtenerPago(int idSuscripcion) {
+        Pago pago = null;
+        String query = "SELECT * FROM Pago WHERE P_idSuscripcion = ?;";
+        try {
+            PreparedStatement prepared = Conexion.Conexion().prepareStatement(query);
+            prepared.setInt(1, idSuscripcion);
+            ResultSet r = prepared.executeQuery();
+            while (r.next()) {
+                pago = new Pago(r.getInt(1), r.getDouble(3), r.getDouble(4), r.getDouble(5));
+            }
+        } catch (SQLException e) {
+        }
+        return pago;
     }
 }

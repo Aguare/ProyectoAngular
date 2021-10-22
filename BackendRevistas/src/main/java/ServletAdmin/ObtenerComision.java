@@ -1,8 +1,8 @@
 package ServletAdmin;
 
 import Controlador.ControlAdmin;
-import Entidades.Info;
-import Entidades.ValorSistema;
+import EntidadesAuxiliares.Info;
+import EntidadesAuxiliares.ValorSistema;
 import JSON.Convertir;
 import ObtenerObjetos.ObAdmin;
 import java.io.IOException;

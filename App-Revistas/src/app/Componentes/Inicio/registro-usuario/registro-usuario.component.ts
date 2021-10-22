@@ -39,13 +39,13 @@ export class RegistroUsuarioComponent implements OnInit {
     private subirArchivo: RegistrarService,
     private almacenamiento: AlmacenamientoLocalService
   ) {
-    this.validarForm = new FormGroup({
-      nombreUsuario: new FormControl('', [Validators.required]),
-      password: new FormControl('', [Validators.required]),
-      passwordConfirm: new FormControl('', [Validators.required]),
-      tipoUsuario: new FormControl('', [Validators.required]),
-      descripcion: new FormControl('', [Validators.required, Validators.minLength(5)]),
-      archivo: new FormControl('', [Validators.required])
+    this.validarForm = this.formBuilder.group({
+      nombreUsuario: ['', Validators.required],
+      password: ['', Validators.required],
+      passwordConfirm: ['', Validators.required],
+      tipoUsuario: [2, Validators.required],
+      descripcion: ['', Validators.required],
+      archivo: ['', Validators.required]
     });
   }
 

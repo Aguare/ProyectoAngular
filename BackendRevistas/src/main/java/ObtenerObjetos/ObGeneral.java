@@ -1,9 +1,9 @@
 package ObtenerObjetos;
 
-import Entidades.Cliente;
-import Entidades.Etiqueta;
-import Entidades.Perfil;
-import Entidades.Usuario;
+import EntidadesAuxiliares.Cliente;
+import EntidadesPrincipales.Etiqueta;
+import EntidadesPrincipales.Perfil;
+import EntidadesPrincipales.Usuario;
 import SQL.Conexion;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

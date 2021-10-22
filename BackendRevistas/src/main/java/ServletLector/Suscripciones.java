@@ -1,10 +1,10 @@
 package ServletLector;
 
 import Controlador.ControlLector;
-import Entidades.Info;
-import Entidades.Revista;
-import Entidades.Suscripcion;
-import Entidades.Usuario;
+import EntidadesAuxiliares.Info;
+import EntidadesPrincipales.Revista;
+import EntidadesAuxiliares.Suscripcion;
+import EntidadesPrincipales.Usuario;
 import JSON.Convertir;
 import ObtenerObjetos.ObGeneral;
 import ObtenerObjetos.ObLector;

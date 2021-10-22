@@ -40,7 +40,12 @@ export class RegistrarAnuncianteComponent implements OnInit {
         this.mensaje = respuesta;
         this.mostrarMensaje = true;
         this.validarForm.reset();
-      });
+      },
+        (error: any) => {
+          this.mensaje = error.error;
+          this.mostrarMensaje = true;
+        }
+      );
     } else {
       this.mostrarMensaje = true;
     }

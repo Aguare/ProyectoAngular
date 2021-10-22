@@ -23,7 +23,12 @@ export class VerAnunciantesComponent implements OnInit {
         this.verMensaje = true;
         this.mensaje = new Info(false, "ERROR", "El Servidor no respondió la solicitud");
       }
-    });
+    },
+    (error: any)=>{
+      this.mensaje = error.error;
+      this.verMensaje = true;
+    }
+    );
   }
 
   ngOnInit(): void {

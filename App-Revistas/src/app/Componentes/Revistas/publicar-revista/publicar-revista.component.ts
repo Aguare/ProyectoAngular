@@ -109,7 +109,12 @@ export class PublicarRevistaComponent implements OnInit {
             if (this.mensaje.operacion) {
               this.validarForm.reset();
             }
-          })
+          },
+          (error:any)=>{
+            this.mensaje = error.error;
+            this.error = true;
+          }
+          );
         } else {
           this.mensaje = new Info(false, "Etiquetas", "Debe seleccionar almenos 1 etiqueta");
           this.error = true;

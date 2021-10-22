@@ -53,17 +53,20 @@ export class PrevisualizarComponent implements OnInit {
             this.cantidadCom = this.comentarios.length;
             this.nombreUsuario = this.almacenamiento.obtenerUsuario().nombreUsuario;
           },
-            (error: Info) => {
+            (error: any) => {
+              this.mensaje = error.error;
               this.error = true;
             }
           );
         },
-          (error: Info) => {
+          (error: any) => {
+            this.mensaje = error.error;
             this.error = true;
           }
         );
       },
-        (error: Info) => {
+        (error: any) => {
+          this.mensaje = error.error;
           this.error = true;
         }
       );

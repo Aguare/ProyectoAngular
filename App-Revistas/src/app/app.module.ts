@@ -39,6 +39,8 @@ import { VisualizarComponent } from './Componentes/Revistas/visualizar/visualiza
 import { VerSuscripcionesComponent } from './Componentes/CompLector/ver-suscripciones/ver-suscripciones.component';
 import { SuscribirseComponent } from './Componentes/CompLector/suscribirse/suscribirse.component';
 import { ListaEsperaComponent } from './Componentes/CompAdmin/lista-espera/lista-espera.component';
+import { EstadoRevistaComponent } from './Componentes/CompAdmin/estado-revista/estado-revista.component';
+import { EditarRevistaComponent } from './Componentes/Revistas/editar-revista/editar-revista.component';
 
 const rutas: Routes = [
   {
@@ -58,6 +60,7 @@ const rutas: Routes = [
       { path: 'NuevaPublicacion', component: PublicarRevistaComponent },
       { path: 'Publicaciones', component: PublicacionesComponent },
       { path: 'Perfil/:nombreUsuario', component: PerfilComponent },
+      { path: 'EditarRevista/:idRevista', component: PerfilComponent },
     ]
   },
   {
@@ -65,7 +68,9 @@ const rutas: Routes = [
     children: [
       { path: 'RegistrarAnunciante', component: RegistrarAnuncianteComponent },
       { path: 'VerAnunciantes', component: VerAnunciantesComponent },
-      { path: 'ListaEspera', component: ListaEsperaComponent }
+      { path: 'ListaEspera', component: ListaEsperaComponent },
+      { path: 'EstadoRevista/:idRevista', component: EstadoRevistaComponent },
+      { path: 'Perfil/:nombreUsuario', component: PerfilComponent }
     ]
   },
   {
@@ -112,7 +117,9 @@ const rutas: Routes = [
     VisualizarComponent,
     VerSuscripcionesComponent,
     SuscribirseComponent,
-    ListaEsperaComponent
+    ListaEsperaComponent,
+    EstadoRevistaComponent,
+    EditarRevistaComponent
   ],
   imports: [
     BrowserModule,

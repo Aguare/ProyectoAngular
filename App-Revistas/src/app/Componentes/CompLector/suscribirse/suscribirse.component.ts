@@ -64,13 +64,13 @@ export class SuscribirseComponent implements OnInit {
           this.verificarSuscripcionActiva();
         },
           (error: any) => {
-            this.mensaje = error;
+            this.mensaje = error.error;
             this.espera = true;
           }
         );
       },
         (error: any) => {
-          this.mensaje = error;
+          this.mensaje = error.error;
           this.espera = true;
         });
       this.calcularTotal();

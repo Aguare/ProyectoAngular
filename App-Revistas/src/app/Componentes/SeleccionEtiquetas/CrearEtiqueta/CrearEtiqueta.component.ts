@@ -49,7 +49,12 @@ export class CrearEtiquetaComponent implements OnInit {
             this.mensaje = respuesta;
             this.error = true;
             this.incluirEtiqueta();
-          });
+          },
+          (error:any)=>{
+            this.mensaje = error.error;
+            this.error = true;
+          }
+          );
         } else {
           this.nuevaEtiqueta = "";
         }

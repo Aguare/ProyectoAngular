@@ -41,10 +41,14 @@ export class VisualizarComponent implements OnInit {
       this.espera = false;
       this.path = revista.revista;
       this.obtenerLinkDescarga();
+    },
+     (error: any) => {
+      this.mensaje = error.error;
+      this.espera = true;
     });
   }
 
-  obtenerLinkDescarga(){
+  obtenerLinkDescarga() {
     let temp = Backend.Path + "SubirArchivo?opcion=2&path=" + this.path;
     this.urlDescarga = this.sanitizer.bypassSecurityTrustResourceUrl(temp);
   }

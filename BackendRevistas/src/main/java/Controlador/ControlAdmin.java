@@ -52,7 +52,9 @@ public class ControlAdmin {
             prepared.setDouble(2, revista.getPrecio_costo());
             prepared.setInt(3, revista.getIdRevista());
             prepared.executeUpdate();
-            cambiarPrecioCosto(revista);
+            if (revista.isAprobado()) {
+                cambiarPrecioCosto(revista);
+            }
             return new Info(true, "Exito", "El estado de la revista fue actualizado");
         } catch (SQLException e) {
             errorGeneral = modificar.obtenerTipoError(e.getErrorCode());

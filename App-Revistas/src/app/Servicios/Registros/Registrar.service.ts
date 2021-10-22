@@ -74,13 +74,12 @@ export class RegistrarService {
     return this.conexion.post<Info>(Backend.Path + "Suscripciones", formData);
   }
 
-  //falta el servlet
   public registrarEstadoRevista(revista: Revista): Observable<Info> {
     let formData = new FormData();
     formData.append("Revista", JSON.stringify(revista));
     return this.conexion.post<Info>(Backend.Path + "EstadoRevista", formData);
   }
-
+  //falta el servlet
   public registrarCambioPrecioCosto(revista: Revista): Observable<Info> {
     let formData = new FormData();
     formData.append("Revista", JSON.stringify(revista));

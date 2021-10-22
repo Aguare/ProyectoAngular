@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Usuario } from 'src/app/Objetos/Usuario';
+import { AlmacenamientoLocalService } from 'src/app/Servicios/Almacenamiento/AlmacenamientoLocal.service';
 
 @Component({
   selector: 'app-menuadmin',
@@ -7,7 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MenuadminComponent implements OnInit {
 
-  constructor() { }
+  usuario: Usuario;
+  constructor(
+    private almacenamiento: AlmacenamientoLocalService
+  ) {
+    this.usuario = this.almacenamiento.obtenerUsuario();
+   }
 
   ngOnInit(): void {
   }

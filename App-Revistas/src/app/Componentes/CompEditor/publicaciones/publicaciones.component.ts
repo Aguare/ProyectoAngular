@@ -34,7 +34,8 @@ export class PublicacionesComponent implements OnInit {
         this.mostrar = false;
       }
     },
-      (error: Info) => {
+      (error: any) => {
+        this.mensaje = error.error;
         this.mostrar = true;
       }
     );

@@ -31,8 +31,8 @@ export class VerSuscripcionesComponent implements OnInit {
         this.espera = true;
       }
     },
-      (error: Info) => {
-        this.mensaje = error;
+      (error: any) => {
+        this.mensaje = error.error;
         this.espera = true;
       }
     );

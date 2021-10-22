@@ -37,7 +37,6 @@ public class ObtenerRevista extends HttpServlet {
         response.setCharacterEncoding("UTF-8");
         try {
             String idRevista = request.getParameter("idRevista");
-            System.out.println(idRevista);
             Revista revista = obE.obtenerRevistaID(Integer.parseInt(idRevista));
             if (revista != null) {
                 response.getWriter().append(c.obtenerJSON(revista, Revista.class));

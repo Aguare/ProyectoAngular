@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Anunciante } from 'src/app/Objetos/Anunciante';
+import { Anuncio } from 'src/app/Objetos/Anuncio';
 import { Backend } from 'src/app/Objetos/Backend';
 import { Comentario } from 'src/app/Objetos/Comentario';
 import { Etiqueta } from 'src/app/Objetos/Etiqueta';
@@ -90,5 +91,12 @@ export class RegistrarService {
     let formData = new FormData();
     formData.append("Comision", JSON.stringify(valor));
     return this.conexion.post<Info>(Backend.Path + "ObtenerComision", formData);
+  }
+
+  public registrarAnuncio(anuncio:Anuncio, dias: number): Observable<Info>{
+    let formData = new FormData();
+    formData.append("Anuncio", JSON.stringify(anuncio));
+    formData.append("Dias", JSON.stringify(dias));
+    return this.conexion.post<Info>(Backend.Path + "RegistrarAnuncio", formData);
   }
 }

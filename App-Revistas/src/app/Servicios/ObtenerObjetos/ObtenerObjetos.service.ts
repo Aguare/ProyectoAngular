@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Anunciante } from 'src/app/Objetos/Anunciante';
+import { Anuncio } from 'src/app/Objetos/Anuncio';
 import { Backend } from 'src/app/Objetos/Backend';
 import { Cliente } from 'src/app/Objetos/Cliente';
 import { Comentario } from 'src/app/Objetos/Comentario';
@@ -22,7 +23,7 @@ export class ObtenerObjetosService {
     private conexion: HttpClient
   ) { }
 
-  obtenerEtiquetas(): Observable<Anunciante[]> {
+  obtenerAnunciantes(): Observable<Anunciante[]> {
     return this.conexion.post<Anunciante[]>(
       `${Backend.Path}ObtenerAnunciantes`,
       ""
@@ -75,12 +76,15 @@ export class ObtenerObjetosService {
     return this.conexion.get<Suscripcion[]>(Backend.Path + "ObtenerSuscripciones?idRevista=" + idRevista);
   }
 
-  //falta el servlet
   obtenerRevistasPendientes(): Observable<Revista[]>{
     return this.conexion.get<Revista[]>(Backend.Path+"EstadoRevista");
   }
 
   obtenerRevistasAceptadas(): Observable<Revista[]>{
     return this.conexion.get<Revista[]>(Backend.Path+"RevistasAceptadas");
+  }
+
+  obtenerAnuncios(): Observable<Anuncio[]>{
+    return this.conexion.get<Anuncio[]>(Backend.Path+"RegistrarAnuncio");
   }
 }

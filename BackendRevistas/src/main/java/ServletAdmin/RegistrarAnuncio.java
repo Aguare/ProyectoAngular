@@ -7,7 +7,9 @@ import JSON.Convertir;
 import ObtenerObjetos.ObAdmin;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -18,6 +20,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author marco
  */
 @WebServlet(name = "RegistrarAnuncio", urlPatterns = {"/RegistrarAnuncio"})
+@MultipartConfig()
 public class RegistrarAnuncio extends HttpServlet {
 
     private final ObAdmin obAd = new ObAdmin();
@@ -35,7 +38,15 @@ public class RegistrarAnuncio extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
+        try {
+            ArrayList<Anuncio> anuncios = obAd.obtenerAnuncios();
+            response.getWriter().append(c.obtenerJSON(anuncios, anuncios.getClass()));
+        } catch (IOException e) {
+            response.setStatus(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
+            response.getWriter().append(c.obtenerJSON(new Info(false, "Error", "Error al obtener los anuncios"), Info.class));
+        }
     }
 
     /**

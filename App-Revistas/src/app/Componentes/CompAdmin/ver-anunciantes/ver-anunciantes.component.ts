@@ -15,7 +15,7 @@ export class VerAnunciantesComponent implements OnInit {
   mensaje: Info = new Info(true, "Vacío", "No hay anunciantes para mostrar");
 
   constructor(public obtener: ObtenerObjetosService) {
-    obtener.obtenerEtiquetas().subscribe((respuesta: Anunciante[]) => {
+    obtener.obtenerAnunciantes().subscribe((respuesta: Anunciante[]) => {
       if (respuesta != null) {
         this.anunciantes = respuesta;
         this.verMensaje = false;

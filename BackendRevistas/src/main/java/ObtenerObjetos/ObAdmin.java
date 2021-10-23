@@ -32,7 +32,7 @@ public class ObAdmin {
     }
 
     public ValorSistema obtenerComision() {
-        String query = "SELECT * FROM ValoresSistema ORDER BY idValores DESC;";
+        String query = "SELECT * FROM ValoresSistema ORDER BY idValores DESC LIMIT 1;";
         ValorSistema valor = null;
         try {
             PreparedStatement prepared = Conexion.Conexion().prepareStatement(query);
@@ -40,14 +40,28 @@ public class ObAdmin {
             while (r.next()) {
                 valor = new ValorSistema(r.getDouble(2), r.getDate(3).toString());
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
         }
-
         return valor;
+    }
+
+    public ArrayList<ValorSistema> obtenerComisiones() {
+        ArrayList<ValorSistema> valores = new ArrayList<>();
+        String query = "SELECT * FROM ValoresSistema ORDER BY idValores ASC;";
+        try {
+            PreparedStatement prepared = Conexion.Conexion().prepareStatement(query);
+            ResultSet r = prepared.executeQuery();
+            while (r.next()) {
+                valores.add(new ValorSistema(r.getDouble(2), r.getDate(3).toString()));
+            }
+        } catch (SQLException e) {
+        }
+        return valores;
     }
 
     /**
      * Obtiene las revistas
+     *
      * @param opcion 1 -> pendientes de aceptar, 2 -> Ya aprobadas
      * @return
      */

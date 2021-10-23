@@ -1,0 +1,73 @@
+<div class="container-sm" style="max-width: 750px">
+  <div class="container shadow-lg rounded-3 my-5">
+    <form class="was-validated" (ngSubmit)="cambiarValorSistema()">
+      <div class="container p-3">
+        <div class="text-center">
+          <h4>Comisión Sobre Suscripciones Actual</h4>
+        </div>
+        <div class="row">
+          <div class="col input-group mb-3 my-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text">Porcentaje %</span>
+            </div>
+            <input
+              type="number"
+              min="0.01"
+              max="100"
+              step="0.01"
+              class="form-control text-center"
+              [(ngModel)]="porcentaje"
+              name="porcentaje"
+              required
+            />
+          </div>
+          <div class="col input-group mb-3 my-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text">Fecha</span>
+            </div>
+            <input
+              type="date"
+              [(ngModel)]="fecha"
+              name="fecha"
+              class="form-control text-center"
+              required
+            />
+          </div>
+        </div>
+        <div class="row">
+          <div class="d-grid">
+            <button id="boton" class="btn btn-success">Confirmar Cambio</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="container shadow-lg rounded-3">
+    <div class="container p-3">
+      <div class="text-center">
+        <h4>Últimos Cambios</h4>
+      </div>
+      <table class="table table-responsive-sm text-center">
+        <thead class="table-dark">
+          <tr>
+            <th>ID</th>
+            <th>Porcentaje</th>
+            <th>Fecha de Cambio</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngIf="espera">
+            <td colspan="3">
+              <app-error [mensaje]="mensaje" [espera]="espera"></app-error>
+            </td>
+          </tr>
+          <tr *ngFor="let parte of valoresSistema; let i = index">
+            <td>{{ i + 1 }}</td>
+            <td>{{ parte.porcentaje_comision | percent }}</td>
+            <td>{{ parte.fecha | date }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

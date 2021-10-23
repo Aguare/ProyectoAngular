@@ -27,3 +27,4 @@ DESCRIBE CambioRevista;
 ALTER TABLE CambioRevista MODIFY COLUMN idCambioRevista int AUTO_INCREMENT;
 INSERT INTO CambioRevista(precio_costo, fecha_inicio, CR_idRevista, CR_nombre_usuario) VALUES (2,"2021-03-10",1,"editor");
 UPDATE CambioRevista SET fecha_final = "2021-04-10" WHERE idCambioRevista = (SELECT idCambioRevista FROM CambioRevista WHERE CR_idRevista = 1 ORDER BY idCambioRevista DESC LIMIT 1);
+SELECT * FROM ValoresSistema;

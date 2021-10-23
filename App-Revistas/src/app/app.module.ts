@@ -41,6 +41,7 @@ import { SuscribirseComponent } from './Componentes/CompLector/suscribirse/suscr
 import { ListaEsperaComponent } from './Componentes/CompAdmin/lista-espera/lista-espera.component';
 import { EstadoRevistaComponent } from './Componentes/CompAdmin/estado-revista/estado-revista.component';
 import { EditarRevistaComponent } from './Componentes/Revistas/editar-revista/editar-revista.component';
+import { ComisionComponent } from './Componentes/CompAdmin/comision/comision.component';
 
 const rutas: Routes = [
   {
@@ -70,7 +71,8 @@ const rutas: Routes = [
       { path: 'VerAnunciantes', component: VerAnunciantesComponent },
       { path: 'ListaEspera', component: ListaEsperaComponent },
       { path: 'EstadoRevista/:idRevista', component: EstadoRevistaComponent },
-      { path: 'Perfil/:nombreUsuario', component: PerfilComponent }
+      { path: 'Perfil/:nombreUsuario', component: PerfilComponent },
+      { path: 'Comision', component: ComisionComponent }
     ]
   },
   {
@@ -119,7 +121,8 @@ const rutas: Routes = [
     SuscribirseComponent,
     ListaEsperaComponent,
     EstadoRevistaComponent,
-    EditarRevistaComponent
+    EditarRevistaComponent,
+    ComisionComponent
   ],
   imports: [
     BrowserModule,

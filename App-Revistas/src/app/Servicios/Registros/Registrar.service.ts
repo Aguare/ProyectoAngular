@@ -88,7 +88,7 @@ export class RegistrarService {
 
   public registrarComision(valor: ValorSistema): Observable<Info> {
     let formData = new FormData();
-    formData.append("Revista", JSON.stringify(valor));
-    return this.conexion.post<Info>(Backend.Path + "CambioComision", formData);
+    formData.append("Comision", JSON.stringify(valor));
+    return this.conexion.post<Info>(Backend.Path + "ObtenerComision", formData);
   }
 }

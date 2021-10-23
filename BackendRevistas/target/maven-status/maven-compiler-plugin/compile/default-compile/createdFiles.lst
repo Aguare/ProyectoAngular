@@ -5,6 +5,7 @@ ObtenerObjetos\ObLector.class
 ServletsControl\ObtenerPerfil.class
 SQL\ErrorSQL.class
 EntidadesAuxiliares\Pago.class
+ServletAdmin\EstadoRevista.class
 ServletsUsuario\InicioSesion.class
 ServletEditor\RegistrarRevista.class
 EntidadesPrincipales\Comentario.class

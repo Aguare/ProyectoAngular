@@ -24,16 +24,16 @@ export class RedireccionarService {
     this.usuario = JSON.parse(`${this.almacenamiento.obtener("Usuario")}`);
     switch (this.usuario?.tipoUsuario) {
       case "Administrador":
-        this.enviarPagina("InicioAdmin");
+        this.enviarPagina("InicioAdmin/ListaEspera");
         break;
       case "Lector":
-        this.enviarPagina("InicioLector");
+        this.enviarPagina("InicioLector/VerRevistas");
         break;
       case "Editor":
         this.enviarPagina("InicioEditor");
         break;
       default:
-        this.enviarPagina("Error");
+        this.enviarPagina("ErrorConexion");
         break;
     }
   }

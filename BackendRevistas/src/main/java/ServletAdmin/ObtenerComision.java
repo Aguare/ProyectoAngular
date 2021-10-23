@@ -6,6 +6,7 @@ import EntidadesAuxiliares.ValorSistema;
 import JSON.Convertir;
 import ObtenerObjetos.ObAdmin;
 import java.io.IOException;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -40,15 +41,25 @@ public class ObtenerComision extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
         try {
-            ValorSistema valor = obAd.obtenerComision();
-            if (valor != null) {
-                response.getWriter().append(c.obtenerJSON(valor, ValorSistema.class));
-            } else {
-                response.setStatus(HttpServletResponse.SC_NOT_FOUND);
-                response.getWriter().append(c.obtenerJSON(new Info(false, "Error del Servidor", "El servidor no pudo resolver la petición"), Info.class));
+            String op = request.getParameter("opcion");
+            int opcion = Integer.parseInt(op);
+            System.out.println(opcion);
+            switch (opcion) {
+                case 1:
+                    ArrayList<ValorSistema> valores = obAd.obtenerComisiones();
+                    response.getWriter().append(c.obtenerJSON(valores, valores.getClass()));
+                    break;
+                case 2:
+                    ValorSistema valor = obAd.obtenerComision();
+                    response.getWriter().append(c.obtenerJSON(valor, ValorSistema.class));
+                    break;
+                default:
+                    response.setStatus(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
+                    response.getWriter().append(c.obtenerJSON(new Info(false, "Error del Servidor", "El servidor no pudo resolver la petición"), Info.class));
+                    break;
             }
-        } catch (IOException e) {
-            response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+        } catch (IOException | NumberFormatException e) {
+            response.setStatus(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
             response.getWriter().append(c.obtenerJSON(new Info(false, "Error del Servidor", "El servidor no pudo resolver la petición"), Info.class));
         }
     }
@@ -64,5 +75,16 @@ public class ObtenerComision extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
+        try {
+            String texto = request.getParameter("Comision");
+            ValorSistema valor = (ValorSistema) c.obtenerObjeto(texto, ValorSistema.class);
+            Info info = ctlAd.actualizarComision(valor);
+            response.getWriter().append(c.obtenerJSON(info, Info.class));
+        } catch (Exception e) {
+            response.setStatus(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
+            response.getWriter().append(c.obtenerJSON(new Info(false, "Error", "No se pudo actualizar el valor"), Info.class));
+        }
     }
 }

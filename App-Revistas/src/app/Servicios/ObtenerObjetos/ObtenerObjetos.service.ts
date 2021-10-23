@@ -64,7 +64,11 @@ export class ObtenerObjetosService {
   }
 
   obtenerValorSistema(): Observable<ValorSistema> {
-    return this.conexion.get<ValorSistema>(Backend.Path + "ObtenerComision");
+    return this.conexion.get<ValorSistema>(Backend.Path + "ObtenerComision?opcion=2");
+  }
+
+  obtenerValoresSistema(): Observable<ValorSistema[]> {
+    return this.conexion.get<ValorSistema[]>(Backend.Path + "ObtenerComision?opcion=1");
   }
 
   obtenerSuscripciones(idRevista: string): Observable<Suscripcion[]> {

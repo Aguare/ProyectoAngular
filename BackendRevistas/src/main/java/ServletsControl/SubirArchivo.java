@@ -27,6 +27,8 @@ public class SubirArchivo extends HttpServlet {
 
     private Convertir c = new Convertir();
     private ControlArchivos ctlArch = new ControlArchivos();
+    private String PDF = "application/pdf";
+    private String PNG = "application/image";
 
     /**
      * opcion = 1 -> visualizar opcion = 2 -> descargar
@@ -45,10 +47,13 @@ public class SubirArchivo extends HttpServlet {
             int n = Integer.parseInt(opcion);
             switch (n) {
                 case 1:
-                    obtenerArchivo(response, path);
+                    obtenerArchivo(response, path, PDF);
                     break;
                 case 2:
                     descargarArchivo(response, path);
+                    break;
+                case 3:
+                    obtenerArchivo(response, path, PNG);
                     break;
                 default:
                     response.setStatus(HttpServletResponse.SC_NOT_ACCEPTABLE);
@@ -92,9 +97,9 @@ public class SubirArchivo extends HttpServlet {
      * @param response
      * @param path
      */
-    private void obtenerArchivo(HttpServletResponse response, String path) throws IOException {
+    private void obtenerArchivo(HttpServletResponse response, String path, String contenido) throws IOException {
         try (BufferedInputStream fileStream = new BufferedInputStream(new FileInputStream(path))) {
-            response.setContentType("application/pdf");
+            response.setContentType(contenido);
             int data = fileStream.read();
             while (data > -1) {
                 response.getOutputStream().write(data);

@@ -3,6 +3,7 @@ package ObtenerObjetos;
 import EntidadesPrincipales.Anunciante;
 import EntidadesPrincipales.Revista;
 import EntidadesAuxiliares.ValorSistema;
+import EntidadesPrincipales.Anuncio;
 import SQL.Conexion;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -26,7 +27,7 @@ public class ObAdmin {
             while (resultado.next()) {
                 anunciantes.add(new Anunciante(resultado.getString("nombre_anunciante"), resultado.getInt("telefono")));
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
         }
         return anunciantes;
     }
@@ -79,5 +80,21 @@ public class ObAdmin {
         } catch (SQLException e) {
         }
         return revistas;
+    }
+
+    public ArrayList<Anuncio> obtenerAnuncios() {
+        ArrayList<Anuncio> anuncios = new ArrayList<>();
+        String query = "SELECT * FROM Anuncios;";
+        try {
+            PreparedStatement prepared = Conexion.Conexion().prepareStatement(query);
+            ResultSet r = prepared.executeQuery();
+            while (r.next()) {
+                anuncios.add(new Anuncio(r.getInt(1), r.getInt(2), r.getString(3),
+                        r.getString(4), r.getString(5), r.getBoolean(6), r.getString(7),
+                        r.getString(8), r.getDouble(9), r.getString(10)));
+            }
+        } catch (SQLException e) {
+        }
+        return anuncios;
     }
 }

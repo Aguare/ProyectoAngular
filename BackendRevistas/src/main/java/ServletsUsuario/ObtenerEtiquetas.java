@@ -33,7 +33,6 @@ public class ObtenerEtiquetas extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String etiqueta = (String) request.getParameter("Etiqueta");
-        System.out.println(etiqueta);
         ControlEditor control = new ControlEditor();
         Convertir c = new Convertir();
         Etiqueta nueva = new Etiqueta(etiqueta);

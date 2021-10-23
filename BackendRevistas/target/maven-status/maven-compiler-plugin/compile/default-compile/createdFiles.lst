@@ -5,6 +5,8 @@ ObtenerObjetos\ObLector.class
 ServletsControl\ObtenerPerfil.class
 SQL\ErrorSQL.class
 EntidadesAuxiliares\Pago.class
+EntidadesPrincipales\Anuncio.class
+ServletAdmin\RegistrarAnuncio.class
 ServletAdmin\EstadoRevista.class
 ServletsUsuario\InicioSesion.class
 ServletEditor\RegistrarRevista.class
@@ -19,6 +21,7 @@ ServletLector\ObtenerRevista.class
 EntidadesAuxiliares\Cliente.class
 ServletAdmin\ObtenerComision.class
 EntidadesPrincipales\Anunciante.class
+ServletAdmin\RevistasAceptadas.class
 Controlador\ControlUsuario.class
 Controlador\ControlAdmin.class
 Controlador\ModificarError.class

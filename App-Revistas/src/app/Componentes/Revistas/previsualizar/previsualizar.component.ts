@@ -4,6 +4,7 @@ import { Comentario } from 'src/app/Objetos/Comentario';
 import { Info } from 'src/app/Objetos/Info';
 import { Reaccion } from 'src/app/Objetos/Reaccion';
 import { Revista } from 'src/app/Objetos/Revista';
+import { Suscripcion } from 'src/app/Objetos/Suscripcion';
 import { AlmacenamientoLocalService } from 'src/app/Servicios/Almacenamiento/AlmacenamientoLocal.service';
 import { ObtenerObjetosService } from 'src/app/Servicios/ObtenerObjetos/ObtenerObjetos.service';
 import { RegistrarService } from 'src/app/Servicios/Registros/Registrar.service';
@@ -27,6 +28,8 @@ export class PrevisualizarComponent implements OnInit {
   comentarioNuevo: string;
   fecha: string;
   nombreUsuario: string;
+  suscripciones: Suscripcion[];
+  tieneSub: boolean = false;
 
   constructor(
     private registrar: RegistrarService,
@@ -52,6 +55,15 @@ export class PrevisualizarComponent implements OnInit {
             this.comentarios = respuesta;
             this.cantidadCom = this.comentarios.length;
             this.nombreUsuario = this.almacenamiento.obtenerUsuario().nombreUsuario;
+            this.obtener.obtenerSuscripciones(this.revista.idRevista + "").subscribe((r: Suscripcion[]) => {
+              this.suscripciones = r;
+              this.verificarSuscripcion();
+            },
+              (error: any) => {
+                this.mensaje = error.error;
+                this.error = true;
+              }
+            );
           },
             (error: any) => {
               this.mensaje = error.error;
@@ -70,6 +82,17 @@ export class PrevisualizarComponent implements OnInit {
           this.error = true;
         }
       );
+    }
+  }
+
+  verificarSuscripcion(){
+    const usuario = this.almacenamiento.obtenerUsuario().nombreUsuario;
+    for (let i = 0; i < this.suscripciones.length; i++) {
+      const element = this.suscripciones[i];
+      if (element.lector.nombreUsuario == usuario) {
+        this.tieneSub = true;
+        break;
+      }
     }
   }
 

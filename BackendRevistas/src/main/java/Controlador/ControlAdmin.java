@@ -4,10 +4,13 @@ import EntidadesPrincipales.Anunciante;
 import EntidadesAuxiliares.Info;
 import EntidadesPrincipales.Revista;
 import EntidadesAuxiliares.ValorSistema;
+import EntidadesPrincipales.Anuncio;
 import SQL.Conexion;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 
 /**
  *
@@ -142,6 +145,50 @@ public class ControlAdmin {
             errorGeneral = modificar.obtenerTipoError(e.getErrorCode());
         }
         return new Info(false, "Error", errorGeneral);
+    }
+
+    public Info crearAnuncio(Anuncio anuncio, int dias) {
+        String query = "INSERT INTO Anuncio(tipo_anuncio,texto,video_url,imagen_path,activo,fecha_inicio,fecha_final,pago,A_nombre_anunciante) VALUES(?,?,?,?,?,?,?,?,?);";
+        LocalDate fechaIni = anuncio.getFecha_inicioDate().toLocalDate();
+        LocalDate fechaFin = fechaIni.plusDays(dias);
+        try {
+            PreparedStatement p = Conexion.Conexion().prepareStatement(query);
+            p.setInt(1, anuncio.getTipoAnuncio());
+            p.setString(2, anuncio.getTexto());
+            p.setString(3, anuncio.getVideo_url());
+            p.setString(4, anuncio.getImagen_path());
+            p.setBoolean(5, anuncio.isActivo());
+            p.setDate(6, anuncio.getFecha_inicioDate());
+            p.setDate(7, Date.valueOf(fechaFin));
+            p.setDouble(8, anuncio.getPago());
+            p.setString(9, anuncio.getAnunciante());
+            p.executeUpdate();
+            return new Info(true, "Exito", "El anuncio se creó correctamente");
+        } catch (SQLException e) {
+            errorGeneral = modificar.obtenerTipoError(e.getErrorCode());
+            return new Info(false, "Error", errorGeneral);
+        }
+    }
+
+    /**
+     * Habilita o deshabilita un anuncio
+     *
+     * @param anuncio
+     * @return
+     */
+    public Info actualizarAnuncio(Anuncio anuncio) {
+        String query = "UPDATE Anuncio SET activo = ? WHERE idAnuncio = ?;";
+        try {
+            PreparedStatement p = Conexion.Conexion().prepareStatement(query);
+            p.setBoolean(1, anuncio.isActivo());
+            p.setInt(2, anuncio.getIdAnuncio());
+            p.executeUpdate();
+            String mensaje = anuncio.isActivo() ? "El anunció se habilitó correctamente" : "El anuncio se deshabilito correctamente";
+            return new Info(true, "Exito", mensaje);
+        } catch (SQLException e) {
+            errorGeneral = modificar.obtenerTipoError(e.getErrorCode());
+            return new Info(false, "Error", errorGeneral);
+        }
     }
 
 }

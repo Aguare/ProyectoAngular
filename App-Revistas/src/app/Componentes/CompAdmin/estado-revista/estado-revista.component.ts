@@ -36,7 +36,7 @@ export class EstadoRevistaComponent implements OnInit {
     }
     this.validarForm = this.builder.group({
       costo: new FormControl ('1', Validators.required),
-      estado: new FormControl ('true', Validators.required),
+      estado: new FormControl ('1', Validators.required),
       fecha: new FormControl('2021-10-25',Validators.required)
     });
   }
@@ -67,8 +67,7 @@ export class EstadoRevistaComponent implements OnInit {
   cambiarEstadoRevista() {
     if (this.validarForm.valid) {
       this.revista.fecha = this.validarForm.value.fecha;
-      this.estado = this.validarForm.value.estado;
-      if (this.estado == true) {
+      if (this.validarForm.value.estado == 1) {
         this.revista.aprobado = true;
         this.revista.precio_costo = this.validarForm.value.costo;
       } else {

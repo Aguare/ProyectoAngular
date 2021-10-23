@@ -15,12 +15,12 @@ import { RegistrarService } from 'src/app/Servicios/Registros/Registrar.service'
 export class TarjetaRevistaComponent implements OnInit {
 
   @Input() revista: Revista;
-  @Input() fecha: Date;
   tieneMG: boolean = false;
   cantidadMG: number = 0;
   cantidadCom: number = 0;
   reacciones: Reaccion[] = [];
   comentarios: Comentario[] = [];
+  fecha: string;
 
   constructor(
     private registrar: RegistrarService,
@@ -45,6 +45,10 @@ export class TarjetaRevistaComponent implements OnInit {
         error => alert("error")
       );
     }
+  }
+
+  recibirFecha(f: string){
+    this.fecha = f;
   }
 
   verificarMegustaUsuario() {
@@ -83,10 +87,6 @@ export class TarjetaRevistaComponent implements OnInit {
     }
   }
 
-  nuevaFecha(fecha: any) {
-    this.fecha = fecha;
-  }
-
   registrarReaccion() {
     let fecha = prompt("Ingrese la fecha para el comentario Ejemplo: 2021-09-24");
     if (fecha != null) {
@@ -94,6 +94,8 @@ export class TarjetaRevistaComponent implements OnInit {
         this.tieneMG, fecha, this.almacenamiento.obtenerUsuario().nombreUsuario, this.revista.idRevista);
       this.registrar.registrarReaccion(reaccion).subscribe((respuesta: Info) => {
       });
+    }else{
+     this.cambiarBoton(); 
     }
   }
 }

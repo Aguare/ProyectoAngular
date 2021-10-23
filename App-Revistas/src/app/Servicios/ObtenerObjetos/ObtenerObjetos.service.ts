@@ -81,6 +81,6 @@ export class ObtenerObjetosService {
   }
 
   obtenerRevistasAceptadas(): Observable<Revista[]>{
-    return this.conexion.get<Revista[]>(Backend.Path+"pendiente");
+    return this.conexion.get<Revista[]>(Backend.Path+"RevistasAceptadas");
   }
 }

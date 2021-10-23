@@ -28,3 +28,7 @@ ALTER TABLE CambioRevista MODIFY COLUMN idCambioRevista int AUTO_INCREMENT;
 INSERT INTO CambioRevista(precio_costo, fecha_inicio, CR_idRevista, CR_nombre_usuario) VALUES (2,"2021-03-10",1,"editor");
 UPDATE CambioRevista SET fecha_final = "2021-04-10" WHERE idCambioRevista = (SELECT idCambioRevista FROM CambioRevista WHERE CR_idRevista = 1 ORDER BY idCambioRevista DESC LIMIT 1);
 SELECT * FROM ValoresSistema;
+SELECT * FROM Suscripcion;
+SELECT * FROM Revista WHERE idRevista = EXISTS (SELECT S_idRevista FROM Suscripcion WHERE S_usuario_lector = "lector" AND fecha_final >= NOW());
+SELECT * FROM Revista;
+INSERT INTO Anuncio(tipo_anuncio,texto,video_url,imagen_path,activo,fecha_inicio,fecha_final,pago,A_nombre_anunciante)

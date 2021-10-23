@@ -1,5 +1,5 @@
 <!-- The Modal -->
-<div class="container shadow-lg my-5">
+<div class="container shadow-lg my-4">
   <app-error [mensaje]="mensaje" [espera]="error"></app-error>
   <div *ngIf="revista" class="container">
     <div class="container p-2">
@@ -52,7 +52,7 @@
 
           <div class="row justify-content-center p-2">
             <div
-              *ngIf="revista.suscripciones && revista.es_pago"
+              *ngIf="revista.suscripciones && revista.es_pago && !tieneSub"
               class="col-auto m-0 input-group-append p-1"
             >
               <a
@@ -63,7 +63,7 @@
               </a>
             </div>
             <div
-              *ngIf="!revista.es_pago"
+              *ngIf="!revista.es_pago || tieneSub"
               class="col-auto m-0 input-group-append p-1"
             >
               <a

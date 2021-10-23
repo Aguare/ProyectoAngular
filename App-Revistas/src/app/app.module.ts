@@ -42,6 +42,9 @@ import { ListaEsperaComponent } from './Componentes/CompAdmin/lista-espera/lista
 import { EstadoRevistaComponent } from './Componentes/CompAdmin/estado-revista/estado-revista.component';
 import { EditarRevistaComponent } from './Componentes/Revistas/editar-revista/editar-revista.component';
 import { ComisionComponent } from './Componentes/CompAdmin/comision/comision.component';
+import { VerImagenComponent } from './Componentes/Inicio/ver-imagen/ver-imagen.component';
+import { ListaRevistasComponent } from './Componentes/CompAdmin/lista-revistas/lista-revistas.component';
+import { CrearAnuncioComponent } from './Componentes/CompAdmin/crear-anuncio/crear-anuncio.component';
 
 const rutas: Routes = [
   {
@@ -70,9 +73,11 @@ const rutas: Routes = [
       { path: 'RegistrarAnunciante', component: RegistrarAnuncianteComponent },
       { path: 'VerAnunciantes', component: VerAnunciantesComponent },
       { path: 'ListaEspera', component: ListaEsperaComponent },
+      { path: 'ListaRevistas', component: ListaRevistasComponent },
       { path: 'EstadoRevista/:idRevista', component: EstadoRevistaComponent },
       { path: 'Perfil/:nombreUsuario', component: PerfilComponent },
-      { path: 'Comision', component: ComisionComponent }
+      { path: 'Comision', component: ComisionComponent },
+      { path: 'CrearAnuncio', component: CrearAnuncioComponent }
     ]
   },
   {
@@ -122,7 +127,10 @@ const rutas: Routes = [
     ListaEsperaComponent,
     EstadoRevistaComponent,
     EditarRevistaComponent,
-    ComisionComponent
+    ComisionComponent,
+    VerImagenComponent,
+    ListaRevistasComponent,
+    CrearAnuncioComponent
   ],
   imports: [
     BrowserModule,

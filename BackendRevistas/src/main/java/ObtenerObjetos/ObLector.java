@@ -21,8 +21,8 @@ public class ObLector {
     private final ObGeneral obtenerG = new ObGeneral();
 
     /**
-     * Obtiene las revistas para el lector según la opción 1 -> devuelve las
-     * revistas de interés 2 -> devuelve sus suscripciones
+     * Obtiene las revistas para el lector según la opción 2 -> devuelve las
+     * revistas de interés 1 -> devuelve sus suscripciones
      *
      * @param usuario
      * @param opcion
@@ -30,7 +30,7 @@ public class ObLector {
      */
     public ArrayList<Revista> obtenerRevistasLector(Usuario usuario, int opcion) {
         ArrayList<Revista> revistas = new ArrayList<>();
-        String query = opcion == 1 ? "SELECT * FROM Revista;" : "SELECT * FROM Revista WHERE EXISTS (SELECT S_idRevista FROM Suscripcion WHERE S_usuario_lector = ? AND fecha_final >= NOW());";
+        String query = (opcion == 1) ? "SELECT * FROM Revista WHERE aprobado = 1;" : "SELECT * FROM Revista WHERE idRevista = EXISTS (SELECT S_idRevista FROM Suscripcion WHERE S_usuario_lector = ? AND fecha_final >= NOW());";
         try {
             PreparedStatement prepared = Conexion.Conexion().prepareStatement(query);
             if (opcion != 1) {

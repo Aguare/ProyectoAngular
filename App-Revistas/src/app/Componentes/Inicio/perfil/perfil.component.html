@@ -5,7 +5,7 @@
       <div class="row justify-content-center">
         <div class="col-auto m-0">
           <div class="card" style="width: 200px">
-            <img class="card-img-top" [src]="pathFoto" alt="Card image" />
+            <app-ver-imagen [path]="perfil.foto"></app-ver-imagen>
             <div class="card-body">
               <h4 class="card-title">{{ usuario.nombreUsuario }}</h4>
               <p class="card-text">{{ perfil.descripcion }}</p>

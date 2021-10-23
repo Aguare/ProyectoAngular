@@ -176,11 +176,15 @@ CREATE TABLE Anunciante(
 );
 
 CREATE TABLE Anuncio(
-    idAnuncio INT NOT NULL,
+    idAnuncio INT NOT NULL AUTO_INCREMENT,
     tipo_anuncio INT NOT NULL,
     texto TEXT,
     video_url TEXT,
     imagen_path TEXT,
+    activo TINYINT NOT NULL,
+    fecha_inicio DATE NOT NULL,
+    fecha_final DATE NOT NULL,
+    pago DOUBLE NOT NULL,
     A_nombre_anunciante VARCHAR(50) NOT NULL,
     PRIMARY KEY(idAnuncio),
     FOREIGN KEY(A_nombre_anunciante) REFERENCES Anunciante(nombre_anunciante)

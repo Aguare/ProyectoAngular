@@ -22,8 +22,8 @@ export class VerRevistaComponent implements OnInit {
   }
 
   obtenerLink() {
-    let _showPdfUrl = Backend.Path + "SubirArchivo?opcion=1&path=" + this.path;
-    this.url = this.sanitizer.bypassSecurityTrustResourceUrl(_showPdfUrl);
+    let url = Backend.Path + "SubirArchivo?opcion=1&path=" + this.path;
+    this.url = this.sanitizer.bypassSecurityTrustResourceUrl(url);
   }
 
 }

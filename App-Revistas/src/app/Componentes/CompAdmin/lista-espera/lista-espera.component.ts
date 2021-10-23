@@ -23,6 +23,9 @@ export class ListaEsperaComponent implements OnInit {
     this.obtener.obtenerRevistasPendientes().subscribe((respuesta: Revista[]) => {
       this.revistas = respuesta;
       this.espera = false;
+      if (this.revistas.length == 0) {
+        this.espera = true;
+      }
     },
       (error: any) => {
         this.mensaje = error.error;

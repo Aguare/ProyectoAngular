@@ -54,6 +54,7 @@ export class SeleccionEtiquetasComponent implements OnInit {
       if (element.nombre == etiqueta) {
         this.etiquetasSeleccionadas.splice(i, 1);
         this.etiquetasExistentes.push(new Etiqueta(etiqueta));
+        this.etiquetasSU(this.etiquetasSeleccionadas);
         break;
       }
     }

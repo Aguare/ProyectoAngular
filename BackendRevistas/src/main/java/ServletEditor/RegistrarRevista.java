@@ -64,11 +64,9 @@ public class RegistrarRevista extends HttpServlet {
         response.setCharacterEncoding("UTF-8");
         Part archivo = request.getPart("archivo");
         String revista = request.getParameter("revista");
-        LocalDateTime fecha = LocalDateTime.now();
         try {
             Revista nueva = (Revista) c.obtenerObjeto(revista, Revista.class);
-            String hora = "" + fecha.getHour() + fecha.getMinute() + fecha.getSecond();
-            String pathArchivo = controlArch.guardarArchivo(archivo, "Revista_" + nueva.getUsuarioCreador().getNombreUsuario() + hora, ControlArchivos.PDF);
+            String pathArchivo = controlArch.guardarArchivo(archivo, "Revista_" + nueva.getUsuarioCreador().getNombreUsuario(), ControlArchivos.PDF);
             Info info = controlEditor.registrarRevista(nueva, pathArchivo);
             response.getWriter().append(c.obtenerJSON(info, Info.class));
         } catch (IOException e) {

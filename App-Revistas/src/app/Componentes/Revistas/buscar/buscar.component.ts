@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Etiqueta } from 'src/app/Objetos/Etiqueta';
 import { Info } from 'src/app/Objetos/Info';
 import { Revista } from 'src/app/Objetos/Revista';
 import { Usuario } from 'src/app/Objetos/Usuario';
@@ -16,6 +17,7 @@ export class BuscarComponent implements OnInit {
   revistas: Revista[];
   usuario: Usuario;
   fecha: Date = new Date();
+  etiquetas: Etiqueta[];
 
   constructor(
     private obtener: ObtenerObjetosService,
@@ -33,5 +35,22 @@ export class BuscarComponent implements OnInit {
     );
   }
 
-  
+  recibirEtiquetas(etiquetas: Etiqueta[]) {
+    this.etiquetas = etiquetas;
+  }
+
+  actualizarRevistas() {
+    if (this.etiquetas.length == 0) {
+      this.ngOnInit();
+    } else {
+      this.obtener.obtenerRevistasBusqueda(this.etiquetas).subscribe((respuesta: Revista[]) => {
+        this.revistas = respuesta;
+      },
+        (error: any) => {
+          alert("Error al obtener las revistas");
+        }
+      );
+    }
+
+  }
 }

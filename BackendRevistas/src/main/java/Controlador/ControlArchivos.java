@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.time.LocalDateTime;
 import javax.servlet.http.Part;
 
 /**
@@ -18,6 +19,8 @@ public class ControlArchivos {
     public static final String IMG = ".png";
 
     public String guardarArchivo(Part parte, String nombreArchivo, String extension) throws IOException {
+        LocalDateTime fecha = LocalDateTime.now();
+        String hora = "" + fecha.getHour() + fecha.getMinute() + fecha.getSecond();
         String path = "";
         InputStream fileStream = parte.getInputStream();
         try (BufferedReader in = new BufferedReader(new InputStreamReader(fileStream))) {
@@ -25,7 +28,7 @@ public class ControlArchivos {
             while (line != null) {
                 line = in.readLine();
             }
-            path = PATH + nombreArchivo + extension;
+            path = PATH + nombreArchivo + hora + extension;
             parte.write(path);
         } catch (Exception ex) {
             System.out.println("ERROR AL GUARDAR EL ARCHIVO");

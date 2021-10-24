@@ -1,6 +1,7 @@
 package EntidadesPrincipales;
 
 import java.sql.Date;
+import java.util.ArrayList;
 
 /**
  *
@@ -18,10 +19,11 @@ public class Anuncio {
     private String fecha_final;
     private Double pago;
     private String A_nombre_anunciante;
+    private ArrayList<Etiqueta> etiquetas;
 
-    public Anuncio(int idAnuncio, int tipoAnuncio, String texto, String video_url, String imagen_path, boolean activo, String fecha_inicio, String fecha_final, Double pago, String anunciante) {
+    public Anuncio(int idAnuncio, int tipo_anuncio, String texto, String video_url, String imagen_path, boolean activo, String fecha_inicio, String fecha_final, Double pago, String A_nombre_anunciante, ArrayList<Etiqueta> etiquetas) {
         this.idAnuncio = idAnuncio;
-        this.tipo_anuncio = tipoAnuncio;
+        this.tipo_anuncio = tipo_anuncio;
         this.texto = texto;
         this.video_url = video_url;
         this.imagen_path = imagen_path;
@@ -29,7 +31,16 @@ public class Anuncio {
         this.fecha_inicio = fecha_inicio;
         this.fecha_final = fecha_final;
         this.pago = pago;
-        this.A_nombre_anunciante = anunciante;
+        this.A_nombre_anunciante = A_nombre_anunciante;
+        this.etiquetas = etiquetas;
+    }
+
+    public ArrayList<Etiqueta> getEtiquetas() {
+        return etiquetas;
+    }
+
+    public void setEtiquetas(ArrayList<Etiqueta> etiquetas) {
+        this.etiquetas = etiquetas;
     }
 
     public boolean isActivo() {

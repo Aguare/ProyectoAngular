@@ -45,6 +45,7 @@ import { ComisionComponent } from './Componentes/CompAdmin/comision/comision.com
 import { VerImagenComponent } from './Componentes/Inicio/ver-imagen/ver-imagen.component';
 import { ListaRevistasComponent } from './Componentes/CompAdmin/lista-revistas/lista-revistas.component';
 import { CrearAnuncioComponent } from './Componentes/CompAdmin/crear-anuncio/crear-anuncio.component';
+import { AnuncioComponent } from './Componentes/anuncio/anuncio.component';
 
 const rutas: Routes = [
   {
@@ -130,7 +131,8 @@ const rutas: Routes = [
     ComisionComponent,
     VerImagenComponent,
     ListaRevistasComponent,
-    CrearAnuncioComponent
+    CrearAnuncioComponent,
+    AnuncioComponent
   ],
   imports: [
     BrowserModule,

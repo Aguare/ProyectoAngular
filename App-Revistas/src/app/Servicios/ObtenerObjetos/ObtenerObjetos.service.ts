@@ -6,6 +6,7 @@ import { Anuncio } from 'src/app/Objetos/Anuncio';
 import { Backend } from 'src/app/Objetos/Backend';
 import { Cliente } from 'src/app/Objetos/Cliente';
 import { Comentario } from 'src/app/Objetos/Comentario';
+import { Etiqueta } from 'src/app/Objetos/Etiqueta';
 import { Perfil } from 'src/app/Objetos/Perfil';
 import { Reaccion } from 'src/app/Objetos/Reaccion';
 import { Revista } from 'src/app/Objetos/Revista';
@@ -36,6 +37,12 @@ export class ObtenerObjetosService {
 
   obtenerRevistasLector(usuario: Usuario): Observable<Revista[]> {
     return this.conexion.get<Revista[]>(Backend.Path + "RevistasInicio?usuario=" + usuario.nombreUsuario);
+  }
+
+  obtenerRevistasBusqueda(etiquetas: Etiqueta[]): Observable<Revista[]> {
+    let formData = new FormData();
+    formData.append("Etiquetas", JSON.stringify(etiquetas));
+    return this.conexion.post<Revista[]>(Backend.Path + "RevistasInicio",formData);
   }
 
   obtenerPerfilUsuario(usuario: string): Observable<Perfil> {
@@ -76,15 +83,15 @@ export class ObtenerObjetosService {
     return this.conexion.get<Suscripcion[]>(Backend.Path + "ObtenerSuscripciones?idRevista=" + idRevista);
   }
 
-  obtenerRevistasPendientes(): Observable<Revista[]>{
-    return this.conexion.get<Revista[]>(Backend.Path+"EstadoRevista");
+  obtenerRevistasPendientes(): Observable<Revista[]> {
+    return this.conexion.get<Revista[]>(Backend.Path + "EstadoRevista");
   }
 
-  obtenerRevistasAceptadas(): Observable<Revista[]>{
-    return this.conexion.get<Revista[]>(Backend.Path+"RevistasAceptadas");
+  obtenerRevistasAceptadas(): Observable<Revista[]> {
+    return this.conexion.get<Revista[]>(Backend.Path + "RevistasAceptadas");
   }
 
-  obtenerAnuncios(): Observable<Anuncio[]>{
-    return this.conexion.get<Anuncio[]>(Backend.Path+"RegistrarAnuncio");
+  obtenerAnuncios(): Observable<Anuncio[]> {
+    return this.conexion.get<Anuncio[]>(Backend.Path + "RegistrarAnuncio");
   }
 }

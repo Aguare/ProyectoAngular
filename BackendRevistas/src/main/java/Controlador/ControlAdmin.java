@@ -5,19 +5,21 @@ import EntidadesAuxiliares.Info;
 import EntidadesPrincipales.Revista;
 import EntidadesAuxiliares.ValorSistema;
 import EntidadesPrincipales.Anuncio;
+import EntidadesPrincipales.Etiqueta;
 import SQL.Conexion;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 /**
  *
  * @author marco
  */
 public class ControlAdmin {
-
+    
     private final ModificarError modificar = new ModificarError();
     private String errorGeneral = "No se realizó la operación";
 
@@ -99,7 +101,7 @@ public class ControlAdmin {
         }
         return new Info(false, "Error", errorGeneral);
     }
-
+    
     private boolean actualizarUltimoCambio(Revista revista) {
         int idCambio = obtenerUltimoRegisto(revista);
         String query = "UPDATE CambioRevista SET fecha_final = ? WHERE idCambioRevista = ?;";
@@ -116,7 +118,7 @@ public class ControlAdmin {
         }
         return false;
     }
-
+    
     private int obtenerUltimoRegisto(Revista revista) {
         String query = "SELECT idCambioRevista FROM CambioRevista WHERE CR_idRevista = ? ORDER BY fecha_inicio DESC LIMIT 1;";
         int n = -1;
@@ -132,7 +134,7 @@ public class ControlAdmin {
         }
         return n;
     }
-
+    
     public Info actualizarComision(ValorSistema valor) {
         String query = "INSERT INTO ValoresSistema(porcentaje_comision, fecha) VALUES(?,?);";
         try {
@@ -146,13 +148,13 @@ public class ControlAdmin {
         }
         return new Info(false, "Error", errorGeneral);
     }
-
+    
     public Info crearAnuncio(Anuncio anuncio, int dias) {
         String query = "INSERT INTO Anuncio(tipo_anuncio,texto,video_url,imagen_path,activo,fecha_inicio,fecha_final,pago,A_nombre_anunciante) VALUES(?,?,?,?,?,?,?,?,?);";
         LocalDate fechaIni = anuncio.getFecha_inicioDate().toLocalDate();
         LocalDate fechaFin = fechaIni.plusDays(dias);
         try {
-            PreparedStatement p = Conexion.Conexion().prepareStatement(query);
+            PreparedStatement p = Conexion.Conexion().prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS);
             p.setInt(1, anuncio.getTipoAnuncio());
             p.setString(2, anuncio.getTexto());
             p.setString(3, anuncio.getVideo_url());
@@ -163,10 +165,35 @@ public class ControlAdmin {
             p.setDouble(8, anuncio.getPago());
             p.setString(9, anuncio.getAnunciante());
             p.executeUpdate();
+            ResultSet r = p.getGeneratedKeys();
+            int n = -1;
+            while (r.next()) {
+                n = r.getInt(1);
+            }
+            anuncio.setIdAnuncio(n);
+            registrarEtiquetasAnuncio(anuncio);
             return new Info(true, "Exito", "El anuncio se creó correctamente");
         } catch (SQLException e) {
             errorGeneral = modificar.obtenerTipoError(e.getErrorCode());
             return new Info(false, "Error", errorGeneral);
+        }
+    }
+    
+    private void registrarEtiquetasAnuncio(Anuncio anuncio) {
+        ArrayList<Etiqueta> etiquetas = anuncio.getEtiquetas();
+        for (Etiqueta etiqueta : etiquetas) {
+            registrarEtiqueta(etiqueta, anuncio.getIdAnuncio());
+        }
+    }
+    
+    private void registrarEtiqueta(Etiqueta etiqueta, int idAnuncio) {
+        String query = "INSERT INTO Anuncio_Etiquetas(AE_idAnuncio, AE_nombre_etiqueta) VALUES(?,?);";
+        try {
+            PreparedStatement p = Conexion.Conexion().prepareStatement(query);
+            p.setInt(1, idAnuncio);
+            p.setString(2, etiqueta.getNombre());
+            p.executeUpdate();
+        } catch (SQLException e) {
         }
     }
 
@@ -190,5 +217,5 @@ public class ControlAdmin {
             return new Info(false, "Error", errorGeneral);
         }
     }
-
+    
 }

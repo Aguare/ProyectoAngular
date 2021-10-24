@@ -1,3 +1,5 @@
+import { Etiqueta } from "./Etiqueta";
+
 export class Anuncio {
 
     idAnuncio: number;
@@ -10,6 +12,7 @@ export class Anuncio {
     fecha_final: string;
     pago: number;
     A_nombre_anunciante: string;
+    etiquetas: Etiqueta[];
 
     constructor(
         idAnuncio: number,
@@ -22,6 +25,7 @@ export class Anuncio {
         fecha_final: string,
         pago: number,
         A_nombre_anunciante: string,
+        etiquetas: Etiqueta[]
     ) {
         this.idAnuncio = idAnuncio;
         this.tipo_anuncio = tipo_anuncio;
@@ -33,5 +37,6 @@ export class Anuncio {
         this.fecha_final = fecha_final;
         this.pago = pago;
         this.A_nombre_anunciante = A_nombre_anunciante;
+        this.etiquetas = etiquetas;
     }
 }

@@ -15,7 +15,12 @@ import java.util.ArrayList;
 public class ObEditor {
 
     private ObGeneral obtenerG = new ObGeneral();
-
+    
+    /**
+     * Obtiene las revistas que ha publicado
+     * @param usuario
+     * @return 
+     */
     public ArrayList<Revista> obtenerRevistasEditor(Usuario usuario) {
         ArrayList<Revista> revistas = new ArrayList<>();
         String query = "SELECT * FROM Revista WHERE R_nombre_usuario = ?;";
@@ -32,7 +37,12 @@ public class ObEditor {
         }
         return revistas;
     }
-
+    
+    /**
+     * Obtiene una revista según su ID
+     * @param idRevista
+     * @return 
+     */
     public Revista obtenerRevistaID(int idRevista) {
         Revista revista = null;
         String query = "SELECT * FROM Revista WHERE idRevista = ?;";

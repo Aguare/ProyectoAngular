@@ -4,6 +4,7 @@ import EntidadesPrincipales.Anunciante;
 import EntidadesPrincipales.Revista;
 import EntidadesAuxiliares.ValorSistema;
 import EntidadesPrincipales.Anuncio;
+import EntidadesPrincipales.Etiqueta;
 import SQL.Conexion;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -91,10 +92,31 @@ public class ObAdmin {
             while (r.next()) {
                 anuncios.add(new Anuncio(r.getInt(1), r.getInt(2), r.getString(3),
                         r.getString(4), r.getString(5), r.getBoolean(6), r.getString(7),
-                        r.getString(8), r.getDouble(9), r.getString(10)));
+                        r.getString(8), r.getDouble(9), r.getString(10), etiquetasAnuncio(r.getInt(1))));
             }
         } catch (SQLException e) {
         }
         return anuncios;
+    }
+
+    /**
+     * Devuelve las etiquetas relacionadas con el anuncio
+     *
+     * @param idAnuncio
+     * @return
+     */
+    private ArrayList<Etiqueta> etiquetasAnuncio(int idAnuncio) {
+        ArrayList<Etiqueta> etiquetas = new ArrayList<>();
+        String query = "SELECT * FROM Anuncio_Etiquetas WHERE AE_idAnuncio = ?";
+        try {
+            PreparedStatement prepared = Conexion.Conexion().prepareStatement(query);
+            prepared.setInt(1, idAnuncio);
+            ResultSet r = prepared.executeQuery();
+            while (r.next()) {
+                etiquetas.add(new Etiqueta(r.getString(2)));
+            }
+        } catch (SQLException e) {
+        }
+        return etiquetas;
     }
 }

@@ -5,6 +5,8 @@ import EntidadesAuxiliares.Pago;
 import EntidadesPrincipales.Reaccion;
 import EntidadesPrincipales.Revista;
 import EntidadesAuxiliares.Suscripcion;
+import EntidadesPrincipales.Etiqueta;
+import EntidadesPrincipales.Perfil;
 import EntidadesPrincipales.Usuario;
 import SQL.Conexion;
 import java.sql.PreparedStatement;
@@ -19,6 +21,7 @@ import java.util.ArrayList;
 public class ObLector {
 
     private final ObGeneral obtenerG = new ObGeneral();
+    private final ObEditor obtenerE = new ObEditor();
 
     /**
      * Obtiene las revistas para el lector según la opción 2 -> devuelve las
@@ -30,7 +33,12 @@ public class ObLector {
      */
     public ArrayList<Revista> obtenerRevistasLector(Usuario usuario, int opcion) {
         ArrayList<Revista> revistas = new ArrayList<>();
-        String query = (opcion == 1) ? "SELECT * FROM Revista WHERE aprobado = 1;" : "SELECT * FROM Revista WHERE idRevista = EXISTS (SELECT S_idRevista FROM Suscripcion WHERE S_usuario_lector = ? AND fecha_final >= NOW());";
+        Perfil perfil = obtenerG.obtenerPerfilUsuario(usuario.getNombreUsuario());
+        ArrayList<Etiqueta> etiquetasLector = perfil.getEtiquetasInteres();
+        String query = "SELECT * FROM Revista WHERE idRevista = EXISTS (SELECT S_idRevista FROM Suscripcion WHERE S_usuario_lector = ? AND fecha_final >= NOW());";
+        if (opcion == 1) {
+            return obtenerBusquedaRevista(etiquetasLector);
+        }
         try {
             PreparedStatement prepared = Conexion.Conexion().prepareStatement(query);
             if (opcion != 1) {
@@ -43,6 +51,36 @@ public class ObLector {
                         r.getDate(13).toString(), usuario, obtenerG.obtenerEtiquetas(1, r.getInt(1))));
             }
         } catch (SQLException e) {
+        }
+        return revistas;
+    }
+
+    /**
+     * Devuelve las revistas según las etiquetas seleccionadas
+     *
+     * @param usuario
+     * @param etiquetas
+     * @return
+     */
+    public ArrayList<Revista> obtenerBusquedaRevista(ArrayList<Etiqueta> etiquetas) {
+        ArrayList<Revista> revistas = new ArrayList<>();
+        String parte1 = "SELECT idRevista FROM Revista WHERE aprobado = 1 AND idRevista IN (SELECT RE_idRevista FROM Revista_Etiquetas WHERE RE_nombre_etiqueta IN (";
+        String parteFinal = ") GROUP BY RE_idRevista);";
+        for (Etiqueta etiqueta : etiquetas) {
+            parte1 += "\'" + etiqueta.getNombre() + "\'";
+            if (!etiquetas.get(etiquetas.size() - 1).getNombre().equals(etiqueta.getNombre())) {
+                parte1 += ",";
+            }
+        }
+        parte1 += parteFinal;
+        try {
+            PreparedStatement prepared = Conexion.Conexion().prepareStatement(parte1);
+            ResultSet r = prepared.executeQuery();
+            while (r.next()) {
+                revistas.add(obtenerE.obtenerRevistaID(r.getInt(1)));
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getErrorCode());
         }
         return revistas;
     }
@@ -135,7 +173,7 @@ public class ObLector {
                         obtenerG.obtenerUsuario(r.getString(8)), obtenerPago(r.getInt(1))));
             }
         } catch (SQLException e) {
-            
+
         }
         return suscripciones;
     }

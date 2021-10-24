@@ -31,4 +31,15 @@ SELECT * FROM ValoresSistema;
 SELECT * FROM Suscripcion;
 SELECT * FROM Revista WHERE idRevista = EXISTS (SELECT S_idRevista FROM Suscripcion WHERE S_usuario_lector = "lector" AND fecha_final >= NOW());
 SELECT * FROM Revista;
-INSERT INTO Anuncio(tipo_anuncio,texto,video_url,imagen_path,activo,fecha_inicio,fecha_final,pago,A_nombre_anunciante)
+SELECT * FROM Anuncio;
+SELECT * FROM Anuncio_Etiquetas;
+INSERT INTO Anunciante VALUES("PEPE",51806388);
+INSERT INTO Anuncio(tipo_anuncio,texto,video_url,imagen_path,activo,fecha_inicio,fecha_final,pago,A_nombre_anunciante) VALUES(1,"TEXTO","VIDEO","IMAGEN",0,"2021-10-25","2021-10-26",800,"PEPE");
+UPDATE Anuncio SET activo = 1 WHERE idAnuncio = 2;
+SELECT * FROM Anuncio_Etiquetas WHERE AE_nombre_etiqueta = 'CUNOC' AND 'Ingeniería' AND 'Real Madrid';
+SELECT AE_idAnuncio FROM Anuncio_Etiquetas WHERE AE_nombre_etiqueta IN('CUNOC', 'Ingeniería', 'Real Madrid') GROUP BY AE_idAnuncio;
+SELECT RE_idRevista FROM Revista_Etiquetas WHERE RE_nombre_etiqueta IN ('CUNOC') GROUP BY RE_idRevista;
+SELECT * FROM Revista WHERE aprobado = 0 AND idRevista IN (SELECT RE_idRevista FROM Revista_Etiquetas WHERE RE_nombre_etiqueta IN ('CUNOC') GROUP BY RE_idRevista);
+SELECT * FROM Anuncio WHERE EXISTS (SELECT * FROM Anuncio_Etiquetas WHERE AE_nombre_etiqueta = 'CUNOC');
+SELECT * FROM Etiqueta;
+SELECT idRevista FROM Revista WHERE aprobado = 1 AND idRevista IN (SELECT RE_idRevista FROM Revista_Etiquetas WHERE RE_nombre_etiqueta IN ('Comida','Computadoras','Audifonos','Ingeniería','Cocina','Base de Datos','Mouse','Silla','Monitor','Perro','PepePollo','Mesa','CUNOC') GROUP BY RE_idRevista);

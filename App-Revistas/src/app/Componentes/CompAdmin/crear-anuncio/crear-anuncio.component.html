@@ -16,11 +16,11 @@
               <div class="input-group-text">Anunciante</div>
             </div>
             <select
-              *ngFor="let a of anunciantes"
               class="form-control text-center"
               formControlName="anunciante"
+              required
             >
-              <option>
+              <option *ngFor="let a of anunciantes" [value]="a.nombreAnunciante">
                 {{ a.nombreAnunciante }}
               </option>
             </select>
@@ -32,6 +32,7 @@
               <div class="input-group-text">Tipo Anuncio</div>
             </div>
             <select
+              (change)="cambioTipoAnuncio()"
               class="form-control text-center"
               formControlName="tipo"
             >
@@ -64,8 +65,9 @@
             <input
               type="file"
               class="form-control"
+              id="imagen"
               accept="image/*"
-              [disabled]="tipoAnuncio == 1"
+              [disabled]="tipoAnuncio == 1 || tipoAnuncio == 3"
               (change)="obtenerImagen($event)"
               required
             />
@@ -79,8 +81,11 @@
             <input
               type="url"
               class="form-control"
-              [disabled]="tipoAnuncio == 1 || tipoAnuncio == 2"
-              required
+              id="video"
+              name="video"
+              minlength="10"
+              formControlName="video"
+              readonly
             />
           </div>
         </div>
@@ -118,10 +123,34 @@
         </div>
       </div>
       <div class="row my-2">
+        <div class="input-group mb-2">
+          <div class="input-group-prepend">
+            <div class="input-group-text">Fecha</div>
+          </div>
+          <input
+            type="date"
+            formControlName="fecha"
+            class="form-control text-center"
+            required
+          />
+        </div>
+      </div>
+      <div class="row">
+        <div class="text-center">
+          <h4>Seleccione las etiquetas relacionadas</h4>
+        </div>
+        <app-seleccion-etiquetas
+          (enviarEtiquetas)="recibirEtiquetas($event)"
+        ></app-seleccion-etiquetas>
+      </div>
+      <div class="row my-2">
         <div class="d-grid">
-          <button type="button" class="btn btn-success">Crear Anuncio</button>
+          <button type="submit" id="boton" class="btn btn-success">
+            Crear Anuncio
+          </button>
         </div>
       </div>
     </div>
   </form>
 </div>
+

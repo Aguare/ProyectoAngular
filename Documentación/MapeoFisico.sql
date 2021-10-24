@@ -200,6 +200,13 @@ CREATE TABLE Visualizacion(
     FOREIGN KEY(V_nombre_anunciante) REFERENCES Anunciante(nombre_anunciante)
 );
 
+CREATE TABLE Anuncio_Etiquetas(
+	AE_idAnuncio INT NOT NULL,
+    AE_nombre_etiqueta VARCHAR(50) NOT NULL,
+    FOREIGN KEY(AE_idAnuncio) REFERENCES Anuncio(idAnuncio),
+    FOREIGN KEY(AE_nombre_etiqueta) REFERENCES Etiqueta(nombre_etiqueta)
+);
+
 INSERT INTO TipoUsuario(nombre_tipo) VALUES("Administrador");
 INSERT INTO TipoUsuario(nombre_tipo) VALUES("Lector");
 INSERT INTO TipoUsuario(nombre_tipo) VALUES("Editor");

@@ -1,0 +1,50 @@
+<div class="container shadow-lg my-4">
+  <div class="container">
+    <div class="text-center">
+      <h2>Listado de Anuncios</h2>
+    </div>
+    <div class="row">
+      <table class="table">
+        <thead class="table-dark text-center">
+          <tr>
+            <th>ID</th>
+            <th>Tipo Anuncio</th>
+            <th>Anunciante</th>
+            <th>Fecha Inicio</th>
+            <th>Fecha Final</th>
+            <th>Costo</th>
+            <th>Estado</th>
+          </tr>
+        </thead>
+        <tbody class="text-center table-borderless">
+          <tr *ngFor="let a of anuncios">
+            <td>{{ a.idAnuncio }}</td>
+            <td [ngSwitch]="a.tipo_anuncio">
+              <a *ngSwitchCase="1"> Texto </a>
+              <a *ngSwitchCase="2"> Imagen con Texto </a>
+              <a *ngSwitchCase="3"> Video con Texto </a>
+            </td>
+            <td>{{ a.A_nombre_anunciante }}</td>
+            <td>{{ a.fecha_inicio | date }}</td>
+            <td>{{ a.fecha_final | date }}</td>
+            <td>{{ a.pago | currency: "Q" }}</td>
+            <td>
+              <div class="form-switch">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  (change)="cambiarEstadoAnuncio(a)"
+                  [checked]="a.activo"
+                />
+                Activo
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<div class="container my-4">
+  <app-error [mensaje]="mensaje" [espera]="espera"></app-error>
+</div>

@@ -44,7 +44,6 @@ public class RevistasInicio extends HttpServlet {
         response.setCharacterEncoding("UTF-8");
         try {
             String nombreUsuario = request.getParameter("usuario");
-            System.out.println(nombreUsuario);
             Usuario usuario = obtenerG.obtenerUsuario(nombreUsuario);
             ArrayList<Revista> revistasLector = obLec.obtenerRevistasLector(usuario, 1);
             response.getWriter().append(c.obtenerJSON(revistasLector, revistasLector.getClass()));

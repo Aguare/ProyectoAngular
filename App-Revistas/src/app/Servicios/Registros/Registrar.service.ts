@@ -99,4 +99,17 @@ export class RegistrarService {
     formData.append("Dias", JSON.stringify(dias));
     return this.conexion.post<Info>(Backend.Path + "RegistrarAnuncio", formData);
   }
+
+  public registrarCambioAnuncio(anuncio:Anuncio): Observable<Info>{
+    let formData = new FormData();
+    formData.append("Anuncio", JSON.stringify(anuncio));
+    return this.conexion.post<Info>(Backend.Path + "CambioAnuncio", formData);
+  }
+
+  public registrarCambioRevista(revista: Revista, opcion: number): Observable<Info>{
+    let formData = new FormData();
+    formData.append("Revista", JSON.stringify(revista));
+    formData.append("Opcion", JSON.stringify(opcion));
+    return this.conexion.post<Info>(Backend.Path + "CambioRevista", formData);
+  }
 }

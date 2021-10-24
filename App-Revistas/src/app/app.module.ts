@@ -46,6 +46,7 @@ import { VerImagenComponent } from './Componentes/Inicio/ver-imagen/ver-imagen.c
 import { ListaRevistasComponent } from './Componentes/CompAdmin/lista-revistas/lista-revistas.component';
 import { CrearAnuncioComponent } from './Componentes/CompAdmin/crear-anuncio/crear-anuncio.component';
 import { AnuncioComponent } from './Componentes/anuncio/anuncio.component';
+import { VerAnunciosComponent } from './Componentes/CompAdmin/ver-anuncios/ver-anuncios.component';
 
 const rutas: Routes = [
   {
@@ -78,7 +79,8 @@ const rutas: Routes = [
       { path: 'EstadoRevista/:idRevista', component: EstadoRevistaComponent },
       { path: 'Perfil/:nombreUsuario', component: PerfilComponent },
       { path: 'Comision', component: ComisionComponent },
-      { path: 'CrearAnuncio', component: CrearAnuncioComponent }
+      { path: 'CrearAnuncio', component: CrearAnuncioComponent },
+      { path: 'VerAnuncios', component: VerAnunciosComponent }
     ]
   },
   {
@@ -132,7 +134,8 @@ const rutas: Routes = [
     VerImagenComponent,
     ListaRevistasComponent,
     CrearAnuncioComponent,
-    AnuncioComponent
+    AnuncioComponent,
+    VerAnunciosComponent
   ],
   imports: [
     BrowserModule,

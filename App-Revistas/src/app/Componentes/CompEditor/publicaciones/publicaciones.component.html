@@ -10,7 +10,9 @@
         <th>Título</th>
         <th>Versión</th>
         <th>Estado</th>
-        <th>Opciones</th>
+        <th>Comentarios</th>
+        <th>Me Gusta</th>
+        <th>Suscripciones</th>
       </tr>
     </thead>
     <tbody class="table-light">
@@ -34,7 +36,35 @@
           </p>
         </td>
         <td>
-          <a class="btn btn-info mx-1">Editar</a>
+          <div class="form-switch">
+            <input
+              (change)="cambioComentarios(r)"
+              class="form-check-input"
+              type="checkbox"
+              [checked]="r.tiene_comentarios"
+            />
+          </div>
+        </td>
+        <td>
+          <div class="form-switch">
+            <input
+            (change)="cambioMeGusta(r)"
+              class="form-check-input"
+              type="checkbox"
+              [checked]="r.tiene_reacciones"
+            />
+          </div>
+        </td>
+        <td>
+          <div class="form-switch">
+            <input
+            (change)="cambioSuscripciones(r)"
+              class="form-check-input"
+              type="checkbox"
+              [disabled]="!r.es_pago"
+              [checked]="r.suscripciones"
+            />
+          </div>
         </td>
       </tr>
     </tbody>

@@ -43,4 +43,3 @@ ObtenerObjetos\ObEditor.class
 EntidadesAuxiliares\Info.class
 Controlador\ControlEditor.class
 ServletLector\RegistrarInteraccion.class
-ServletsControl\MostrarRevista.class

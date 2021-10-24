@@ -47,7 +47,7 @@ export class TarjetaRevistaComponent implements OnInit {
     }
   }
 
-  recibirFecha(f: string){
+  recibirFecha(f: string) {
     this.fecha = f;
   }
 
@@ -68,8 +68,10 @@ export class TarjetaRevistaComponent implements OnInit {
   }
 
   darMeGusta() {
-    this.cambiarBoton();
-    this.registrarReaccion();
+    if (this.revista.tiene_reacciones) {
+      this.cambiarBoton();
+      this.registrarReaccion();
+    }
   }
 
   cambiarBoton() {
@@ -94,8 +96,8 @@ export class TarjetaRevistaComponent implements OnInit {
         this.tieneMG, fecha, this.almacenamiento.obtenerUsuario().nombreUsuario, this.revista.idRevista);
       this.registrar.registrarReaccion(reaccion).subscribe((respuesta: Info) => {
       });
-    }else{
-     this.cambiarBoton(); 
+    } else {
+      this.cambiarBoton();
     }
   }
 }

@@ -18,9 +18,9 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author marco
  */
-@WebServlet(name = "RegistrarAnuncio", urlPatterns = {"/RegistrarAnuncio"})
+@WebServlet(name = "CambioAnuncio", urlPatterns = {"/CambioAnuncio"})
 @MultipartConfig()
-public class RegistrarAnuncio extends HttpServlet {
+public class CambioAnuncio extends HttpServlet {
 
     private final ObAdmin obAd = new ObAdmin();
     private final Convertir c = new Convertir();
@@ -63,10 +63,8 @@ public class RegistrarAnuncio extends HttpServlet {
         response.setCharacterEncoding("UTF-8");
         try {
             String texto = request.getParameter("Anuncio");
-            String dias = request.getParameter("Dias");
-            int d = Integer.parseInt(dias);
             Anuncio anuncio = (Anuncio) c.obtenerObjeto(texto, Anuncio.class);
-            Info info = ctlAd.crearAnuncio(anuncio, d);
+            Info info = ctlAd.actualizarAnuncio(anuncio);
             response.getWriter().append(c.obtenerJSON(info, Info.class));
         } catch (IOException | NumberFormatException e) {
             response.setStatus(HttpServletResponse.SC_METHOD_NOT_ALLOWED);

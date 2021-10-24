@@ -85,7 +85,7 @@ public class ObAdmin {
 
     public ArrayList<Anuncio> obtenerAnuncios() {
         ArrayList<Anuncio> anuncios = new ArrayList<>();
-        String query = "SELECT * FROM Anuncios;";
+        String query = "SELECT * FROM Anuncio;";
         try {
             PreparedStatement prepared = Conexion.Conexion().prepareStatement(query);
             ResultSet r = prepared.executeQuery();

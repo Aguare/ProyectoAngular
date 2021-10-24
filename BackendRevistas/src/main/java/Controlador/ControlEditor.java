@@ -96,4 +96,43 @@ public class ControlEditor {
         }
     }
 
+    /**
+     * Actualiza el estado de las revistas
+     *
+     * @param revista
+     * @param opcion 1 = tiene_comentarios, 2 = me gusta, 3 = suscripciones
+     * @return
+     */
+    public Info cambiarEstadoRevista(Revista revista, int opcion) {
+        String query = "";
+        try {
+            PreparedStatement p = null;
+            switch (opcion) {
+                case 1:
+                    query = "UPDATE Revista SET tiene_comentarios = ? WHERE idRevista = ?;";
+                    p = Conexion.Conexion().prepareStatement(query);
+                    p.setBoolean(1, revista.isTiene_comentarios());
+                    break;
+                case 2:
+                    query = "UPDATE Revista SET tiene_reacciones = ? WHERE idRevista = ?;";
+                    p = Conexion.Conexion().prepareStatement(query);
+                    p.setBoolean(1, revista.isTiene_reacciones());
+                    break;
+                case 3:
+                    query = "UPDATE Revista SET suscripciones = ? WHERE idRevista = ?;";
+                    p = Conexion.Conexion().prepareStatement(query);
+                    p.setBoolean(1, revista.isSuscripciones());
+                    break;
+                default:
+                    break;
+            }
+            p.setInt(2, revista.getIdRevista());
+            p.executeUpdate();
+            return new Info(true, "Exito", "Se actualizaron los valores");
+        } catch (SQLException e) {
+            errorGeneral = modificar.obtenerTipoError(e.getErrorCode());
+            return new Info(false, "Error", "No se actualizaron los valores" + errorGeneral);
+        }
+    }
+
 }

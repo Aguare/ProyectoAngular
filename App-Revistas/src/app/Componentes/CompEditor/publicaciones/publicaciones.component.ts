@@ -1,11 +1,10 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { SafeResourceUrl } from '@angular/platform-browser';
 import { Info } from 'src/app/Objetos/Info';
 import { Revista } from 'src/app/Objetos/Revista';
 import { Usuario } from 'src/app/Objetos/Usuario';
 import { AlmacenamientoLocalService } from 'src/app/Servicios/Almacenamiento/AlmacenamientoLocal.service';
 import { ObtenerObjetosService } from 'src/app/Servicios/ObtenerObjetos/ObtenerObjetos.service';
+import { RegistrarService } from 'src/app/Servicios/Registros/Registrar.service';
 
 @Component({
   selector: 'app-publicaciones',
@@ -25,10 +24,10 @@ export class PublicacionesComponent implements OnInit {
   constructor(
     private obtener: ObtenerObjetosService,
     private almacenamiento: AlmacenamientoLocalService,
-    private conexion: HttpClient
+    private registrar: RegistrarService
   ) {
-    this.usuario = almacenamiento.obtenerUsuario();
-    obtener.obtenerRevistasPorEditor(this.usuario).subscribe((respuesta: Revista[]) => {
+    this.usuario = this.almacenamiento.obtenerUsuario();
+    this.obtener.obtenerRevistasPorEditor(this.usuario).subscribe((respuesta: Revista[]) => {
       if (respuesta != null) {
         this.revistas = respuesta;
         this.mostrar = false;
@@ -42,5 +41,32 @@ export class PublicacionesComponent implements OnInit {
   }
 
   ngOnInit(): void {
+  }
+
+  cambioComentarios(revista: Revista) {
+    revista.tiene_comentarios = !revista.tiene_comentarios;
+    this.registrarCambio(revista, 1);
+  }
+
+  cambioMeGusta(revista: Revista) {
+    revista.tiene_reacciones = !revista.tiene_reacciones;
+    this.registrarCambio(revista, 2);
+  }
+
+  cambioSuscripciones(revista: Revista) {
+    revista.suscripciones = !revista.suscripciones;
+    this.registrarCambio(revista, 3);
+  }
+
+  registrarCambio(revista: Revista, opcion: number) {
+    this.registrar.registrarCambioRevista(revista, opcion).subscribe((respuesta: Info) => {
+      this.mensaje = respuesta;
+      this.mostrar = true;
+    },
+      (error: any) => {
+        this.mensaje = error.error;
+        this.mostrar = true;
+      }
+    );
   }
 }

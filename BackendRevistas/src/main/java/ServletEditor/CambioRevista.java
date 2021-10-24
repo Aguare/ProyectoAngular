@@ -1,12 +1,10 @@
-package ServletAdmin;
+package ServletEditor;
 
-import Controlador.ControlAdmin;
+import Controlador.ControlEditor;
 import EntidadesAuxiliares.Info;
-import EntidadesPrincipales.Anuncio;
+import EntidadesPrincipales.Revista;
 import JSON.Convertir;
-import ObtenerObjetos.ObAdmin;
 import java.io.IOException;
-import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -18,13 +16,12 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author marco
  */
-@WebServlet(name = "RegistrarAnuncio", urlPatterns = {"/RegistrarAnuncio"})
+@WebServlet(name = "CambioRevista", urlPatterns = {"/CambioRevista"})
 @MultipartConfig()
-public class RegistrarAnuncio extends HttpServlet {
+public class CambioRevista extends HttpServlet {
 
-    private final ObAdmin obAd = new ObAdmin();
     private final Convertir c = new Convertir();
-    private final ControlAdmin ctlAd = new ControlAdmin();
+    private final ControlEditor ctlE = new ControlEditor();
 
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -37,15 +34,7 @@ public class RegistrarAnuncio extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.setCharacterEncoding("UTF-8");
-        response.setCharacterEncoding("UTF-8");
-        try {
-            ArrayList<Anuncio> anuncios = obAd.obtenerAnuncios();
-            response.getWriter().append(c.obtenerJSON(anuncios, anuncios.getClass()));
-        } catch (IOException e) {
-            response.setStatus(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
-            response.getWriter().append(c.obtenerJSON(new Info(false, "Error", "Error al obtener los anuncios"), Info.class));
-        }
+
     }
 
     /**
@@ -62,11 +51,11 @@ public class RegistrarAnuncio extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
         try {
-            String texto = request.getParameter("Anuncio");
-            String dias = request.getParameter("Dias");
-            int d = Integer.parseInt(dias);
-            Anuncio anuncio = (Anuncio) c.obtenerObjeto(texto, Anuncio.class);
-            Info info = ctlAd.crearAnuncio(anuncio, d);
+            String texto = request.getParameter("Revista");
+            String op = request.getParameter("Opcion");
+            int n = Integer.parseInt(op);
+            Revista revista = (Revista) c.obtenerObjeto(texto, Revista.class);
+            Info info = ctlE.cambiarEstadoRevista(revista, n);
             response.getWriter().append(c.obtenerJSON(info, Info.class));
         } catch (IOException | NumberFormatException e) {
             response.setStatus(HttpServletResponse.SC_METHOD_NOT_ALLOWED);

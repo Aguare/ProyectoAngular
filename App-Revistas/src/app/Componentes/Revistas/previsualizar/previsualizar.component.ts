@@ -149,6 +149,8 @@ export class PrevisualizarComponent implements OnInit {
         this.mensaje = respuesta;
         this.error = true;
         this.comentarios.push(coment);
+        this.comentarioNuevo = "";
+        
       },
         (error: Info) => {
           this.mensaje = error;

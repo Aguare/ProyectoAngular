@@ -1,21 +1,14 @@
 package Reportes;
 
-import EntidadesPrincipales.Etiqueta;
 import SQL.Conexion;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.Map;
 import net.sf.jasperreports.engine.JRDataSource;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 
 /**
  *

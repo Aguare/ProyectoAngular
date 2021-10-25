@@ -72,6 +72,9 @@ export class SolicitarReporteComponent implements OnInit {
       this.fecha_final = "vacio";
       this.fecha_inicio = "vacio";
     }
+    if (this.opcionReporte == 3) {
+      this.idRevista = 0;
+    }
     this.obtenerLink();
   }
 }

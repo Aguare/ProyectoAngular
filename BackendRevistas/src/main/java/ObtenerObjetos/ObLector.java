@@ -20,8 +20,8 @@ import java.util.ArrayList;
  */
 public class ObLector {
 
-    private final ObGeneral obtenerG = new ObGeneral();
-    private final ObEditor obtenerE = new ObEditor();
+    private ObGeneral obtenerG = new ObGeneral();
+    private ObEditor obtenerE = new ObEditor();
 
     /**
      * Obtiene las revistas para el lector según la opción 2 -> devuelve las
@@ -58,7 +58,6 @@ public class ObLector {
     /**
      * Devuelve las revistas según las etiquetas seleccionadas
      *
-     * @param usuario
      * @param etiquetas
      * @return
      */

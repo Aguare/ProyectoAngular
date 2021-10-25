@@ -47,6 +47,7 @@ import { ListaRevistasComponent } from './Componentes/CompAdmin/lista-revistas/l
 import { CrearAnuncioComponent } from './Componentes/CompAdmin/crear-anuncio/crear-anuncio.component';
 import { AnuncioComponent } from './Componentes/anuncio/anuncio.component';
 import { VerAnunciosComponent } from './Componentes/CompAdmin/ver-anuncios/ver-anuncios.component';
+import { SolicitarReporteComponent } from './Componentes/Reportes/EditorReport/solicitar-reporte/solicitar-reporte.component';
 
 const rutas: Routes = [
   {
@@ -66,7 +67,7 @@ const rutas: Routes = [
       { path: 'NuevaPublicacion', component: PublicarRevistaComponent },
       { path: 'Publicaciones', component: PublicacionesComponent },
       { path: 'Perfil/:nombreUsuario', component: PerfilComponent },
-      { path: 'EditarRevista/:idRevista', component: PerfilComponent },
+      { path: 'SolicitarReporte', component: SolicitarReporteComponent }
     ]
   },
   {
@@ -135,7 +136,8 @@ const rutas: Routes = [
     ListaRevistasComponent,
     CrearAnuncioComponent,
     AnuncioComponent,
-    VerAnunciosComponent
+    VerAnunciosComponent,
+    SolicitarReporteComponent
   ],
   imports: [
     BrowserModule,

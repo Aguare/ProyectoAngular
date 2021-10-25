@@ -22,7 +22,7 @@ import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
  * @author marco
  */
 public class ControlReportes {
-
+    
     public void imprimirReporte(OutputStream targetStream) throws JRException {
         InputStream compiledReport = getClass().getClassLoader().getResourceAsStream("com/jgranados/calcappapi/reports/report1.jasper");
         JasperPrint printer = JasperFillManager.fillReport(compiledReport, null, Conexion.Conexion());
@@ -30,30 +30,18 @@ public class ControlReportes {
         JasperExportManager.exportReportToPdfStream(printer, targetStream);
     }
 
-    public void imprimirReportesConParametros(OutputStream targetStream, LocalDate startDate, LocalDate endDate) throws JRException {
-        Date start = Date.from(startDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
-        Date end = Date.from(endDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
-        InputStream compiledReport = getClass().getClassLoader().getResourceAsStream("com/jgranados/calcappapi/reports/report2Params.jasper");
-        Map<String, Object> params = new HashMap<>();
-        params.put("StartDate", start);
-        params.put("EndDate", end);
-        JasperPrint printer = JasperFillManager.fillReport(compiledReport, params, Conexion.Conexion());
-
+    public void imprimirReportesConParametros(OutputStream targetStream, Map<String, Object> parametros, String pathReporte) throws JRException {
+        InputStream compiledReport = getClass().getClassLoader().getResourceAsStream(pathReporte);
+        JasperPrint printer = JasperFillManager.fillReport(compiledReport, parametros, Conexion.Conexion());
         JasperExportManager.exportReportToPdfStream(printer, targetStream);
     }
 
-    public void imprimirReporteBeans(OutputStream targetStream) throws JRException {
-        InputStream compiledReport = getClass().getClassLoader().getResourceAsStream("com/jgranados/calcappapi/reports/report3ListBeans.jasper");
-
-        ArrayList<Etiqueta> estudiantes = new ArrayList<>();
-        estudiantes.add(new Etiqueta("Hola"));
-
-        JRDataSource source = new JRBeanCollectionDataSource(estudiantes);
-
-        JasperPrint printer = JasperFillManager.fillReport(compiledReport, null, source);
-
+    public void imprimirReporteBeans(OutputStream targetStream, String path, JRDataSource parametros) throws JRException {
+        InputStream compiledReport = getClass().getClassLoader().getResourceAsStream(path);
+        JasperPrint printer = JasperFillManager.fillReport(compiledReport, null, parametros);
         JasperExportManager.exportReportToPdfStream(printer, targetStream);
     }
+    
     /*
     public void printReportWithComplexBeans(OutputStream targetStream) throws JRException {
         InputStream compiledReport = getClass().getClassLoader().getResourceAsStream("com/jgranados/calcappapi/reports/report4ListComplexBeans.jasper");

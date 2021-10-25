@@ -4,7 +4,7 @@ import EntidadesAuxiliares.Suscripcion;
 import EntidadesPrincipales.Comentario;
 import EntidadesPrincipales.Reaccion;
 import EntidadesPrincipales.Revista;
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -13,11 +13,11 @@ import java.util.ArrayList;
 public class RevistaReport {
 
     private Revista revista;
-    private ArrayList<Comentario> comentarios;
-    private ArrayList<Reaccion> reacciones;
-    private ArrayList<Suscripcion> suscripciones;
+    private List<Comentario> comentarios;
+    private List<Reaccion> reacciones;
+    private List<Suscripcion> suscripciones;
 
-    public RevistaReport(Revista revista, ArrayList<Comentario> comentarios, ArrayList<Reaccion> reacciones, ArrayList<Suscripcion> suscripciones) {
+    public RevistaReport(Revista revista, List<Comentario> comentarios, List<Reaccion> reacciones, List<Suscripcion> suscripciones) {
         this.revista = revista;
         this.comentarios = comentarios;
         this.reacciones = reacciones;
@@ -32,27 +32,27 @@ public class RevistaReport {
         this.revista = revista;
     }
 
-    public ArrayList<Comentario> getComentarios() {
+    public List<Comentario> getComentarios() {
         return comentarios;
     }
 
-    public void setComentarios(ArrayList<Comentario> comentarios) {
+    public void setComentarios(List<Comentario> comentarios) {
         this.comentarios = comentarios;
     }
 
-    public ArrayList<Reaccion> getReacciones() {
+    public List<Reaccion> getReacciones() {
         return reacciones;
     }
 
-    public void setReacciones(ArrayList<Reaccion> reacciones) {
+    public void setReacciones(List<Reaccion> reacciones) {
         this.reacciones = reacciones;
     }
 
-    public ArrayList<Suscripcion> getSuscripciones() {
+    public List<Suscripcion> getSuscripciones() {
         return suscripciones;
     }
 
-    public void setSuscripciones(ArrayList<Suscripcion> suscripciones) {
+    public void setSuscripciones(List<Suscripcion> suscripciones) {
         this.suscripciones = suscripciones;
     }
 }

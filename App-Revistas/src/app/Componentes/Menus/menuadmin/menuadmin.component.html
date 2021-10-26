@@ -1,0 +1,79 @@
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+  <a class="navbar-brand"></a>
+  <a class="navbar-brand" href="InicioAdmin">
+    <img
+      src="http://voxpopulii.in/system/static/dashboard/img/default_user.png"
+      alt="Avatar Logo"
+      style="width: 35px"
+      class="rounded-pill"
+    />
+  </a>
+  <a class="navbar-brand">Admin</a>
+  <div class="collapse navbar-collapse" id="navbarsExample04">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="InicioAdmin/ListaEspera">Inicio</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="InicioAdmin/Comision">Comisión</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+          Anuncios
+        </a>
+        <ul class="dropdown-menu">
+          <li>
+            <a class="dropdown-item" href="InicioAdmin/CrearAnuncio">Crear</a>
+          </li>
+          <li>
+            <a class="dropdown-item" href="InicioAdmin/VerAnuncios"
+              >Ver Anuncios</a
+            >
+          </li>
+          <li>
+            <a class="dropdown-item" href="InicioAdmin/VerAnunciantes"
+              >Ver Anunciantes</a
+            >
+          </li>
+          <li>
+            <a class="dropdown-item" href="InicioAdmin/RegistrarAnunciante"
+              >Registrar Anunciante</a
+            >
+          </li>
+        </ul>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+          Revistas
+        </a>
+        <ul class="dropdown-menu">
+          <li>
+            <a class="dropdown-item" href="InicioAdmin/ListaEspera">
+              Lista de Espera
+            </a>
+          </li>
+          <li>
+            <a class="dropdown-item" href="InicioAdmin/ListaRevistas">
+              Revistas Aprobadas
+            </a>
+          </li>
+        </ul>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
+          Reportes
+        </a>
+        <ul class="dropdown-menu">
+          <li>
+            <a class="dropdown-item" href="InicioAdmin/Reportes1">Reporte de Revistas</a>
+          </li>
+          <li>
+            <a class="dropdown-item" href="InicioAdmin">Reporte de Anuncios</a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+  <app-cerrar-sesion></app-cerrar-sesion>
+</nav>
+<router-outlet></router-outlet>

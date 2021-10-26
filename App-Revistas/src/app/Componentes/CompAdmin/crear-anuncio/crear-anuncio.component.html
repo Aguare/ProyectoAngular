@@ -1,0 +1,156 @@
+<div class="container rounded-3 shadow-lg my-4" style="max-width: 725px">
+  <form
+    class="was-validated"
+    [formGroup]="validarForm"
+    (ngSubmit)="registrarAnuncio()"
+  >
+    <div class="container p-2">
+      <div class="text-center">
+        <h1>Crear Anuncio</h1>
+      </div>
+      <app-error [mensaje]="mensaje" [espera]="espera"></app-error>
+      <div class="row">
+        <div class="col">
+          <div class="input-group mb-2">
+            <div class="input-group-prepend">
+              <div class="input-group-text">Anunciante</div>
+            </div>
+            <select
+              class="form-control text-center"
+              formControlName="anunciante"
+              required
+            >
+              <option *ngFor="let a of anunciantes" [value]="a.nombreAnunciante">
+                {{ a.nombreAnunciante }}
+              </option>
+            </select>
+          </div>
+        </div>
+        <div class="col">
+          <div class="input-group mb-2">
+            <div class="input-group-prepend">
+              <div class="input-group-text">Tipo Anuncio</div>
+            </div>
+            <select
+              (change)="cambioTipoAnuncio()"
+              class="form-control text-center"
+              formControlName="tipo"
+            >
+              <option value="1">Texto</option>
+              <option value="2">Imagen con Texto</option>
+              <option value="3">Video con Texto</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="row my-2">
+        <div class="col">
+          <textarea
+            class="form-control"
+            rows="4"
+            maxlength="500"
+            minlength="5"
+            formControlName="texto"
+            placeholder="Ingrese el Texto del anuncio aquí...."
+            required
+          ></textarea>
+        </div>
+        <div class="col text-center">
+          <img src="{{ path }}" class="rounded" width="110px" />
+        </div>
+      </div>
+      <div class="row my-4">
+        <div class="col">
+          <div class="input-group">
+            <input
+              type="file"
+              class="form-control"
+              id="imagen"
+              accept="image/*"
+              [disabled]="tipoAnuncio == 1 || tipoAnuncio == 3"
+              (change)="obtenerImagen($event)"
+              required
+            />
+          </div>
+        </div>
+        <div class="col">
+          <div class="input-group mb-2">
+            <div class="input-group-prepend">
+              <div class="input-group-text">Video URL</div>
+            </div>
+            <input
+              type="url"
+              class="form-control"
+              id="video"
+              name="video"
+              minlength="10"
+              formControlName="video"
+              readonly
+            />
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <div class="input-group mb-2">
+            <div class="input-group-prepend">
+              <div class="input-group-text">Costo Q.</div>
+            </div>
+            <input
+              type="number"
+              min="1"
+              step="0.01"
+              formControlName="costo"
+              class="form-control text-center"
+              required
+            />
+          </div>
+        </div>
+        <div class="col">
+          <div class="input-group mb-2">
+            <div class="input-group-prepend">
+              <div class="input-group-text">Días Activo</div>
+            </div>
+            <input
+              type="number"
+              min="1"
+              step="1"
+              formControlName="dias"
+              class="form-control text-center"
+              required
+            />
+          </div>
+        </div>
+      </div>
+      <div class="row my-2">
+        <div class="input-group mb-2">
+          <div class="input-group-prepend">
+            <div class="input-group-text">Fecha</div>
+          </div>
+          <input
+            type="date"
+            formControlName="fecha"
+            class="form-control text-center"
+            required
+          />
+        </div>
+      </div>
+      <div class="row">
+        <div class="text-center">
+          <h4>Seleccione las etiquetas relacionadas</h4>
+        </div>
+        <app-seleccion-etiquetas
+          (enviarEtiquetas)="recibirEtiquetas($event)"
+        ></app-seleccion-etiquetas>
+      </div>
+      <div class="row my-2">
+        <div class="d-grid">
+          <button type="submit" id="boton" class="btn btn-success">
+            Crear Anuncio
+          </button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+

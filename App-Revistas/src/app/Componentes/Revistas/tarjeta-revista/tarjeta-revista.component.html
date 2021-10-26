@@ -1,0 +1,30 @@
+<div class="card my-1 shadow-lg">
+  <div class="card-body">
+    <h4 class="card-title">{{ revista.titulo }}</h4>
+    <p class="card-text">
+      {{ revista.descripcion }}
+    </p>
+
+    <a
+      class="btn btn-outline-primary btn-sm"
+      (click)="darMeGusta()"
+      id="botonMG{{ revista.idRevista }}"
+    >
+      Me Gusta
+      <span class="badge bg-danger">
+        {{ cantidadMG }}
+      </span>
+    </a>
+    <a class="btn btn-info btn-sm mx-2">
+      Comentarios <span class="badge bg-secondary"> {{ cantidadCom }}</span>
+    </a>
+    <a
+      class="btn btn-outline-info btn-sm mx-1"
+      role="button"
+      href="InicioLector/Previsualizar/{{ revista.idRevista }}"
+    >
+      Previsualizar
+    </a>
+  </div>
+</div>
+<app-solicitar-fecha (cambioFecha)="recibirFecha($event)"></app-solicitar-fecha>

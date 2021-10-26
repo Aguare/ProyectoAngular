@@ -1,0 +1,14 @@
+<app-anuncio></app-anuncio>
+<div class="container border rounded-3 my-2">
+  <app-seleccion-etiquetas
+    (enviarEtiquetas)="recibirEtiquetas($event)"
+  ></app-seleccion-etiquetas>
+  <div class="d-grid p-2">
+    <button type="button" class="btn btn-primary btn-block" role="button" (click)="actualizarRevistas()">Buscar</button>
+  </div>
+</div>
+
+<div class="container">
+  <app-ver-revistas [revistas]="revistas" [fecha]="fecha"></app-ver-revistas>
+</div>
+<br /><br /><br />

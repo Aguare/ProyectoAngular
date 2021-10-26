@@ -1,0 +1,14 @@
+<div class="container">
+  <div class="input-group mb-3">
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Nueva Etiqueta"
+      id="textoEtiqueta"
+      (keyup)="verificarEspacio($event)"
+      [(ngModel)]="nuevaEtiqueta"
+    />
+    <a class="btn btn-dark" (click)="agregarEtiqueta()">Agregar</a>
+  </div>
+</div>
+<app-error [mensaje]="mensaje" [espera]="error"></app-error>

@@ -1,0 +1,51 @@
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+  <a class="navbar-brand"></a>
+  <a class="navbar-brand" href="InicioEditor">
+    <img
+      src="http://voxpopulii.in/system/static/dashboard/img/default_user.png"
+      alt="Avatar Logo"
+      style="width: 35px"
+      class="rounded-pill"
+    />
+  </a>
+  <a class="navbar-brand"> {{ usuario.nombreUsuario }} </a>
+  <div class="collapse navbar-collapse" id="navbarsExample04">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="InicioEditor">Inicio</a>
+      </li>
+      <li class="nav-item">
+        <a
+          class="nav-link"
+          href="InicioEditor/Perfil/{{ usuario.nombreUsuario }}"
+        >
+          Perfil
+        </a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#">
+          Revistas
+        </a>
+        <ul class="dropdown-menu">
+          <li>
+            <a class="dropdown-item" href="InicioEditor/Publicaciones"
+              >Publicaciones</a
+            >
+          </li>
+          <li>
+            <a class="dropdown-item" href="InicioEditor/NuevaPublicacion"
+              >Nueva Publicación</a
+            >
+          </li>
+        </ul>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="InicioEditor/SolicitarReporte">
+          Reportes
+        </a>
+      </li>
+    </ul>
+  </div>
+  <app-cerrar-sesion></app-cerrar-sesion>
+</nav>
+<router-outlet></router-outlet>

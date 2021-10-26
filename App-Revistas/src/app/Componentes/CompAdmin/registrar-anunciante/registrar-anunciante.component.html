@@ -1,0 +1,43 @@
+<div class="container border my-5">
+  <div class="text-center p-2">
+    <h1>Ingrese los Datos del Anunciante</h1>
+  </div>
+  <app-error [espera]="mostrarMensaje" [mensaje]="mensaje"></app-error>
+  <form
+    [formGroup]="validarForm"
+    (ngSubmit)="registrarAnunciante()"
+    class="was-validated"
+  >
+    <div class="row">
+      <div class="col mb-3">
+        <label for="validationDefault01">Nombre</label>
+        <input
+          type="text"
+          class="form-control"
+          formControlName="nombreAnunciante"
+          placeholder="Nombre del Anunciante"
+          minlength="4"
+          maxlength="50"
+          required
+        />
+      </div>
+      <div class="col mb-3">
+        <label for="validationDefault02">Telefono</label>
+        <input
+          type="number"
+          class="form-control"
+          formControlName="telefono"
+          placeholder="Teléfono"
+          min="11111111"
+          max="9999999999999"
+          required
+        />
+      </div>
+    </div>
+    <div class="container">
+      <div class="row text-center my-4">
+        <button class="btn btn-primary" type="submit">Registrar</button>
+      </div>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,21 @@
+<div class="container border rounded">
+  <div class="row align-content-center">
+    <div class="col-sm-1">
+      <h5>
+        <a href="InicioLector/Perfil/{{ comentario.nombreUsuario }}">
+          {{ comentario.nombreUsuario }}
+        </a>
+      </h5>
+    </div>
+    <div class="col">
+      <h6 class="text-secondary">
+        {{ comentario.fecha | date: "dd-MM-yyyy" }}
+      </h6>
+    </div>
+  </div>
+  <div class="row">
+    <p>
+      {{ comentario.comentario }}
+    </p>
+  </div>
+</div>

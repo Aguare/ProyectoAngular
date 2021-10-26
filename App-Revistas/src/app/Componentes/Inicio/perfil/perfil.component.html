@@ -1,0 +1,32 @@
+<div class="container-sm border shadow-lg my-5">
+  <app-error [espera]="error" [mensaje]="mensaje"></app-error>
+  <div *ngIf="usuario != null && perfil != null">
+    <div class="container p-2">
+      <div class="row justify-content-center">
+        <div class="col-auto m-0">
+          <div class="card" style="width: 200px">
+            <app-ver-imagen [path]="perfil.foto"></app-ver-imagen>
+            <div class="card-body">
+              <h4 class="card-title">{{ usuario.nombreUsuario }}</h4>
+              <p class="card-text">{{ perfil.descripcion }}</p>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="text-center">
+            <h4>Interéses</h4>
+          </div>
+          <app-editar-etiquetas
+            [etiquetasSeleccionadas]="perfil.etiquetasInteres"
+            [editar]="puedeEditar"
+          >
+          </app-editar-etiquetas>
+          <div *ngIf="puedeEditar" class="container-fluid text-center my-sm-4">
+            <button class="btn btn-primary">Guardar Cambios</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<app-anuncio></app-anuncio>

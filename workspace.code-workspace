@@ -1,0 +1,10 @@
+{
+	"folders": [
+		{
+			"path": "App-Revistas"
+		}
+	],
+	"settings": {
+		"terminal.explorerKind": "external"
+	}
+}

@@ -1,0 +1,37 @@
+<div class="container my-1">
+  <h5>Categorias y etiquetas existentes</h5>
+  <div class="container border rounded overflow-auto" style="height: 75px">
+    <table class="table-responsive">
+      <tbody>
+        <app-etiqueta
+          *ngFor="let etiqueta of etiquetasExistentes; let i = index"
+          [etiquetaIn]="etiqueta"
+          [tipoBoton]="true"
+          (agregar)="agregarEtiqueta($event)"
+        >
+        </app-etiqueta>
+      </tbody>
+    </table>
+  </div>
+  <div class="my-1">
+    <h5>Seleccionadas:</h5>
+  </div>
+  <div class="container border rounded overflow-auto" style="height: 75px">
+    <table class="table-responsive">
+      <tbody>
+        <app-etiqueta
+          *ngFor="let etiqueta of etiquetasSeleccionadas; let i = index"
+          [etiquetaIn]="etiqueta"
+          [tipoBoton]="false"
+          (quitar)="quitarEtiqueta($event)"
+        >
+        </app-etiqueta>
+      </tbody>
+    </table>
+  </div>
+</div>
+<app-CrearEtiqueta
+  (incluir)="agregarNuevaEtiqueta($event)"
+  *ngIf="crearEtiqueta"
+>
+</app-CrearEtiqueta>

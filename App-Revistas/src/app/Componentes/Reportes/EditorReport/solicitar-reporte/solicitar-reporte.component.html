@@ -1,0 +1,81 @@
+<div class="container shadow-lg rounded-3 my-4">
+  <div class="container p-1">
+    <div class="text-center">
+      <h2>Reportes de Editor</h2>
+    </div>
+    <div class="row">
+      <div class="col-sm-4 border" style="height: 700px">
+        <div class="row my-3">
+          <div class="col">
+            <label class="form-label h5">Reportes Disponibles</label>
+            <select
+              class="form-control"
+              (change)="cambioReporte(tipo.value)"
+              #tipo
+            >
+              <option value="1">
+                Comentarios de Revista en Intervalo de Tiempo
+              </option>
+              <option value="2">
+                Suscripciones de Revista en Intervalo de Tiempo
+              </option>
+              <option value="3">
+                Revistas más Gustadas en Intervalo de Tiempo
+              </option>
+              <option value="4">Ganancias en Intervalo de Tiempo</option>
+            </select>
+          </div>
+        </div>
+        <div class="row my-3">
+          <div class="col">
+            <label class="form-label h5">Fecha de Inicio</label>
+            <input
+              type="date"
+              class="form-control"
+              [(ngModel)]="fecha_inicio"
+            />
+          </div>
+          <div class="col">
+            <label for="" class="form-label h5">Fecha de Final</label>
+            <input type="date" class="form-control" [(ngModel)]="fecha_final" />
+          </div>
+          <small class="text-center"
+            >Fechas vacías muestran todos los datos</small
+          >
+        </div>
+        <div class="row my-3">
+          <div class="col">
+            <label class="form-label h5">Revistas Creadas</label>
+            <select
+              (change)="cambioRevista(inputRevista.value)"
+              class="form-control"
+              #inputRevista
+            >
+              <option value="0">Todas</option>
+              <option *ngFor="let r of revistas" value="{{ r.idRevista }}">
+                Versión: {{ r.no_version }}, Título: {{ r.titulo }}
+              </option>
+            </select>
+          </div>
+        </div>
+        <div class="row my-3">
+          <div class="d-grid">
+            <button
+              type="button"
+              class="btn btn-primary"
+              (click)="generarReporte()"
+            >
+              Generar Reporte
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="col border text-center">
+        <h3>Reporte Generado</h3>
+        <div class="container" style="height: 650px;">
+          <iframe [src]="url" width="100%" height="100%"></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

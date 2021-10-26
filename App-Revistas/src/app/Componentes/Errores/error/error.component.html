@@ -1,0 +1,17 @@
+<div class="container">
+  <div *ngIf="espera">
+    <div
+      *ngIf="!mensaje.operacion"
+      class="alert alert-danger my-2 text-center"
+      role="alert"
+    >
+      {{ mensaje.tipoError }}: {{ mensaje.mensaje }}
+    </div>
+    <div
+      *ngIf="mensaje.operacion"
+      class="alert alert-success" role="alert"
+    >
+      {{ mensaje.tipoError }}: {{ mensaje.mensaje }}
+    </div>
+  </div>
+</div>

@@ -1,0 +1,31 @@
+<div class="container rounded-3 shadow-lg my-5">
+  <app-error [mensaje]="mensaje" [espera]="espera"></app-error>
+  <div class="container p-3">
+    <div *ngIf="revista" class="row">
+      <div class="col-sm-4 rounded-3 border">
+        <div class="my-4">
+          <h2>{{ revista.titulo }}, No. {{ revista.no_version }}</h2>
+          <h5>Fecha de creación: {{ revista.fecha | date: "dd-MM-yyyy" }}</h5>
+          <p>
+            {{ revista.descripcion }}
+          </p>
+        </div>
+        <div class="d-grid">
+          <a class="btn btn-success" [href]="urlDescarga">Descargar</a>
+        </div>
+        <div class="d-grid my-3">
+          <a
+            class="btn btn-dark"
+            href="InicioLector/Perfil/{{
+              revista.usuarioCreador.nombreUsuario
+            }}"
+            >Ver Perfil de {{ revista.usuarioCreador.nombreUsuario }}</a
+          >
+        </div>
+      </div>
+      <div class="col rounded-3" style="height: 700px">
+        <app-ver-revista [path]="revista.revista"></app-ver-revista>
+      </div>
+    </div>
+  </div>
+</div>

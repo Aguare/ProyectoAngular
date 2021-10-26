@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.16.0.final using JasperReports Library version 6.16.0-48579d909b7943b64690c65c71e07e0b80981928  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="SuscripcionOb" pageWidth="560" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="560" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="f7cbd4a0-0a5b-4c77-88cc-0f91b37430bf">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="RevistaNoList"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="idSuscripcion" class="java.lang.Integer">
+		<fieldDescription><![CDATA[idSuscripcion]]></fieldDescription>
+	</field>
+	<field name="lector" class="EntidadesPrincipales.Usuario">
+		<fieldDescription><![CDATA[lector]]></fieldDescription>
+	</field>
+	<field name="fechaInicio" class="java.lang.String">
+		<fieldDescription><![CDATA[fechaInicio]]></fieldDescription>
+	</field>
+	<field name="fechaFinal" class="java.lang.String">
+		<fieldDescription><![CDATA[fechaFinal]]></fieldDescription>
+	</field>
+	<field name="nombreUsuario" class="java.lang.String">
+		<fieldDescription><![CDATA[lector.nombreUsuario]]></fieldDescription>
+	</field>
+	<field name="obtenido" class="java.lang.Double">
+		<fieldDescription><![CDATA[pago.parte_editor]]></fieldDescription>
+	</field>
+	<variable name="subTotal" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{obtenido}]]></variableExpression>
+	</variable>
+	<detail>
+		<band height="107" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="50" height="30" uuid="bf377ac2-c27a-45d2-b202-6cc53573cf96"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{idSuscripcion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="290" y="0" width="90" height="30" uuid="9a3116fa-4d67-4bb4-badf-181191ff21c7"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{fechaInicio}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="380" y="0" width="90" height="30" uuid="6f9c2632-1013-41e4-8712-a8ab2d9059fd"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{fechaFinal}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="50" y="0" width="240" height="30" uuid="cb98c868-d440-4ba8-be21-e9ec79148b81"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{nombreUsuario}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="470" y="0" width="90" height="30" uuid="59146130-67db-446b-a30a-dbc7f7c777db"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{obtenido}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="60">
+			<textField>
+				<reportElement x="460" y="30" width="100" height="30" uuid="ec113b6f-5073-4d3d-8395-bd1dc790fccb"/>
+				<textFieldExpression><![CDATA[$V{subTotal}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnFooter>
+</jasperReport>

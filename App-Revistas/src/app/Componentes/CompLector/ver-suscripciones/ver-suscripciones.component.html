@@ -1,0 +1,8 @@
+<div class="container shadow-lg my-5">
+  <div class="text-center">
+    <h4>Tus Suscripciones {{ usuario.nombreUsuario }}</h4>
+  </div>
+  <app-ver-revistas [revistas]="revistas"></app-ver-revistas>
+  <app-error [mensaje]="mensaje" [espera]="espera"></app-error>
+  <br />
+</div>

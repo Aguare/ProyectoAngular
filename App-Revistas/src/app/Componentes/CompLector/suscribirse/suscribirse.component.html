@@ -1,0 +1,137 @@
+<div class="container shadow-lg my-5" style="width: 50%">
+  <div class="p-2">
+    <app-error [mensaje]="mensaje" [espera]="espera"></app-error>
+  </div>
+  <form *ngIf="!esconder && revista" [formGroup]="validarForm" (ngSubmit)="registrarSuscripcion()" class="was-validated">
+    <div class="row p-4">
+      <div class="col">
+        <div class="text-center">
+          <h4>Detalles de Suscripción</h4>
+        </div>
+        <div class="row">
+          <div class="col-sm-8">
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text">Revista</span>
+              </div>
+              <input
+                type="text"
+                class="form-control"
+                [value]="revista.titulo"
+                disabled
+              />
+            </div>
+          </div>
+          <div class="col">
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text">Versión</span>
+              </div>
+              <input
+                type="text"
+                class="form-control text-center"
+                [value]="revista.no_version"
+                disabled
+              />
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text">Precio Suscripción</span>
+              </div>
+              <input
+                type="text"
+                class="form-control text-center"
+                [value]="revista.precio_suscripcion"
+                disabled
+              />
+            </div>
+          </div>
+          <div class="col">
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text">Fecha</span>
+              </div>
+              <input
+                type="date"
+                class="form-control text-center"
+                formControlName="fecha"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text">Tipo Suscripción</span>
+              </div>
+              <select
+                class="form-control text-center"
+                formControlName="tipoSus"
+                (change)="cambiaTipo()"
+              >
+                <option value="Mensual">Mensual</option>
+                <option value="Anual">Anual</option>
+              </select>
+            </div>
+          </div>
+          <div class="col">
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text">Cantidad de Meses</span>
+              </div>
+              <input
+                type="number"
+                id="inputCM"
+                min="1"
+                max="24"
+                step="1"
+                value="1"
+                (change)="calcularTotal()"
+                formControlName="meses"
+                class="form-control text-center"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text">Usuario</span>
+              </div>
+              <input
+                type="text"
+                class="form-control text-center"
+                [value]="usuario.nombreUsuario"
+                disabled
+              />
+            </div>
+          </div>
+          <div class="col">
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text">Total</span>
+              </div>
+              <input
+                type="number"
+                class="form-control text-center"
+                disabled
+                [value]="total"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="d-grid">
+            <button class="btn btn-success">Pagar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

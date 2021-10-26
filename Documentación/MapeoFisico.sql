@@ -3,9 +3,10 @@ CREATE DATABASE IF NOT EXISTS AppRevistas;
 USE AppRevistas;
 
 CREATE TABLE ValoresSistema(
-    idValores INT NOT NULL,
+    idValores INT NOT NULL AUTO_INCREMENT,
     porcentaje_comision DOUBLE NOT NULL,
-    fecha DATE NOT NULL
+    fecha DATE NOT NULL,
+    PRIMARY KEY(idValores)
 );
 
 CREATE TABLE TipoUsuario(
@@ -23,10 +24,10 @@ CREATE TABLE Usuario(
 );
 
 CREATE TABLE Perfil(
-    idPerfil INT NOT NULL,
+    idPerfil INT NOT NULL AUTO_INCREMENT,
     foto TEXT,
     descripcion VARCHAR(100),
-    P_nombre_usuario VARCHAR(50),
+    P_nombre_usuario VARCHAR(50) NOT NULL,
     PRIMARY KEY(idPerfil),
     FOREIGN KEY(P_nombre_usuario) REFERENCES Usuario(nombre_usuario)
 );
@@ -62,12 +63,17 @@ CREATE TABLE Perfil_Etiquetas(
 CREATE TABLE Revista(
     idRevista INT NOT NULL AUTO_INCREMENT,
     revista TEXT NOT NULL,
+    titulo VARCHAR(50) NOT NULL,
+    descripcion VARCHAR(150) NOT NULL,
     no_version INT,
     precio_costo DOUBLE,
+    aprobado TINYINT NOT NULL,
+    suscripciones TINYINT NOT NULL,
     precio_suscripcion DOUBLE NOT NULL,
     es_pago TINYINT NOT NULL,
     tiene_comentarios TINYINT NOT NULL,
     tiene_reacciones TINYINT NOT NULL,
+    fecha DATE NOT NULL,
     R_nombre_usuario VARCHAR(50) NOT NULL,
     PRIMARY KEY(idRevista),
     FOREIGN KEY(R_nombre_usuario) REFERENCES Usuario(nombre_usuario)
@@ -75,7 +81,8 @@ CREATE TABLE Revista(
 
 CREATE TABLE Comentario(
     idComentario INT NOT NULL AUTO_INCREMENT,
-    comentario VARCHAR(100) NOT NULL,
+    comentario VARCHAR(200) NOT NULL,
+    fecha DATE NOT NULL,
     C_nombre_usuario VARCHAR(50) NOT NULL,
     PRIMARY KEY(idComentario),
     FOREIGN KEY(C_nombre_usuario) REFERENCES Usuario(nombre_usuario)
@@ -84,6 +91,7 @@ CREATE TABLE Comentario(
 CREATE TABLE Reaccion(
     idReaccion INT NOT NULL AUTO_INCREMENT,
     reaccion TINYINT NOT NULL,
+    fecha DATE NOT NULL,
     RM_nombre_usuario VARCHAR(50) NOT NULL,
     PRIMARY KEY(idReaccion),
     FOREIGN KEY(RM_nombre_usuario) REFERENCES Usuario(nombre_usuario)
@@ -107,6 +115,7 @@ CREATE TABLE Comentario_Revista(
     CR_idComentario INT NOT NULL,
     CR_nombre_usuario VARCHAR(50) NOT NULL,
     CR_idRevista INT NOT NULL,
+    fecha DATE NOT NULL,
     FOREIGN KEY(CR_idComentario) REFERENCES Comentario(idComentario),
     FOREIGN KEY(CR_nombre_usuario) REFERENCES Usuario(nombre_usuario),
     FOREIGN KEY(CR_idRevista) REFERENCES Revista(idRevista)
@@ -116,13 +125,14 @@ CREATE TABLE Reaccion_Revista(
     RR_idReaccion INT NOT NULL,
     RR_nombre_usuario VARCHAR(50),
     RR_idRevista INT NOT NULL,
+    fecha DATE NOT NULL,
     FOREIGN KEY(RR_idReaccion) REFERENCES Reaccion(idReaccion),
     FOREIGN KEY(RR_nombre_usuario) REFERENCES Usuario(nombre_usuario),
     FOREIGN KEY(RR_idRevista) REFERENCES Revista(idRevista)
 );
 
 CREATE TABLE CambioRevista(
-    idCambioRevista INT NOT NULL,
+    idCambioRevista INT NOT NULL AUTO_INCREMENT,
     precio_costo DOUBLE NOT NULL,
     fecha_inicio DATE NOT NULL,
     fecha_final DATE,
@@ -166,11 +176,15 @@ CREATE TABLE Anunciante(
 );
 
 CREATE TABLE Anuncio(
-    idAnuncio INT NOT NULL,
+    idAnuncio INT NOT NULL AUTO_INCREMENT,
     tipo_anuncio INT NOT NULL,
     texto TEXT,
     video_url TEXT,
     imagen_path TEXT,
+    activo TINYINT NOT NULL,
+    fecha_inicio DATE NOT NULL,
+    fecha_final DATE NOT NULL,
+    pago DOUBLE NOT NULL,
     A_nombre_anunciante VARCHAR(50) NOT NULL,
     PRIMARY KEY(idAnuncio),
     FOREIGN KEY(A_nombre_anunciante) REFERENCES Anunciante(nombre_anunciante)
@@ -185,3 +199,47 @@ CREATE TABLE Visualizacion(
     FOREIGN KEY(V_idAnuncio) REFERENCES Anuncio(idAnuncio),
     FOREIGN KEY(V_nombre_anunciante) REFERENCES Anunciante(nombre_anunciante)
 );
+
+CREATE TABLE Anuncio_Etiquetas(
+	AE_idAnuncio INT NOT NULL,
+    AE_nombre_etiqueta VARCHAR(50) NOT NULL,
+    FOREIGN KEY(AE_idAnuncio) REFERENCES Anuncio(idAnuncio),
+    FOREIGN KEY(AE_nombre_etiqueta) REFERENCES Etiqueta(nombre_etiqueta)
+);
+DROP USER IF EXISTS 'adminAguare'@'localhost';
+CREATE USER 'adminAguare'@'localhost' identified by 'Aadmin_1!';
+GRANT ALL PRIVILEGES ON AppRevistas.* TO adminAguare@localhost;
+FLUSH PRIVILEGES;
+
+INSERT INTO TipoUsuario(nombre_tipo) VALUES("Administrador");
+INSERT INTO TipoUsuario(nombre_tipo) VALUES("Lector");
+INSERT INTO TipoUsuario(nombre_tipo) VALUES("Editor");
+INSERT INTO ValoresSistema(porcentaje_comision, fecha) VALUES(0.10,"2021-10-25");
+
+INSERT INTO Etiqueta(nombre_etiqueta) VALUES("Ropa");
+INSERT INTO Etiqueta(nombre_etiqueta) VALUES("Comida");
+INSERT INTO Etiqueta(nombre_etiqueta) VALUES("Carros");
+INSERT INTO Etiqueta(nombre_etiqueta) VALUES("Animales");
+INSERT INTO Etiqueta(nombre_etiqueta) VALUES("Perro");
+INSERT INTO Etiqueta(nombre_etiqueta) VALUES("Cocina");
+INSERT INTO Etiqueta(nombre_etiqueta) VALUES("Carpinteria");
+INSERT INTO Etiqueta(nombre_etiqueta) VALUES("Tecnología");
+INSERT INTO Etiqueta(nombre_etiqueta) VALUES("Computadoras");
+INSERT INTO Etiqueta(nombre_etiqueta) VALUES("Monitor");
+INSERT INTO Etiqueta(nombre_etiqueta) VALUES("Mouse");
+INSERT INTO Etiqueta(nombre_etiqueta) VALUES("Silla");
+INSERT INTO Etiqueta(nombre_etiqueta) VALUES("Mesa");
+INSERT INTO Etiqueta(nombre_etiqueta) VALUES("Audifonos");
+INSERT INTO Etiqueta(nombre_etiqueta) VALUES("Case");
+INSERT INTO Etiqueta(nombre_etiqueta) VALUES("ventilador");
+INSERT INTO Etiqueta(nombre_etiqueta) VALUES("Gorra");
+INSERT INTO Etiqueta(nombre_etiqueta) VALUES("Real Madrid");
+INSERT INTO Etiqueta(nombre_etiqueta) VALUES("Barcelona");
+INSERT INTO Etiqueta(nombre_etiqueta) VALUES("PSG");
+INSERT INTO Etiqueta(nombre_etiqueta) VALUES("Messi");
+INSERT INTO Etiqueta(nombre_etiqueta) VALUES("Cristiano Ronaldo");
+INSERT INTO Etiqueta(nombre_etiqueta) VALUES("Programación");
+INSERT INTO Etiqueta(nombre_etiqueta) VALUES("USAC");
+INSERT INTO Etiqueta(nombre_etiqueta) VALUES("CUNOC");
+INSERT INTO Etiqueta(nombre_etiqueta) VALUES("Ingeniería");
+INSERT INTO Etiqueta(nombre_etiqueta) VALUES("Base de Datos");

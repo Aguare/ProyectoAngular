@@ -88,10 +88,9 @@ export class PrevisualizarComponent implements OnInit {
   verificarSuscripcion(){
     const usuario = this.almacenamiento.obtenerUsuario().nombreUsuario;
     for (let i = 0; i < this.suscripciones.length; i++) {
-      const element = this.suscripciones[i];
-      if (element.lector.nombreUsuario == usuario) {
+      const element = this.suscripciones[i].lector.nombreUsuario;
+      if (element == usuario) {
         this.tieneSub = true;
-        break;
       }
     }
   }

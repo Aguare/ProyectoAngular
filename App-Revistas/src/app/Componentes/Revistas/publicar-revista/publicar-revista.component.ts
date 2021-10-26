@@ -70,6 +70,7 @@ export class PublicarRevistaComponent implements OnInit {
       input?.setAttribute("required", "");
       input?.setAttribute("min", "1");
       input?.setAttribute("value", "1");
+      this.precioSuscripcion = 1;
     } else {
       this.esGratuita = true;
       this.precioSuscripcion = 0;

@@ -3,10 +3,12 @@ package ObtenerObjetos;
 import EntidadesPrincipales.Anunciante;
 import EntidadesPrincipales.Revista;
 import EntidadesAuxiliares.ValorSistema;
+import EntidadesAuxiliares.Visualizacion;
 import EntidadesPrincipales.Anuncio;
 import EntidadesPrincipales.Etiqueta;
 import ReportEntidades.AnuncianteReport;
 import ReportEntidades.RevistaReport;
+import ReportEntidades.VisualReport;
 import SQL.Conexion;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -248,6 +250,70 @@ public class ObAdmin {
         } catch (SQLException e) {
         }
         return anuncios;
+    }
+    
+    /**
+     * Obtiene el objeto para los reportes
+     * @param fecha1
+     * @param fecha2
+     * @return 
+     */
+    public ArrayList<VisualReport> obtenerVisualReports(String fecha1, String fecha2) {
+        ArrayList<VisualReport> v = new ArrayList<>();
+        String query = "SELECT * FROM Anuncio ORDER BY A_nombre_anunciante;";
+        try {
+            PreparedStatement prepared = Conexion.Conexion().prepareStatement(query);
+            ResultSet r = prepared.executeQuery();
+            while (r.next()) {
+                v.add(new VisualReport(r.getString("A_nombre_anunciante"), obtenerAnuncioID(r.getInt("idAnuncio")),
+                        obtenerVisualizaciones(r.getString("A_nombre_anunciante"), fecha1, fecha2, r.getInt("idAnuncio"))));
+            }
+        } catch (SQLException e) {
+        }
+        return v;
+    }
+
+    private ArrayList<Visualizacion> obtenerVisualizaciones(String anunciante, String fecha1, String fecha2, int idAnuncio) {
+        ArrayList<Visualizacion> v = new ArrayList<>();
+        try {
+            String query1 = "SELECT * FROM Visualizacion WHERE V_nombre_anunciante = ? AND V_idAnuncio = ?;";
+            String query2 = "SELECT * FROM Visualizacion WHERE V_nombre_anunciante = ? AND fecha BETWEEN ? AND ? AND V_idAnuncio = ?;";
+            PreparedStatement prepared = null;
+            if (fechasVacias(fecha1, fecha2)) {
+                prepared = Conexion.Conexion().prepareStatement(query1);
+                prepared.setString(1, anunciante);
+                prepared.setInt(2, idAnuncio);
+            } else {
+                prepared = Conexion.Conexion().prepareStatement(query2);
+                prepared.setString(1, anunciante);
+                prepared.setDate(2, getDate(fecha1));
+                prepared.setDate(3, getDate(fecha2));
+                prepared.setInt(4, idAnuncio);
+            }
+            ResultSet r = prepared.executeQuery();
+            while (r.next()) {
+                v.add(new Visualizacion(r.getInt(1), r.getString(2), r.getString(3), r.getInt(4), r.getString(5)));
+            }
+        } catch (Exception e) {
+        }
+        return v;
+    }
+
+    private Anuncio obtenerAnuncioID(int id) {
+        String query = "SELECT * FROM Anuncio WHERE idAnuncio = ?;";
+        Anuncio anuncio = null;
+        try {
+            PreparedStatement prepared = Conexion.Conexion().prepareStatement(query);
+            prepared.setInt(1, id);
+            ResultSet r = prepared.executeQuery();
+            while (r.next()) {
+                anuncio = new Anuncio(r.getInt(1), r.getInt(2), r.getString(3),
+                        r.getString(4), r.getString(5), r.getBoolean(6), r.getString(7),
+                        r.getString(8), r.getDouble(9), r.getString(10), etiquetasAnuncio(r.getInt(1)));
+            }
+        } catch (SQLException e) {
+        }
+        return anuncio;
     }
 
     public Anunciante obtenerAnunciante(String nombre) {

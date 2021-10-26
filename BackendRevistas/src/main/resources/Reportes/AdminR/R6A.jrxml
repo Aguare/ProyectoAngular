@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.16.0.final using JasperReports Library version 6.16.0-48579d909b7943b64690c65c71e07e0b80981928  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="R6A" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="8724d76a-ee71-4561-9937-cb34f6966b75">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="RevistaNoList"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="idAnuncio" class="java.lang.Integer">
+		<fieldDescription><![CDATA[anuncio.idAnuncio]]></fieldDescription>
+	</field>
+	<field name="anunciante" class="java.lang.String">
+		<fieldDescription><![CDATA[anunciante]]></fieldDescription>
+	</field>
+	<field name="tipo" class="java.lang.Integer">
+		<fieldDescription><![CDATA[anuncio.tipoAnuncio]]></fieldDescription>
+	</field>
+	<field name="visualizaciones" class="java.util.List">
+		<fieldDescription><![CDATA[visualizaciones]]></fieldDescription>
+	</field>
+	<field name="anuncio" class="EntidadesPrincipales.Anuncio">
+		<fieldDescription><![CDATA[anuncio]]></fieldDescription>
+	</field>
+	<title>
+		<band height="72">
+			<frame>
+				<reportElement mode="Opaque" x="-20" y="-20" width="595" height="92" backcolor="#006699" uuid="d32c9494-89d7-4d7d-9af6-7e4880244209"/>
+				<staticText>
+					<reportElement x="0" y="20" width="595" height="43" forecolor="#FFFFFF" uuid="f4013150-f991-4aa6-8c72-9ff4d4ba1822"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="34" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Reporte de Anuncios]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</title>
+	<detail>
+		<band height="90">
+			<textField>
+				<reportElement mode="Opaque" x="0" y="10" width="560" height="20" forecolor="#FFFFFF" backcolor="#006699" uuid="57cea8f3-a038-4a97-b01a-901ce251fb06"/>
+				<box>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{anunciante}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="50" width="280" height="20" uuid="2578d8d7-92ca-4bde-b72c-05257307e191"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{idAnuncio}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="280" y="50" width="280" height="20" uuid="0d379a87-57a9-4e35-ab0f-8e658be53809"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[IF($F{tipo} == 1,"TEXTO",IF($F{tipo} == 2,"IMAGEN CON TEXTO","VIDEO CON TEXTO"))]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="30" width="280" height="20" forecolor="#FFFFFF" backcolor="#006699" uuid="82aaf8d6-c185-43c9-87a9-57125fa017ff"/>
+				<box>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="280" y="30" width="280" height="20" forecolor="#FFFFFF" backcolor="#006699" uuid="34290659-845c-421e-ae98-01e71398d298"/>
+				<box>
+					<pen lineWidth="0.5" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[TIPO DE ANUNCIO]]></text>
+			</staticText>
+			<subreport>
+				<reportElement x="0" y="70" width="560" height="20" uuid="6c875690-4716-4a7e-a784-5a5902a7e2a4"/>
+				<subreportParameter name="visualizaciones">
+					<subreportParameterExpression><![CDATA[$F{visualizaciones}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{visualizaciones})]]></dataSourceExpression>
+				<subreportExpression><![CDATA["/Reportes/AdminR/SubAR/Visualizacion.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<columnFooter>
+		<band/>
+	</columnFooter>
+	<pageFooter>
+		<band height="17">
+			<textField>
+				<reportElement mode="Opaque" x="0" y="4" width="515" height="13" backcolor="#E6E6E6" uuid="64b1717f-1fee-431e-9675-185d1ca114ba"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement mode="Opaque" x="515" y="4" width="40" height="13" backcolor="#E6E6E6" uuid="6226cc0c-7558-47dc-8736-6a2c106cb82e"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="0" y="4" width="100" height="13" uuid="3219852b-5c95-4dfa-95a9-573c23373b1f"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

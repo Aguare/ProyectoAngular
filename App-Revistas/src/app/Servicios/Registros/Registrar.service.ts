@@ -12,6 +12,7 @@ import { Revista } from 'src/app/Objetos/Revista';
 import { Suscripcion } from 'src/app/Objetos/Suscripcion';
 import { Usuario } from 'src/app/Objetos/Usuario';
 import { ValorSistema } from 'src/app/Objetos/ValorSistema';
+import { Visualizacion } from 'src/app/Objetos/Visualizacion';
 import { Base64Service } from '../ObtenerObjetos/Base64.service';
 
 @Injectable({
@@ -93,23 +94,29 @@ export class RegistrarService {
     return this.conexion.post<Info>(Backend.Path + "ObtenerComision", formData);
   }
 
-  public registrarAnuncio(anuncio:Anuncio, dias: number): Observable<Info>{
+  public registrarAnuncio(anuncio: Anuncio, dias: number): Observable<Info> {
     let formData = new FormData();
     formData.append("Anuncio", JSON.stringify(anuncio));
     formData.append("Dias", JSON.stringify(dias));
     return this.conexion.post<Info>(Backend.Path + "RegistrarAnuncio", formData);
   }
 
-  public registrarCambioAnuncio(anuncio:Anuncio): Observable<Info>{
+  public registrarCambioAnuncio(anuncio: Anuncio): Observable<Info> {
     let formData = new FormData();
     formData.append("Anuncio", JSON.stringify(anuncio));
     return this.conexion.post<Info>(Backend.Path + "CambioAnuncio", formData);
   }
 
-  public registrarCambioRevista(revista: Revista, opcion: number): Observable<Info>{
+  public registrarCambioRevista(revista: Revista, opcion: number): Observable<Info> {
     let formData = new FormData();
     formData.append("Revista", JSON.stringify(revista));
     formData.append("Opcion", JSON.stringify(opcion));
     return this.conexion.post<Info>(Backend.Path + "CambioRevista", formData);
+  }
+
+  public registrarVisualizacion(v: Visualizacion): Observable<Info> {
+    let formData = new FormData();
+    formData.append("visual", JSON.stringify(v));
+    return this.conexion.post<Info>(Backend.Path + "RegistrarVisualizacion", formData);
   }
 }

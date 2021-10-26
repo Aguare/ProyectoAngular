@@ -28,6 +28,12 @@
               <option value="5">
                 5 Revistas más comentadas en Intervalo de Tiempo
               </option>
+              <option value="6">
+                Reporte de Anuncios en Intervalo de Tiempo
+              </option>
+              <option value="7">
+                Reporte de Efectividad de Anuncios por Anunciante
+              </option>
             </select>
           </div>
         </div>
@@ -52,7 +58,13 @@
           <div class="col">
             <label class="form-label h5">Revistas Creadas</label>
             <select
-              [disabled]="opcionReporte == 4 || opcionReporte == 5 || opcionReporte == 2"
+              [disabled]="
+                opcionReporte == 4 ||
+                opcionReporte == 5 ||
+                opcionReporte == 2 ||
+                opcionReporte == 6 ||
+                opcionReporte == 7
+              "
               (change)="cambioRevista(inputRevista.value)"
               class="form-control"
               #inputRevista
@@ -67,7 +79,12 @@
         <div class="row my-3">
           <div class="col">
             <label class="form-label h5">Anunciantes</label>
-            <select [disabled]="opcionReporte != 2" (change)="cambioAnun(inputAnun.value)" class="form-control" #inputAnun>
+            <select
+              [disabled]="opcionReporte != 2"
+              (change)="cambioAnun(inputAnun.value)"
+              class="form-control"
+              #inputAnun
+            >
               <option value="vacio">Todas</option>
               <option
                 *ngFor="let r of anunciantes"

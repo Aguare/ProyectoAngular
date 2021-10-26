@@ -5,7 +5,9 @@ C:\Users\marco\Documents\GITHUB\ProyectoAngular\BackendRevistas\src\main\java\Re
 C:\Users\marco\Documents\GITHUB\ProyectoAngular\BackendRevistas\src\main\java\Controlador\ControlEditor.java
 C:\Users\marco\Documents\GITHUB\ProyectoAngular\BackendRevistas\src\main\java\EntidadesPrincipales\Comentario.java
 C:\Users\marco\Documents\GITHUB\ProyectoAngular\BackendRevistas\src\main\java\ServletLector\Suscripciones.java
+C:\Users\marco\Documents\GITHUB\ProyectoAngular\BackendRevistas\src\main\java\EntidadesAuxiliares\Visualizacion.java
 C:\Users\marco\Documents\GITHUB\ProyectoAngular\BackendRevistas\src\main\java\ServletAdmin\ObtenerAnunciantes.java
+C:\Users\marco\Documents\GITHUB\ProyectoAngular\BackendRevistas\src\main\java\ReportEntidades\VisualReport.java
 C:\Users\marco\Documents\GITHUB\ProyectoAngular\BackendRevistas\src\main\java\EntidadesPrincipales\Usuario.java
 C:\Users\marco\Documents\GITHUB\ProyectoAngular\BackendRevistas\src\main\java\ServletAdmin\EstadoRevista.java
 C:\Users\marco\Documents\GITHUB\ProyectoAngular\BackendRevistas\src\main\java\ServletLector\RevistasInicio.java
@@ -24,6 +26,7 @@ C:\Users\marco\Documents\GITHUB\ProyectoAngular\BackendRevistas\src\main\java\Co
 C:\Users\marco\Documents\GITHUB\ProyectoAngular\BackendRevistas\src\main\java\EntidadesAuxiliares\Cliente.java
 C:\Users\marco\Documents\GITHUB\ProyectoAngular\BackendRevistas\src\main\java\EntidadesPrincipales\Revista.java
 C:\Users\marco\Documents\GITHUB\ProyectoAngular\BackendRevistas\src\main\java\Controlador\ModificarError.java
+C:\Users\marco\Documents\GITHUB\ProyectoAngular\BackendRevistas\src\main\java\ServletAdmin\RegistrarVisualizacion.java
 C:\Users\marco\Documents\GITHUB\ProyectoAngular\BackendRevistas\src\main\java\ServletAdmin\RevistasAceptadas.java
 C:\Users\marco\Documents\GITHUB\ProyectoAngular\BackendRevistas\src\main\java\EntidadesPrincipales\Anunciante.java
 C:\Users\marco\Documents\GITHUB\ProyectoAngular\BackendRevistas\src\main\java\JSON\Convertir.java

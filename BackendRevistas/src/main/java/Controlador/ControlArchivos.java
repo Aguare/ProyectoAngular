@@ -30,7 +30,6 @@ public class ControlArchivos {
             }
             path = servidor + PATH + nombreArchivo + hora + extension;
             parte.write(path);
-            System.out.println(path);
         } catch (Exception ex) {
             System.out.println("ERROR AL GUARDAR EL ARCHIVO");
         }

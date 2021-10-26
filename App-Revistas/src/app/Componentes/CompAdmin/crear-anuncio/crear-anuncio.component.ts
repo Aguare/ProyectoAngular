@@ -83,6 +83,7 @@ export class CrearAnuncioComponent implements OnInit {
     let inputVideo = document.getElementById('video');
     if (this.tipoAnuncio == 3) {
       inputVideo?.removeAttribute('readonly');
+      inputVideo?.removeAttribute('disabled');
       inputVideo?.setAttribute('required', '');
     } else {
       inputVideo?.setAttribute('disabled', '');
@@ -101,7 +102,9 @@ export class CrearAnuncioComponent implements OnInit {
     this.costo = this.validarForm.value.costo;
     this.dias = this.validarForm.value.dias;
     this.fecha = this.validarForm.value.fecha;
-    this.video_url+="?controls=0&autoplay=1&mute=0"
+    if (this.tipoAnuncio == 3) {
+      this.video_url+="?controls=0&autoplay=1&mute=0"  
+    }
     let anuncio = new Anuncio(1, this.tipoAnuncio, this.texto,
       this.video_url, this.imagen, true, this.fecha, this.fecha,
       this.costo, this.anunciante, this.etiquetas);

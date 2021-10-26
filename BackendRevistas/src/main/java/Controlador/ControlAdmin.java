@@ -4,6 +4,7 @@ import EntidadesPrincipales.Anunciante;
 import EntidadesAuxiliares.Info;
 import EntidadesPrincipales.Revista;
 import EntidadesAuxiliares.ValorSistema;
+import EntidadesAuxiliares.Visualizacion;
 import EntidadesPrincipales.Anuncio;
 import EntidadesPrincipales.Etiqueta;
 import SQL.Conexion;
@@ -19,7 +20,7 @@ import java.util.ArrayList;
  * @author marco
  */
 public class ControlAdmin {
-    
+
     private final ModificarError modificar = new ModificarError();
     private String errorGeneral = "No se realizó la operación";
 
@@ -101,7 +102,7 @@ public class ControlAdmin {
         }
         return new Info(false, "Error", errorGeneral);
     }
-    
+
     private boolean actualizarUltimoCambio(Revista revista) {
         int idCambio = obtenerUltimoRegisto(revista);
         String query = "UPDATE CambioRevista SET fecha_final = ? WHERE idCambioRevista = ?;";
@@ -118,7 +119,7 @@ public class ControlAdmin {
         }
         return false;
     }
-    
+
     private int obtenerUltimoRegisto(Revista revista) {
         String query = "SELECT idCambioRevista FROM CambioRevista WHERE CR_idRevista = ? ORDER BY fecha_inicio DESC LIMIT 1;";
         int n = -1;
@@ -134,7 +135,7 @@ public class ControlAdmin {
         }
         return n;
     }
-    
+
     public Info actualizarComision(ValorSistema valor) {
         String query = "INSERT INTO ValoresSistema(porcentaje_comision, fecha) VALUES(?,?);";
         try {
@@ -148,7 +149,7 @@ public class ControlAdmin {
         }
         return new Info(false, "Error", errorGeneral);
     }
-    
+
     public Info crearAnuncio(Anuncio anuncio, int dias) {
         String query = "INSERT INTO Anuncio(tipo_anuncio,texto,video_url,imagen_path,activo,fecha_inicio,fecha_final,pago,A_nombre_anunciante) VALUES(?,?,?,?,?,?,?,?,?);";
         LocalDate fechaIni = anuncio.getFecha_inicioDate().toLocalDate();
@@ -178,14 +179,14 @@ public class ControlAdmin {
             return new Info(false, "Error", errorGeneral);
         }
     }
-    
+
     private void registrarEtiquetasAnuncio(Anuncio anuncio) {
         ArrayList<Etiqueta> etiquetas = anuncio.getEtiquetas();
         for (Etiqueta etiqueta : etiquetas) {
             registrarEtiqueta(etiqueta, anuncio.getIdAnuncio());
         }
     }
-    
+
     private void registrarEtiqueta(Etiqueta etiqueta, int idAnuncio) {
         String query = "INSERT INTO Anuncio_Etiquetas(AE_idAnuncio, AE_nombre_etiqueta) VALUES(?,?);";
         try {
@@ -217,5 +218,20 @@ public class ControlAdmin {
             return new Info(false, "Error", errorGeneral);
         }
     }
-    
+
+    public Info registrarVisualizacion(Visualizacion visual) {
+        String query = "INSERT INTO Visualizacion(url,fecha, V_idAnuncio, V_nombre_anunciante) VALUES (?, ?, ?, ?);";
+        try {
+            PreparedStatement p = Conexion.Conexion().prepareStatement(query);
+            p.setString(1, visual.getUrl());
+            p.setDate(2, visual.getFechaDate());
+            p.setInt(3, visual.getV_idAnuncio());
+            p.setString(4, visual.getV_nombre_anunciante());
+            p.executeUpdate();
+            return new Info(true, "Exito", "La visualizacion se registró correctamente");
+        } catch (SQLException e) {
+            errorGeneral = modificar.obtenerTipoError(e.getErrorCode());
+            return new Info(false, "Error", errorGeneral);
+        }
+    }
 }

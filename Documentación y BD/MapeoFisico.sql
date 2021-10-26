@@ -193,6 +193,7 @@ CREATE TABLE Anuncio(
 CREATE TABLE Visualizacion(
     idVisualizacion INT NOT NULL AUTO_INCREMENT,
     url TEXT NOT NULL,
+    fecha DATE NOT NULL,
     V_idAnuncio INT NOT NULL,
     V_nombre_anunciante VARCHAR(50) NOT NULL,
     PRIMARY KEY(idVisualizacion),

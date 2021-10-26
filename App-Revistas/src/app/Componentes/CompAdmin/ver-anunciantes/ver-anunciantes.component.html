@@ -1,7 +1,7 @@
 <div class="text-center my-4">
-    <h2>Anunciantes Registrados</h2>
+  <h2>Anunciantes Registrados</h2>
 </div>
-<div class="container my-4 border text-center" style="max-width: 850px;">
+<div class="container my-4 border text-center" style="max-width: 850px">
   <div class="my-2">
     <app-error [mensaje]="mensaje" [espera]="verMensaje"></app-error>
   </div>
@@ -10,16 +10,12 @@
       <tr>
         <th>Anunciante</th>
         <th>Telefono</th>
-        <th>Opciones</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let anunciante of anunciantes">
         <td>{{ anunciante.nombreAnunciante }}</td>
         <td>{{ anunciante.telefono }}</td>
-        <td>
-          <a class="btn btn-info mx-1">Editar</a>
-        </td>
       </tr>
     </tbody>
   </table>

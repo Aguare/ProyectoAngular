@@ -56,7 +56,8 @@ public class Anuncio {
     }
 
     public Date getFecha_inicioDate() {
-        return Date.valueOf(fecha_inicio);
+        Date f = Date.valueOf(fecha_inicio);
+        return f;
     }
 
     public void setFecha_inicio(String fecha_inicio) {

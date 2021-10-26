@@ -60,7 +60,7 @@ export class SolicitarReporteAdminComponent implements OnInit {
     this.idRevista = selec;
   }
 
-  cambioAnun(cambio: string){
+  cambioAnun(cambio: string) {
     this.anunciante = cambio;
   }
 
@@ -78,10 +78,10 @@ export class SolicitarReporteAdminComponent implements OnInit {
       this.fecha_final = "vacio";
       this.fecha_inicio = "vacio";
     }
-    if (this.opcionReporte == 4 || this.opcionReporte == 5 || this.opcionReporte == 2) {
+    if (this.opcionReporte == 4 || this.opcionReporte == 5 || this.opcionReporte == 2 || this.opcionReporte == 6 || this.opcionReporte == 7) {
       this.idRevista = 0;
     }
-    if(this.opcionReporte != 2){
+    if (this.opcionReporte != 2) {
       this.anunciante = "vacio";
     }
     this.obtenerLink();

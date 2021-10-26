@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.16.0.final using JasperReports Library version 6.16.0-48579d909b7943b64690c65c71e07e0b80981928  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Visualizacion" pageWidth="560" pageHeight="842" whenNoDataType="BlankPage" columnWidth="560" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="c6ca3c3d-b93e-4955-9706-604ed19282eb">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="NuevoAdaptador"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="idVisualizacion" class="java.lang.Integer">
+		<fieldDescription><![CDATA[idVisualizacion]]></fieldDescription>
+	</field>
+	<field name="url" class="java.lang.String">
+		<fieldDescription><![CDATA[url]]></fieldDescription>
+	</field>
+	<field name="fecha" class="java.lang.String">
+		<fieldDescription><![CDATA[fecha]]></fieldDescription>
+	</field>
+	<variable name="veces" class="java.lang.Integer" calculation="Count">
+		<variableExpression><![CDATA[$F{url}]]></variableExpression>
+	</variable>
+	<columnHeader>
+		<band height="20" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="0" width="60" height="20" forecolor="#FFFFFF" backcolor="#006699" uuid="7358205e-c68c-4835-a1e7-99d582271d8a">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="3697fdba-876b-4a0f-9fca-2107a029bade"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="60" y="0" width="370" height="20" forecolor="#FFFFFF" backcolor="#006699" uuid="b52251ca-472b-4af0-be5c-895c43a50aeb">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="050413b6-57a7-408c-9a9c-3131f866f19c"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[URL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="430" y="0" width="130" height="20" forecolor="#FFFFFF" backcolor="#006699" uuid="2d7c5e57-e9e4-4725-9409-bb65fe8095f8">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="75293b95-8f62-40ac-9a34-374941e5f49b"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[FECHA]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="60" height="20" uuid="770127e0-e60b-4b2e-97e8-2a8b240fc908">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="3697fdba-876b-4a0f-9fca-2107a029bade"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{idVisualizacion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="60" y="0" width="370" height="20" uuid="eb6388bf-c3f8-4007-8d1a-42b8d1bfc255">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="050413b6-57a7-408c-9a9c-3131f866f19c"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{url}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="430" y="0" width="130" height="20" uuid="d89f2d82-068b-45b5-83f6-98010a9a0722">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="75293b95-8f62-40ac-9a34-374941e5f49b"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{fecha}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="20" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="0" width="430" height="20" backcolor="#75CCFA" uuid="d26c671a-e070-49bc-8816-be9b018e3856"/>
+				<box>
+					<pen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Cantidad de Visualizaciones]]></text>
+			</staticText>
+			<textField>
+				<reportElement mode="Opaque" x="430" y="0" width="130" height="20" backcolor="#75CCFA" uuid="68027c94-2cde-41a9-a32d-2164e446cf8a"/>
+				<box>
+					<pen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{veces}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnFooter>
+</jasperReport>

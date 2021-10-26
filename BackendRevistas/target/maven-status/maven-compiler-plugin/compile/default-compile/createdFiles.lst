@@ -16,6 +16,7 @@ ServletAdmin\RevistasAceptadas.class
 Controlador\ControlAdmin.class
 ServletAdmin\ObtenerAnunciantes.class
 ServletAdmin\RegistrarAnunciante.class
+ServletAdmin\AdminReportes.class
 ServletLector\ObtenerSuscripciones.class
 Controlador\ControlEditor.class
 ServletLector\RegistrarInteraccion.class

@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.16.0.final using JasperReports Library version 6.16.0-48579d909b7943b64690c65c71e07e0b80981928  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Revista" pageWidth="560" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="560" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="7750a20b-1f46-42b1-81c7-e290fb20ba34">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="RevistaNoList"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="idRevista" class="java.lang.Integer">
+		<fieldDescription><![CDATA[idRevista]]></fieldDescription>
+	</field>
+	<field name="titulo" class="java.lang.String">
+		<fieldDescription><![CDATA[titulo]]></fieldDescription>
+	</field>
+	<field name="fecha" class="java.lang.String">
+		<fieldDescription><![CDATA[fecha]]></fieldDescription>
+	</field>
+	<field name="usuarioCreador" class="EntidadesPrincipales.Usuario">
+		<fieldDescription><![CDATA[usuarioCreador]]></fieldDescription>
+	</field>
+	<field name="precio_costo" class="java.lang.Double">
+		<fieldDescription><![CDATA[precio_costo]]></fieldDescription>
+	</field>
+	<variable name="costoTotal" class="java.lang.Double">
+		<variableExpression><![CDATA[$F{precio_costo}*DAYS(new SimpleDateFormat("yyyy-MM-dd").parse($F{fecha}),NOW( ))]]></variableExpression>
+	</variable>
+	<columnHeader>
+		<band height="20" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="0" width="40" height="20" forecolor="#FFFFFF" backcolor="#0E87EB" uuid="00e2d0e0-5d39-467c-9471-82a8c932616a"/>
+				<box>
+					<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="40" y="0" width="250" height="20" forecolor="#FFFFFF" backcolor="#0E87EB" uuid="0dd85718-b56a-42f7-bb06-1448db0b4602"/>
+				<box>
+					<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[TÍTULO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="290" y="0" width="90" height="20" forecolor="#FFFFFF" backcolor="#0E87EB" uuid="fd85347e-3242-422b-abc7-fcf8ec3cdf9e"/>
+				<box>
+					<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[FECHA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="380" y="0" width="90" height="20" forecolor="#FFFFFF" backcolor="#0E87EB" uuid="6a57f901-2c1b-49ed-99d7-0704bb3f6a01"/>
+				<box>
+					<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[EDITOR]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="470" y="0" width="90" height="20" forecolor="#FFFFFF" backcolor="#0E87EB" uuid="8d27e003-21af-428c-95b1-8e386c7dbc6c"/>
+				<box>
+					<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[COSTO]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="40" height="20" uuid="e6ced57d-202f-401a-b7ba-6c04983fb7fb">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="d96e4b05-e4ef-4909-89e6-d89ab3070b80"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{idRevista}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="40" y="0" width="250" height="20" uuid="73c420f9-0d28-4393-ae6f-b7cf4c8137dd">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="cb7aaed5-0fbf-42fe-959c-3f866fb6fc9c"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{titulo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="290" y="0" width="90" height="20" uuid="44bd223e-38c2-4f1e-a81b-22755c8d871c">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="8bec3ad0-438f-441b-b6d2-f35e5efdfdd7"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{fecha}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="380" y="0" width="90" height="20" uuid="1931b629-907b-49cc-8ec4-d6a43ce8fa20">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="ee9049e1-bbcb-4fdd-b18b-6527fa046839"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{usuarioCreador}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="470" y="0" width="90" height="20" uuid="0001256b-4d08-4d4b-bba7-702184c7ff3b">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="212c5d26-9963-44af-acbc-a39e134ef3e8"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{precio_costo}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="19" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="-1" width="470" height="20" forecolor="#000000" backcolor="#D9D9D9" uuid="c48cf1a3-1349-4e75-9a64-d78038cfbf1e"/>
+				<box>
+					<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[COSTO TOTAL]]></text>
+			</staticText>
+			<textField>
+				<reportElement mode="Opaque" x="470" y="-1" width="90" height="20" forecolor="#000000" backcolor="#D9D9D9" uuid="200dba25-9586-4877-a039-c1c7d0b51753"/>
+				<box>
+					<pen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+					<topPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{costoTotal}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnFooter>
+</jasperReport>

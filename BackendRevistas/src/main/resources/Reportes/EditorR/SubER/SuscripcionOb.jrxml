@@ -9,7 +9,7 @@
 		<fieldDescription><![CDATA[idSuscripcion]]></fieldDescription>
 	</field>
 	<field name="lector" class="EntidadesPrincipales.Usuario">
-		<fieldDescription><![CDATA[lector]]></fieldDescription>
+		<fieldDescription><![CDATA[lector.nombreUsuario]]></fieldDescription>
 	</field>
 	<field name="fechaInicio" class="java.lang.String">
 		<fieldDescription><![CDATA[fechaInicio]]></fieldDescription>

@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.16.0.final using JasperReports Library version 6.16.0-48579d909b7943b64690c65c71e07e0b80981928  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Suscripcion" pageWidth="560" pageHeight="842" columnWidth="560" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="084a5a9f-8390-42b0-b216-1af6f2d81024">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="RevistaNoList"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="idSuscripcion" class="java.lang.Integer">
+		<fieldDescription><![CDATA[idSuscripcion]]></fieldDescription>
+	</field>
+	<field name="fechaInicio" class="java.lang.String">
+		<fieldDescription><![CDATA[fechaInicio]]></fieldDescription>
+	</field>
+	<field name="lector" class="EntidadesPrincipales.Usuario">
+		<fieldDescription><![CDATA[lector]]></fieldDescription>
+	</field>
+	<field name="total" class="java.lang.Double">
+		<fieldDescription><![CDATA[pago.total]]></fieldDescription>
+	</field>
+	<field name="ganancia" class="java.lang.Double">
+		<fieldDescription><![CDATA[pago.parte_obtenido]]></fieldDescription>
+	</field>
+	<variable name="totalGanancia" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{ganancia}]]></variableExpression>
+	</variable>
+	<variable name="totalIngreso" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{total}]]></variableExpression>
+	</variable>
+	<columnHeader>
+		<band height="20" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="0" width="60" height="20" backcolor="#6296FC" uuid="a5a9bf7e-2f72-4740-8f3e-0956aa6af136">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="04b75cf1-7ac8-4dda-97d6-5eaf855f930a"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="60" y="0" width="80" height="20" backcolor="#6296FC" uuid="ae2e248e-dff1-49b4-8fc9-5c1e8d340d5a">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="068f2a78-e345-48b0-842d-c14f125eb987"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[FECHA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="140" y="0" width="200" height="20" backcolor="#6296FC" uuid="8ae92f1b-51e8-457f-b21d-96cc837fef77">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="2ac0c2ce-bb3c-4379-89b9-fd9f6dc7be2e"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[USUARIO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="340" y="0" width="110" height="20" backcolor="#6296FC" uuid="d6ced8d8-00e6-44d0-b13d-cd423718942e">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="f5974c3f-3769-4129-a228-93aaa154a178"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[GANANCIA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="450" y="0" width="110" height="20" backcolor="#6296FC" uuid="1f8c52c7-5073-4928-8280-ba3b021d911e">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="6b79a16a-2e0a-4a78-b2bf-822851c22952"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[TOTAL INGRESO]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="30" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="60" height="30" uuid="f073aae0-618d-495c-8603-1a086f1fd2e4">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="04b75cf1-7ac8-4dda-97d6-5eaf855f930a"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{idSuscripcion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="60" y="0" width="80" height="30" uuid="5ecbede3-b578-420a-8f35-9fcda8174a6e">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="068f2a78-e345-48b0-842d-c14f125eb987"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{fechaInicio}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="140" y="0" width="200" height="30" uuid="139ac1d1-8de2-4095-85e4-396451ea9a5e">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="2ac0c2ce-bb3c-4379-89b9-fd9f6dc7be2e"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{lector}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="450" y="0" width="110" height="30" uuid="d453a5e9-d3e5-4e4b-aa68-4952acbe717f">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="f5974c3f-3769-4129-a228-93aaa154a178"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{total}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="340" y="0" width="110" height="30" uuid="07913813-7106-490e-bb4b-00c3a23a33fa">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="6b79a16a-2e0a-4a78-b2bf-822851c22952"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{ganancia}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement positionType="FixRelativeToBottom" mode="Opaque" x="340" y="0" width="110" height="20" backcolor="#E0E0E0" uuid="c7bed561-0ad4-4828-9b46-c9e0d427cb38"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{totalGanancia}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement positionType="FixRelativeToBottom" mode="Opaque" x="450" y="0" width="110" height="20" backcolor="#E0E0E0" uuid="13925812-c128-4646-945a-af925282c491"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$V{totalIngreso}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="FixRelativeToBottom" mode="Opaque" x="0" y="0" width="340" height="20" backcolor="#E0E0E0" uuid="58231bd6-4cb5-4f66-8148-7b46b4e4000e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[TOTALES]]></text>
+			</staticText>
+		</band>
+	</columnFooter>
+</jasperReport>

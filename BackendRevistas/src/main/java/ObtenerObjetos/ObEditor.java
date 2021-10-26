@@ -86,7 +86,7 @@ public class ObEditor {
         return obtenerRevistas(query2, idRevista, usuario, fecha_inicio, fecha_final);
     }
 
-    public List<RevistaReport> obtenerRevistas(String consultaR, int idRevista, String usuario, String fecha1, String fecha2) {
+    private List<RevistaReport> obtenerRevistas(String consultaR, int idRevista, String usuario, String fecha1, String fecha2) {
         ArrayList<RevistaReport> revistas = new ArrayList<>();
         String query = "SELECT idRevista FROM Revista WHERE R_nombre_usuario = ?;";
         try {
@@ -113,14 +113,24 @@ public class ObEditor {
         ArrayList<RevistaReport> revistas = new ArrayList<>();
         String query = "SELECT RR_idRevista,COUNT(RR_idRevista) as total  FROM Reaccion_Revista group by RR_idRevista ORDER BY total desc;";
         String consultaR = "SELECT RR_idRevista,COUNT(RR_idRevista) as total  FROM Reaccion_Revista WHERE fecha BETWEEN ? AND ? group by RR_idRevista ORDER BY total desc;";
+        String query3 = "SELECT * FROM Reaccion_Revista WHERE RR_idRevista = ?;";
+        String query4 = "SELECT * FROM Reaccion_Revista WHERE RR_idRevista = ? AND fecha BETWEEN ? AND ?;";
         try {
             PreparedStatement prepared = null;
-            if (fechasVacias(fecha1, fecha2)) {
+            if (fechasVacias(fecha1, fecha2) && idRevista == 0) {
                 prepared = Conexion.Conexion().prepareStatement(query);
-            } else {
+            } else if (!fechasVacias(fecha1, fecha2) && idRevista == 0) {
                 prepared = Conexion.Conexion().prepareStatement(consultaR);
                 prepared.setDate(1, getDate(fecha1));
                 prepared.setDate(2, getDate(fecha2));
+            } else if (fechasVacias(fecha1, fecha2) && idRevista != 0) {
+                prepared = Conexion.Conexion().prepareStatement(query3);
+                prepared.setInt(1, idRevista);
+            } else if (!fechasVacias(fecha1, fecha2) && idRevista != 0) {
+                prepared = Conexion.Conexion().prepareStatement(query4);
+                prepared.setInt(1, idRevista);
+                prepared.setDate(2, getDate(fecha1));
+                prepared.setDate(3, getDate(fecha2));
             }
             ResultSet r = prepared.executeQuery();
             while (r.next()) {
@@ -135,7 +145,7 @@ public class ObEditor {
         return revistas;
     }
 
-    private ArrayList<Comentario> obtenerComentariosConsulta(int idRevista, String fecha_inicio, String fecha_final) {
+    public ArrayList<Comentario> obtenerComentariosConsulta(int idRevista, String fecha_inicio, String fecha_final) {
         ArrayList<Comentario> comentarios = new ArrayList<>();
         String query = "SELECT * FROM Comentario_Revista WHERE CR_idRevista = ? ORDER BY fecha;";
         String com2 = "SELECT * FROM Comentario_Revista WHERE CR_idRevista = ? AND fecha BETWEEN ? AND ?";
@@ -161,7 +171,7 @@ public class ObEditor {
         return comentarios;
     }
 
-    private ArrayList<Reaccion> obtenerReaccionesConsulta(int idRevista, String fecha1, String fecha2) {
+    public ArrayList<Reaccion> obtenerReaccionesConsulta(int idRevista, String fecha1, String fecha2) {
         ArrayList<Reaccion> reacciones = new ArrayList<>();
         String query = "SELECT * FROM Reaccion_Revista WHERE RR_idRevista = ?;";
         String query2 = "SELECT * FROM Reaccion_Revista WHERE RR_idRevista = ? AND fecha BETWEEN ? AND ?;";
@@ -203,7 +213,7 @@ public class ObEditor {
         return false;
     }
 
-    private ArrayList<Suscripcion> obtenerSuscripcionConsulta(int idRevista, String fecha1, String fecha2) {
+    public ArrayList<Suscripcion> obtenerSuscripcionConsulta(int idRevista, String fecha1, String fecha2) {
         ArrayList<Suscripcion> sus = new ArrayList<>();
         String query = "SELECT * FROM Suscripcion WHERE S_idRevista = ?;";
         String query2 = "SELECT * FROM Suscripcion WHERE S_idRevista = ? AND fecha_inicio BETWEEN ? AND ?;";
@@ -232,7 +242,7 @@ public class ObEditor {
         return sus;
     }
 
-    private Pago obtenerPago(int idSuscripcion) {
+    public Pago obtenerPago(int idSuscripcion) {
         Pago pago = null;
         String query = "SELECT * FROM Pago WHERE P_idSuscripcion = ?;";
         try {
@@ -247,7 +257,7 @@ public class ObEditor {
         return pago;
     }
 
-    private String obtenerComentario(int idComentario) {
+    public String obtenerComentario(int idComentario) {
         String comentario = "";
         String query = "SELECT * FROM Comentario WHERE idComentario = ?;";
         try {

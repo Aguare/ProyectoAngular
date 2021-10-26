@@ -116,10 +116,10 @@ public class SubirArchivo extends HttpServlet {
         descargar(response, inputStream, filename);
     }
 
-    private void descargar(HttpServletResponse response, InputStream inputStream, String fileName) throws IOException {
+    private void descargar(HttpServletResponse response, InputStream inputStream, String nombre) throws IOException {
         try (BufferedInputStream fileStream = new BufferedInputStream(inputStream)) {
             response.setContentType("text/plain;charset=UTF-8");
-            response.setHeader("Content-disposition", "attachment; filename=" + fileName);
+            response.setHeader("Content-disposition", "attachment; filename=" + nombre);
             int data = fileStream.read();
             while (data > -1) {
                 response.getOutputStream().write(data);

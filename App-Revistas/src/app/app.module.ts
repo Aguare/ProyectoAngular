@@ -48,6 +48,7 @@ import { CrearAnuncioComponent } from './Componentes/CompAdmin/crear-anuncio/cre
 import { AnuncioComponent } from './Componentes/anuncio/anuncio.component';
 import { VerAnunciosComponent } from './Componentes/CompAdmin/ver-anuncios/ver-anuncios.component';
 import { SolicitarReporteComponent } from './Componentes/Reportes/EditorReport/solicitar-reporte/solicitar-reporte.component';
+import { SolicitarReporteAdminComponent } from './Componentes/Reportes/AdminReport/solicitar-reporte-admin/solicitar-reporte-admin.component';
 
 const rutas: Routes = [
   {
@@ -81,7 +82,8 @@ const rutas: Routes = [
       { path: 'Perfil/:nombreUsuario', component: PerfilComponent },
       { path: 'Comision', component: ComisionComponent },
       { path: 'CrearAnuncio', component: CrearAnuncioComponent },
-      { path: 'VerAnuncios', component: VerAnunciosComponent }
+      { path: 'VerAnuncios', component: VerAnunciosComponent },
+      { path: 'Reportes1', component: SolicitarReporteAdminComponent }
     ]
   },
   {
@@ -137,7 +139,8 @@ const rutas: Routes = [
     CrearAnuncioComponent,
     AnuncioComponent,
     VerAnunciosComponent,
-    SolicitarReporteComponent
+    SolicitarReporteComponent,
+    SolicitarReporteAdminComponent
   ],
   imports: [
     BrowserModule,

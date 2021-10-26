@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.16.0.final using JasperReports Library version 6.16.0-48579d909b7943b64690c65c71e07e0b80981928  -->
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="R1" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="04d3619b-f2d3-42f6-b139-814e661d95ed">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="R3" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="04d3619b-f2d3-42f6-b139-814e661d95ed">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="RevistaNoList"/>
 	<queryString>
 		<![CDATA[]]>
@@ -42,7 +42,7 @@
 		</band>
 	</title>
 	<detail>
-		<band height="106">
+		<band height="112">
 			<staticText>
 				<reportElement mode="Opaque" x="0" y="10" width="60" height="20" forecolor="#FFFFFF" backcolor="#0E87EB" uuid="1c0a41ab-67bd-4c67-83c2-fa4d3f1193ef"/>
 				<box>

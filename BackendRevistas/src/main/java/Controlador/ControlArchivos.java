@@ -14,11 +14,11 @@ import javax.servlet.http.Part;
  */
 public class ControlArchivos {
 
-    public static final String PATH = "C:\\Users\\marco\\Documents\\ServerSources\\";
+    public static final String PATH = "";
     public static final String PDF = ".pdf";
     public static final String IMG = ".png";
 
-    public String guardarArchivo(Part parte, String nombreArchivo, String extension) throws IOException {
+    public String guardarArchivo(Part parte, String nombreArchivo, String extension, String servidor) throws IOException {
         LocalDateTime fecha = LocalDateTime.now();
         String hora = "" + fecha.getHour() + fecha.getMinute() + fecha.getSecond();
         String path = "";
@@ -28,8 +28,9 @@ public class ControlArchivos {
             while (line != null) {
                 line = in.readLine();
             }
-            path = PATH + nombreArchivo + hora + extension;
+            path = servidor + PATH + nombreArchivo + hora + extension;
             parte.write(path);
+            System.out.println(path);
         } catch (Exception ex) {
             System.out.println("ERROR AL GUARDAR EL ARCHIVO");
         }

@@ -34,19 +34,21 @@ public class AdminReportes extends HttpServlet {
         response.setCharacterEncoding("UTF-8");
         request.setCharacterEncoding("UTF-8");
         response.setContentType("application/pdf");
-        response.setHeader("Content-disposition", "attachment; filename=ReporteEditor.pdf");
+        String descarga = request.getParameter("descarga");
         try {
             String opcionReporte = request.getParameter("opcionReporte");
             String fecha_inicio = request.getParameter("fecha_inicio");
             String fecha_final = request.getParameter("fecha_final");
             String idRevista = request.getParameter("idRevista");
+            String anun = request.getParameter("anunciante");
             int op = Integer.parseInt(opcionReporte);
             int id = Integer.parseInt(idRevista);
-            generar.generarReporteAdmin(fecha_inicio, fecha_final, id, op, response.getOutputStream());
+            generar.generarReporteAdmin(fecha_inicio, fecha_final, id, op, response.getOutputStream(), anun);
         } catch (IOException | NumberFormatException e) {
             response.setStatus(HttpServletResponse.SC_NOT_ACCEPTABLE);
             response.getWriter().append(c.obtenerJSON(new Info(false, "Error del Servidor", "No se pudo generar el reporte"), Info.class));
         }
+
     }
 
     /**

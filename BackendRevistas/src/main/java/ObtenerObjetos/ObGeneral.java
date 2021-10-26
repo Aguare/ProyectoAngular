@@ -1,6 +1,7 @@
 package ObtenerObjetos;
 
 import EntidadesAuxiliares.Cliente;
+import EntidadesPrincipales.Anuncio;
 import EntidadesPrincipales.Etiqueta;
 import EntidadesPrincipales.Perfil;
 import EntidadesPrincipales.Usuario;
@@ -78,4 +79,28 @@ public class ObGeneral {
         return cliente;
     }
 
+    public ArrayList<Anuncio> obtenerAnunciosParecidos(ArrayList<Etiqueta> etiquetas) {
+        ArrayList<Anuncio> anuncios = new ArrayList<>();
+        String parte1 = "SELECT * FROM Anuncio WHERE activo = 1 AND idAnuncio IN (SELECT AE_idAnuncio FROM Anuncio_Etiquetas WHERE AE_nombre_etiqueta IN (";
+        String parteFinal = ") GROUP BY AE_idAnuncio);";
+        for (Etiqueta etiqueta : etiquetas) {
+            parte1 += "\'" + etiqueta.getNombre() + "\'";
+            if (!etiquetas.get(etiquetas.size() - 1).getNombre().equals(etiqueta.getNombre())) {
+                parte1 += ",";
+            }
+        }
+        parte1 += parteFinal;
+        try {
+            PreparedStatement prepared = Conexion.Conexion().prepareStatement(parte1);
+            ResultSet r = prepared.executeQuery();
+            while (r.next()) {
+                anuncios.add(new Anuncio(r.getInt(1), r.getInt(2), r.getString(3),
+                        r.getString(4), r.getString(5), r.getBoolean(6), r.getString(7),
+                        r.getString(8), r.getDouble(9), r.getString(10), null));
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getErrorCode());
+        }
+        return anuncios;
+    }
 }

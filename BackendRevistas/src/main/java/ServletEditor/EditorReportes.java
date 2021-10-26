@@ -2,9 +2,7 @@ package ServletEditor;
 
 import EntidadesAuxiliares.Info;
 import JSON.Convertir;
-import Reportes.ControlReportes;
 import Reportes.GenerarRE;
-import SQL.Conexion;
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -13,7 +11,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import net.sf.jasperreports.engine.JRException;
 
 /**
  *
@@ -39,7 +36,6 @@ public class EditorReportes extends HttpServlet {
         response.setCharacterEncoding("UTF-8");
         request.setCharacterEncoding("UTF-8");
         response.setContentType("application/pdf");
-        response.setHeader("Content-disposition", "attachment; filename=ReporteEditor.pdf");
         try {
             String opcionReporte = request.getParameter("opcionReporte");
             String fecha_inicio = request.getParameter("fecha_inicio");
@@ -68,22 +64,4 @@ public class EditorReportes extends HttpServlet {
             throws ServletException, IOException {
     }
 
-    /**
-     * Para mostrar un archivo en debe ir en un get y devuelve el pdf
-     *
-     * @param response
-     * @param path
-     */
-    private void obtenerArchivo(HttpServletResponse response, String path, String contenido) throws IOException {
-        try (BufferedInputStream fileStream = new BufferedInputStream(new FileInputStream(path))) {
-            response.setContentType(contenido);
-            int data = fileStream.read();
-            while (data > -1) {
-                response.getOutputStream().write(data);
-                data = fileStream.read();
-            }
-        } catch (Exception e) {
-            System.out.println("Error-> " + e.getMessage());
-        }
-    }
 }

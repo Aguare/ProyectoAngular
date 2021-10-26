@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.16.0.final using JasperReports Library version 6.16.0-48579d909b7943b64690c65c71e07e0b80981928  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="R2A" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="6afa262c-98a4-4bf4-955a-823c5fd0c56e">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="NuevoAdaptador"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="anuncios" class="java.util.List">
+		<fieldDescription><![CDATA[anuncios]]></fieldDescription>
+	</field>
+	<field name="anunciante" class="EntidadesPrincipales.Anunciante">
+		<fieldDescription><![CDATA[anunciante]]></fieldDescription>
+	</field>
+	<field name="nombre" class="java.lang.String">
+		<fieldDescription><![CDATA[anunciante.nombreAnunciante]]></fieldDescription>
+	</field>
+	<field name="telefono" class="java.lang.Integer">
+		<fieldDescription><![CDATA[anunciante.telefono]]></fieldDescription>
+	</field>
+	<variable name="totalPago" class="java.lang.Double"/>
+	<title>
+		<band height="72">
+			<frame>
+				<reportElement mode="Opaque" x="-20" y="-20" width="595" height="92" backcolor="#006699" uuid="6b591b66-e209-4c94-a026-112b711e27e0"/>
+				<staticText>
+					<reportElement x="0" y="20" width="595" height="43" forecolor="#FFFFFF" uuid="3f0f2b23-9279-48b8-9d4f-fe3eb9baaca7"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="30" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Reporte de Ganancias por Anunciante]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</title>
+	<detail>
+		<band height="70">
+			<textField>
+				<reportElement x="0" y="30" width="280" height="20" uuid="d4b218b4-7b6e-4681-af2f-b7f57c377843">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="280" y="30" width="280" height="20" uuid="22bd86e4-317c-468a-8d48-2ba7f3e56698">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{telefono}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="10" width="280" height="20" forecolor="#FFFFFF" backcolor="#006699" uuid="11268960-b9f3-49c7-be79-3d2127ab51c3">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[ANUNCIANTE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="280" y="10" width="280" height="20" forecolor="#FFFFFF" backcolor="#006699" uuid="2c0952c9-5a70-407d-91da-f1bb65cce4cb">
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<box>
+					<pen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[TELÉFONO]]></text>
+			</staticText>
+			<subreport>
+				<reportElement x="0" y="50" width="553" height="20" uuid="35b900a8-25d4-4be7-b2aa-e2037eb39478"/>
+				<subreportParameter name="anuncios">
+					<subreportParameterExpression><![CDATA[$F{anuncios}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{anuncios})]]></dataSourceExpression>
+				<returnValue subreportVariable="pago" toVariable="totalPago" calculation="Sum"/>
+				<subreportExpression><![CDATA["/Reportes/AdminR/SubAR/Anuncio.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="17">
+			<textField>
+				<reportElement mode="Opaque" x="0" y="4" width="515" height="13" backcolor="#E6E6E6" uuid="6464cb22-b7b8-42b5-afbb-8ca7525667f4"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement mode="Opaque" x="515" y="4" width="40" height="13" backcolor="#E6E6E6" uuid="6138e624-2032-44ea-a750-ef98917ab2b9"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="0" y="4" width="100" height="13" uuid="596954b8-9643-476f-aabd-b134eb44a50a"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="30">
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="10" width="440" height="20" forecolor="#FFFFFF" backcolor="#949494" uuid="7674ce8a-34f2-4836-928a-49804434a4f7"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[TOTAL DE INGRESOS]]></text>
+			</staticText>
+			<textField>
+				<reportElement mode="Opaque" x="440" y="10" width="114" height="20" forecolor="#FFFFFF" backcolor="#949494" uuid="db9c552e-0826-426a-a445-a332b543c018"/>
+				<box>
+					<pen lineWidth="0.25"/>
+					<topPen lineWidth="0.25"/>
+					<leftPen lineWidth="0.25"/>
+					<bottomPen lineWidth="0.25"/>
+					<rightPen lineWidth="0.25"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{totalPago}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

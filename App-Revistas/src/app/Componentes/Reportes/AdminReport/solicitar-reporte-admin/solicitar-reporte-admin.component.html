@@ -52,7 +52,7 @@
           <div class="col">
             <label class="form-label h5">Revistas Creadas</label>
             <select
-              [disabled]="opcionReporte == 4 || opcionReporte == 5"
+              [disabled]="opcionReporte == 4 || opcionReporte == 5 || opcionReporte == 2"
               (change)="cambioRevista(inputRevista.value)"
               class="form-control"
               #inputRevista
@@ -60,6 +60,20 @@
               <option value="0">Todas</option>
               <option *ngFor="let r of revistas" value="{{ r.idRevista }}">
                 Versión: {{ r.no_version }}, Título: {{ r.titulo }}
+              </option>
+            </select>
+          </div>
+        </div>
+        <div class="row my-3">
+          <div class="col">
+            <label class="form-label h5">Anunciantes</label>
+            <select [disabled]="opcionReporte != 2" (change)="cambioAnun(inputAnun.value)" class="form-control" #inputAnun>
+              <option value="vacio">Todas</option>
+              <option
+                *ngFor="let r of anunciantes"
+                value="{{ r.nombreAnunciante }}"
+              >
+                {{ r.nombreAnunciante }}
               </option>
             </select>
           </div>
@@ -75,15 +89,10 @@
             </button>
           </div>
         </div>
-        <div class="row my-3">
-          <div class="d-grid">
-            <button type="button" class="btn btn-success">Descargar</button>
-          </div>
-        </div>
       </div>
       <div class="col border text-center">
         <h3>Reporte Generado</h3>
-        <div class="container">
+        <div class="container" style="height: 650px">
           <iframe [src]="url" width="100%" height="100%"></iframe>
         </div>
       </div>

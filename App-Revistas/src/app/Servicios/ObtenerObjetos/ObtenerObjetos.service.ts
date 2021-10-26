@@ -42,7 +42,7 @@ export class ObtenerObjetosService {
   obtenerRevistasBusqueda(etiquetas: Etiqueta[]): Observable<Revista[]> {
     let formData = new FormData();
     formData.append("Etiquetas", JSON.stringify(etiquetas));
-    return this.conexion.post<Revista[]>(Backend.Path + "RevistasInicio",formData);
+    return this.conexion.post<Revista[]>(Backend.Path + "RevistasInicio", formData);
   }
 
   obtenerPerfilUsuario(usuario: string): Observable<Perfil> {
@@ -93,5 +93,9 @@ export class ObtenerObjetosService {
 
   obtenerAnuncios(): Observable<Anuncio[]> {
     return this.conexion.get<Anuncio[]>(Backend.Path + "RegistrarAnuncio");
+  }
+
+  obtenerAnunciosCliente(usuario: string): Observable<Anuncio[]> {
+    return this.conexion.get<Anuncio[]>(Backend.Path + "ObtenerAnuncios?Usuario=" + usuario);
   }
 }

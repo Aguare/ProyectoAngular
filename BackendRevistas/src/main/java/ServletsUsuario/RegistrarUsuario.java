@@ -58,7 +58,7 @@ public class RegistrarUsuario extends HttpServlet {
             String textoEntrada = request.getParameter("Cliente");
             Part foto = request.getPart("Foto");
             Cliente cliente = (Cliente) c.obtenerObjeto(textoEntrada, Cliente.class);
-            String pathFoto = ctlArch.guardarArchivo(foto, "foto" + cliente.getUsuario().getNombreUsuario(), ControlArchivos.IMG);
+            String pathFoto = ctlArch.guardarArchivo(foto, "foto" + cliente.getUsuario().getNombreUsuario(), ControlArchivos.IMG,request.getServletContext().getRealPath(""));
             cliente.getPerfil().setFoto(pathFoto);
             status = control.regitrarCliente(cliente);
             response.getWriter().append(c.obtenerJSON(status, Info.class));

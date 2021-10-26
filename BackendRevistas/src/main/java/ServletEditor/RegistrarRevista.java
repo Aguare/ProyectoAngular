@@ -9,7 +9,6 @@ import JSON.Convertir;
 import ObtenerObjetos.ObEditor;
 import ObtenerObjetos.ObGeneral;
 import java.io.IOException;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -66,7 +65,7 @@ public class RegistrarRevista extends HttpServlet {
         String revista = request.getParameter("revista");
         try {
             Revista nueva = (Revista) c.obtenerObjeto(revista, Revista.class);
-            String pathArchivo = controlArch.guardarArchivo(archivo, "Revista_" + nueva.getUsuarioCreador().getNombreUsuario(), ControlArchivos.PDF);
+            String pathArchivo = controlArch.guardarArchivo(archivo, "Revista_" + nueva.getUsuarioCreador().getNombreUsuario(), ControlArchivos.PDF, request.getServletContext().getRealPath(""));
             Info info = controlEditor.registrarRevista(nueva, pathArchivo);
             response.getWriter().append(c.obtenerJSON(info, Info.class));
         } catch (IOException e) {

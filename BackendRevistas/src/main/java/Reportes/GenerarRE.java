@@ -2,6 +2,7 @@ package Reportes;
 
 import ObtenerObjetos.ObAdmin;
 import ObtenerObjetos.ObEditor;
+import ReportEntidades.AnuncianteReport;
 import ReportEntidades.RevistaReport;
 import java.io.OutputStream;
 import java.text.ParseException;
@@ -27,7 +28,8 @@ public class GenerarRE {
     private final String R3 = "Reportes/EditorR/R3.jasper";
     private final String R4 = "Reportes/EditorR/R4.jasper";
     //Reportes de Admin
-    private final String R1A = "Reportes/AdminR/R1.jasper";
+    private final String R1A = "Reportes/AdminR/R1A.jasper";
+    private final String R2A = "Reportes/AdminR/R2A.jasper";
     private final String R4A = "Reportes/AdminR/R4A.jasper";
     private final String R5A = "Reportes/AdminR/R5A.jasper";
 
@@ -62,13 +64,18 @@ public class GenerarRE {
         }
     }
 
-    public void generarReporteAdmin(String fecha_inicio, String fecha_final, int idRevista, int opcion, OutputStream out) {
+    public void generarReporteAdmin(String fecha_inicio, String fecha_final, int idRevista, int opcion, OutputStream out, String anunciante) {
         try {
             switch (opcion) {
                 case 1:
                     List<RevistaReport> revistas = obA.obtenerRevistasReporte(fecha_inicio, fecha_final, idRevista, opcion);
                     JRDataSource source = new JRBeanCollectionDataSource(revistas);
                     reporte.imprimirReporteBeans(out, R1A, source);
+                    break;
+                case 2:
+                    List<AnuncianteReport> a = obA.obtenerAnunciantesReporte(fecha_inicio, fecha_final, anunciante);
+                    JRDataSource source2 = new JRBeanCollectionDataSource(a);
+                    reporte.imprimirReporteBeans(out, R2A, source2);
                     break;
                 case 4:
                     List<RevistaReport> revistas4 = obA.obtenerRevistasPopulares(1, fecha_inicio, fecha_final);

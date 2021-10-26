@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { Anunciante } from 'src/app/Objetos/Anunciante';
 import { Backend } from 'src/app/Objetos/Backend';
 import { Info } from 'src/app/Objetos/Info';
 import { Revista } from 'src/app/Objetos/Revista';
@@ -18,10 +19,12 @@ export class SolicitarReporteAdminComponent implements OnInit {
 
   //Variables lógicas
   revistas: Revista[];
+  anunciantes: Anunciante[];
   idRevista: number = 0;
   fecha_inicio: string = "vacio";
   fecha_final: string = "vacio";
   opcionReporte: number = 1;
+  anunciante: string = "vacio";
 
   //Previsualizar reporte
   path: string;
@@ -35,6 +38,9 @@ export class SolicitarReporteAdminComponent implements OnInit {
     this.obtener.obtenerRevistasAceptadas().subscribe((respuesta: Revista[]) => {
       this.revistas = respuesta;
       this.espera = false;
+      this.obtener.obtenerAnunciantes().subscribe((respuesta: Anunciante[]) => {
+        this.anunciantes = respuesta;
+      });
     },
       (error: any) => {
         this.mensaje = error.error;
@@ -54,11 +60,16 @@ export class SolicitarReporteAdminComponent implements OnInit {
     this.idRevista = selec;
   }
 
+  cambioAnun(cambio: string){
+    this.anunciante = cambio;
+  }
+
   obtenerLink() {
     let url = Backend.Path + "AdminReportes?opcionReporte=" + this.opcionReporte;
     url += "&fecha_inicio=" + this.fecha_inicio;
     url += "&fecha_final=" + this.fecha_final;
     url += "&idRevista=" + this.idRevista;
+    url += "&anunciante=" + this.anunciante;
     this.url = this.sanitizer.bypassSecurityTrustResourceUrl(url);
   }
 
@@ -67,8 +78,11 @@ export class SolicitarReporteAdminComponent implements OnInit {
       this.fecha_final = "vacio";
       this.fecha_inicio = "vacio";
     }
-    if(this.opcionReporte == 4 || this.opcionReporte == 5){
+    if (this.opcionReporte == 4 || this.opcionReporte == 5 || this.opcionReporte == 2) {
       this.idRevista = 0;
+    }
+    if(this.opcionReporte != 2){
+      this.anunciante = "vacio";
     }
     this.obtenerLink();
   }

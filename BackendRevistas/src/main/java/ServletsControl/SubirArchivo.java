@@ -83,7 +83,7 @@ public class SubirArchivo extends HttpServlet {
         String usuarioJSON = request.getParameter("Usuario");
         Usuario usuario = (Usuario) c.obtenerObjeto(usuarioJSON, Usuario.class);
         try {
-            String path = ctlArch.guardarArchivo(filePart, "Foto" + usuario.getNombreUsuario(), ControlArchivos.IMG);
+            String path = ctlArch.guardarArchivo(filePart, "Foto" + usuario.getNombreUsuario(), ControlArchivos.IMG, request.getServletContext().getRealPath(""));
             response.getWriter().append(c.obtenerJSON(new Info(true, path, path), Info.class));
         } catch (Exception ex) {
             response.setStatus(HttpServletResponse.SC_NOT_ACCEPTABLE);

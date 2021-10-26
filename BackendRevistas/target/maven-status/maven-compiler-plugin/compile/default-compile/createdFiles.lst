@@ -6,6 +6,7 @@ ServletEditor\CambioRevista.class
 SQL\ErrorSQL.class
 EntidadesAuxiliares\Pago.class
 ServletsUsuario\InicioSesion.class
+ReportEntidades\AnuncianteReport.class
 ServletEditor\RegistrarRevista.class
 ServletAdmin\CambioAnuncio.class
 EntidadesAuxiliares\Suscripcion.class
@@ -15,6 +16,7 @@ ServletAdmin\ObtenerComision.class
 ServletAdmin\RevistasAceptadas.class
 Controlador\ControlAdmin.class
 ServletAdmin\ObtenerAnunciantes.class
+ServletsControl\ObtenerAnuncios.class
 ServletAdmin\RegistrarAnunciante.class
 ServletAdmin\AdminReportes.class
 ServletLector\ObtenerSuscripciones.class

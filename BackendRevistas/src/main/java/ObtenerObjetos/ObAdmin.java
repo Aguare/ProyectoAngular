@@ -5,6 +5,7 @@ import EntidadesPrincipales.Revista;
 import EntidadesAuxiliares.ValorSistema;
 import EntidadesPrincipales.Anuncio;
 import EntidadesPrincipales.Etiqueta;
+import ReportEntidades.AnuncianteReport;
 import ReportEntidades.RevistaReport;
 import SQL.Conexion;
 import java.sql.Date;
@@ -176,14 +177,14 @@ public class ObAdmin {
         String query4 = "SELECT CR_idRevista, COUNT(CR_idRevista) As veces FROM Comentario_Revista WHERE fecha BETWEEN ? AND ? GROUP BY CR_idRevista ORDER BY veces DESC LIMIT 5;";
         try {
             PreparedStatement prepared = null;
-            
+
             if (opcion == 1 && fechasVacias(fecha1, fecha2)) {
                 prepared = Conexion.Conexion().prepareStatement(query);
-            } else if( opcion == 2 && fechasVacias(fecha1, fecha2)) {
+            } else if (opcion == 2 && fechasVacias(fecha1, fecha2)) {
                 prepared = Conexion.Conexion().prepareStatement(query2);
-            }else if (opcion == 1 && !fechasVacias(fecha1, fecha2)) {
+            } else if (opcion == 1 && !fechasVacias(fecha1, fecha2)) {
                 prepared = Conexion.Conexion().prepareStatement(query3);
-            }else if (opcion == 2 && !fechasVacias(fecha1, fecha2)) {
+            } else if (opcion == 2 && !fechasVacias(fecha1, fecha2)) {
                 prepared = Conexion.Conexion().prepareStatement(query4);
             }
             if (!fechasVacias(fecha1, fecha2)) {
@@ -198,6 +199,69 @@ public class ObAdmin {
         } catch (SQLException e) {
         }
         return revistas;
+    }
+
+    public List<AnuncianteReport> obtenerAnunciantesReporte(String fecha1, String fecha2, String anunciante) {
+        List<AnuncianteReport> a = new ArrayList<>();
+        String query1 = "SELECT * FROM Anunciante;";
+        String query2 = "SELECT * FROM Anunciante WHERE nombre_anunciante = ?;";
+        try {
+            PreparedStatement prepared = null;
+            if (anunciante.equalsIgnoreCase("vacio")) {
+                prepared = Conexion.Conexion().prepareStatement(query1);
+            } else {
+                prepared = Conexion.Conexion().prepareStatement(query2);
+                prepared.setString(1, anunciante);
+            }
+            ResultSet r = prepared.executeQuery();
+            while (r.next()) {
+                a.add(new AnuncianteReport(obtenerAnunciante(r.getString("nombre_anunciante")),
+                        obtenerAnunciosSegunAnunciante(r.getString("nombre_anunciante"), fecha1, fecha2)));
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getErrorCode());
+        }
+        return a;
+    }
+
+    public ArrayList<Anuncio> obtenerAnunciosSegunAnunciante(String anunciante, String fecha1, String fecha2) {
+        ArrayList<Anuncio> anuncios = new ArrayList<>();
+        String query1 = "SELECT * FROM Anuncio WHERE A_nombre_anunciante = ?;";
+        String query2 = "SELECT * FROM Anuncio WHERE fecha_inicio BETWEEN ? AND ? AND A_nombre_anunciante = ?;";
+        try {
+            PreparedStatement prepared = null;
+            if (fechasVacias(fecha1, fecha2)) {
+                prepared = Conexion.Conexion().prepareStatement(query1);
+                prepared.setString(1, anunciante);
+            } else if (!fechasVacias(fecha1, fecha2)) {
+                prepared = Conexion.Conexion().prepareStatement(query2);
+                prepared.setDate(1, getDate(fecha1));
+                prepared.setDate(2, getDate(fecha2));
+                prepared.setString(3, anunciante);
+            }
+            ResultSet r = prepared.executeQuery();
+            while (r.next()) {
+                anuncios.add(new Anuncio(r.getInt(1), r.getInt(2), r.getString(3),
+                        r.getString(4), r.getString(5), r.getBoolean(6), r.getString(7),
+                        r.getString(8), r.getDouble(9), r.getString(10), null));
+            }
+        } catch (SQLException e) {
+        }
+        return anuncios;
+    }
+
+    public Anunciante obtenerAnunciante(String nombre) {
+        String query = "SELECT * FROM Anunciante WHERE nombre_anunciante = ?";
+        try {
+            PreparedStatement prepared = Conexion.Conexion().prepareStatement(query);
+            prepared.setString(1, nombre);
+            ResultSet r = prepared.executeQuery();
+            while (r.next()) {
+                return new Anunciante(r.getString(1), r.getInt(2));
+            }
+        } catch (SQLException e) {
+        }
+        return null;
     }
 
     private boolean fechasVacias(String fecha1, String fecha2) {

@@ -101,7 +101,7 @@ export class CrearAnuncioComponent implements OnInit {
     this.costo = this.validarForm.value.costo;
     this.dias = this.validarForm.value.dias;
     this.fecha = this.validarForm.value.fecha;
-
+    this.video_url+="?controls=0&autoplay=1&mute=0"
     let anuncio = new Anuncio(1, this.tipoAnuncio, this.texto,
       this.video_url, this.imagen, true, this.fecha, this.fecha,
       this.costo, this.anunciante, this.etiquetas);
@@ -109,7 +109,7 @@ export class CrearAnuncioComponent implements OnInit {
     if (this.tipoAnuncio == 2) {
       if (this.foto != null) {
         this.registrar.subirArchivo(this.foto, this.almacenamiento.obtenerUsuario()).subscribe((path: Info) => {
-          this.imagen = path.mensaje;
+          anuncio.imagen_path = path.mensaje;
           this.registrar.registrarAnuncio(anuncio, this.dias).subscribe((res: Info) => {
             this.mensaje = res;
             this.espera = true;

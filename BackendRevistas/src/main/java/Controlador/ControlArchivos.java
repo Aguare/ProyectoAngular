@@ -14,7 +14,7 @@ import javax.servlet.http.Part;
  */
 public class ControlArchivos {
 
-    public static final String PATH = "";
+    public static final String PATH = "DatosServer\\";
     public static final String PDF = ".pdf";
     public static final String IMG = ".png";
 

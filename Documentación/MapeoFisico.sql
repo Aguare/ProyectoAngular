@@ -206,7 +206,7 @@ CREATE TABLE Anuncio_Etiquetas(
     FOREIGN KEY(AE_idAnuncio) REFERENCES Anuncio(idAnuncio),
     FOREIGN KEY(AE_nombre_etiqueta) REFERENCES Etiqueta(nombre_etiqueta)
 );
-DROP USER IF EXISTS 'adminAguare'@'localhost';
+DROP USER 'adminAguare'@'localhost';
 CREATE USER 'adminAguare'@'localhost' identified by 'Aadmin_1!';
 GRANT ALL PRIVILEGES ON AppRevistas.* TO adminAguare@localhost;
 FLUSH PRIVILEGES;
